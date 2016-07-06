@@ -1,0 +1,4 @@
+Sitemap: https://derSuessmann.github.io/sitemapindex.xml
+
+User-Agent: *
+Host: derSuessmann.github.io

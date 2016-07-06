@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+<head>
+<meta charset="utf-8">
+<base href="https://derSuessmann.github.io/en/">
+<meta name="description" content="Here is everything beta...">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>derSuessmann</title>
+<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<meta content="#5670d4" name="theme-color">
+<link rel="alternate" type="application/rss+xml" title="RSS (de)" href="../rss.xml">
+<link rel="alternate" type="application/rss+xml" title="RSS (en)" href="rss.xml">
+<link rel="canonical" href="https://derSuessmann.github.io/en/">
+<!--[if lt IE 9]><script src="../assets/js/html5.js"></script><![endif]-->
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-static-top"><div class="container">
+<!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://derSuessmann.github.io/en/">
+
+                <span id="blog-title">derSuessmann</span>
+            </a>
+        </div>
+<!-- /.navbar-header -->
+        <div class="collapse navbar-collapse" id="bs-navbar" aria-expanded="false">
+            <ul class="nav navbar-nav">
+<li>
+<a href="archive.html">Archive</a>
+                </li>
+<li>
+<a href="categories/">Tags</a>
+                </li>
+<li>
+<a href="rss.xml">RSS feed</a>
+
+                
+            </li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+            </li>
+<li><a href="https://derSuessmann.github.io/" rel="alternate" hreflang="de">Deutsch</a></li>
+
+                
+                    
+                
+            </ul>
+</div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav><!-- End of Menubar --><div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+            
+
+    
+<div class="postindex">
+    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/zertifikate-von-lets-encrypt-verwenden/" class="u-url">Zertifikate von Let's Encrypt verwenden</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">
+                derSuessmann
+            </span></p>
+            <p class="dateline"><a href="posts/zertifikate-von-lets-encrypt-verwenden/" rel="bookmark"><time class="published dt-published" datetime="2016-07-06T17:16:50+02:00" title="2016-07-06 17:16">2016-07-06 17:16</time></a></p>
+        </div>
+    </header><div class="e-content entry-content">
+    <p>
+.. title: Zertifikate von Let's Encrypt verwenden
+.. slug: zertifikate-von-lets-encrypt-verwenden
+.. date: 2016-07-06 17:16:50 UTC+02:00
+.. tags: 
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+</p>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Installation von acme-tiny</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<p>
+Mein Favorit der Let's Encrypt Clients ist <a href="https://github.com/diafygi/acme-tiny">acme-tiny</a>. Es ist ein sehr
+kurzes Python-Skript. Das erleichtert einen Code-Review. Die
+Vorarbeiten für die Zertifikatserstellung werden leicht mit OpenSSL
+durchgeführt. Es benötigt keine root-Rechte und funktioniert gut. In
+der folgenden Beschreibung gehen wir davon aus, dass der Benutzer
+`lets` als normaler Benutzer auf einem OpenBSD-System mit nginx als
+Web-Server existiert.
+</p>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">Erstellen der Verzeichnisstruktur</h3>
+<div class="outline-text-3" id="text-orgheadline2">
+<p>
+Im Verzeichnis des Benutzers `lets` wird folgende Verzeichnisstruktur
+angelegt.
+</p>
+
+<div class="highlight"><pre><span></span>mkdir bin
+mkdir src
+mkdir reqs
+mkdir certs
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">Clonen des Repositories</h3>
+<div class="outline-text-3" id="text-orgheadline3">
+<p>
+Damit man das Skript leicht installieren und eventuell auch
+aktualisieren kann wird das Repository in `src` geclont.
+</p>
+
+<div class="highlight"><pre><span></span>cd src
+git clone https://github.com/diafygi/acme-tiny.git
+cd
+</pre></div>
+
+<p>
+Das Skript kopiert man nach dem Code Review nach `bin`.
+</p>
+
+<div class="highlight"><pre><span></span>cp src/acme-tiny/acme_tiny.py bin
+chmod +x bin/acme_tiny.py
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Erstellen des privaten Schlüssels für den Let's Encrypt Account</h3>
+<div class="outline-text-3" id="text-orgheadline4">
+<p>
+Für den Account benötigt man ein Schlüsselpaar. Das kann man leicht mit
+dem folgenden Kommando erstellen. Aus Sicherheitsgründen sollte es auch
+nur für den Benutzer lesbar sein.
+</p>
+
+<div class="highlight"><pre><span></span>openssl genrsa 4096 &gt; account.key
+chmod 400 account.key
+</pre></div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Erstellen eines Certificate Signing Requests (CSR)</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+<p>
+Für jede Domain, für die Let's Encrypt ein Zertifikat ausstellen soll
+benötigt man einen Certificate Signing Request. Im Certificate Signing
+Request wird der öffentliche Schlüssel der Domain zum Unterschreiben an
+Let's Encrypt gesandt. Also müssen wir am besten für jede Domain einen
+eigenes Domain-Schlüsselpaar und einen Request erstellen.
+</p>
+
+<div class="highlight"><pre><span></span>openssl genrsa 4096 &gt; example.key
+openssl req -new -sha256 -key example.key -subj "/CN=example.com" &gt; ./requests/example.csr
+</pre></div>
+
+<p>
+Jetzt wird der Schlüssel nur noch vom Server benötigt. Ich habe ihn als
+root (sudo/doas) in das Verzeichnis `/etc/ssl/private` verschoben.
+</p>
+
+<p>
+Man kann auch ein Zertifikat für mehrere Domains in einem Zertifikat
+erstellen lassen. Das nutze ich zur Zeit aber nicht.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6">Konfiguration des Verzeichnisses für die Challenges</h3>
+<div class="outline-text-3" id="text-orgheadline6">
+<p>
+Let's Encrypt verifiziert mit einer Challenge, dass man die Kontrolle
+über die Domain für das Zertifikat hat. Dazu muss der Client eine Datei
+anlegen können, die der Let's Encrypt Server unter der Adresse
+<a href="http://domain/.well-known/acme-challenge/...">http://domain/.well-known/acme-challenge/...</a>
+abrufen kann. Dazu muss der Web-Server ein entsprechendes Verzeichnis
+haben.
+</p>
+
+<div class="highlight"><pre><span></span><span class="n">server</span> <span class="p">{</span>
+    <span class="n">listen</span> <span class="mi">80</span><span class="p">;</span>
+    <span class="n">server_name</span> <span class="n">example</span><span class="p">.</span><span class="n">com</span><span class="p">;</span>
+
+    <span class="n">location</span> <span class="o">/</span><span class="p">.</span><span class="n">well</span><span class="o">-</span><span class="n">known</span><span class="o">/</span><span class="n">acme</span><span class="o">-</span><span class="n">challenge</span><span class="o">/</span> <span class="p">{</span>
+	<span class="n">alias</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">challenges</span><span class="o">/</span><span class="p">;</span>
+	<span class="n">try_files</span> <span class="err">$</span><span class="n">uri</span> <span class="o">=</span><span class="mi">404</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>
+Dieser Schritt hat mich den meisten Ärger gekostet, da meine
+Konfiguration des nginx als Reverse Proxy trotz scheinbar korrekter
+Pfadangabe irgendwie in den falschen Verzeichnissen gesucht hat. Eine
+Umstellung der Konfigurationsdateien hat da Wunder gewirkt. Man sollte
+nicht zu stark an den nginx-Konfigurationsdateien herumoptimieren.
+</p>
+
+<p>
+Jetzt hat man die Vorarbeiten abgeschlossen und kann die Zertifikate
+anfordern.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">Anfordern eines Zertifikats</h3>
+<div class="outline-text-3" id="text-orgheadline7">
+<p>
+Der folgende Aufruf fordert das Zertifikat für die Domain an.
+</p>
+
+<div class="highlight"><pre><span></span>python acme_tiny.py --account-key ./account.key --csr ~/requests/example.csr --acme-dir /var/www/challenges/ &gt; ~/certs/example.crt
+</pre></div>
+
+<p>
+Für die Server benötigt man meistens eine Zertifikatskette. In der
+Zertifikatskette sind die Zertifikate der Domain und der
+unterschreibenden Certification Authority aneinandergehängt. Diese Kette
+kann man mit den folgenden Schritten erstellen.
+</p>
+
+<div class="highlight"><pre><span></span>curl -fsS https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem -o ~/certs/intermediate.pem
+cat ~/certs/example.crt intermediate.pem &gt; /etc/ssl/acme/example-chained.pem
+</pre></div>
+
+<p>
+Hier sieht man auch einen Kniff, den ich angewendet habe, um möglichst
+eine Trennung der Rechte zu erreichen. Der private Schlüssel der Domain
+(`example.key`), der nur zur Erstellung des Certificate Requests und
+später von Server verwendet wird liegt in einem Verzeichnis, auf das nur
+root zugreifen kann. Das Verzeichnis mit den Zertifikaten
+(`/etc/ssl/acme/` gehört hingegen dem Benutzer `acme`, der nur einfacher
+Anwender ist. Alle dürfen auf das Verzeichnis lesend zugreifen.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8">Erneuern des Zertifikat</h3>
+<div class="outline-text-3" id="text-orgheadline8">
+<p>
+Da das Zertifikate nur 90 Tage gültig ist, muss man vor Ablauf der Frist
+ein neues anfordern. Das kann man wie oben beschrieben mit dem gleichen
+Aufruf von `acme<sub>tiny.py</sub>` durchführen. Unter den unix-artigen
+Betriebssystemen kann man aber auch ein einfaches Skript erstellen und
+von `cron` ausführen lassen.
+</p>
+
+<p>
+Das folgende Skript funktioniert unter OpenBSD und muss etwas für andere
+Unix-Artige angepasst werden. Nennen wir es `renew<sub>cert.sh</sub>`.
+</p>
+
+<div class="highlight"><pre><span></span>#!/bin/sh
+# Renew certificates with Let's Encrypt
+
+base="/home/lets"
+alias acme_tiny="$base/bin/acme_tiny.py"
+chaineddir="/etc/ssl/acme"
+
+accountkey="$base/account.key"
+reqsdir="$base/reqs"
+certsdir="$base/certs"
+challengedir="/var/www/challenges"
+intermediate_cert="$certsdir/intermediate.pem"
+intermediate_cert_url="https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem"
+
+echo "Downloading intermediate certificate..."
+# get intermediate certificate with curl
+# -f: fail without writing html garbage to output file
+# -s: silent mode without progress meter
+# -S: output error message if download fails
+curl -fsS $intermediate_cert_url -o $intermediate_cert &amp;&amp; echo "Success."
+
+# The script continues even if the download of the intermediate
+# certificate fails. The old intermediate certificate should still
+# exist and be useable.
+
+for csr in $reqsdir/*.csr; do
+  domain=`basename $csr .csr`
+  echo "Requesting certificate for $domain..."
+  acme_tiny --account-key $accountkey --csr $csr --acme-dir $challengedir &gt; $certsdir/$domain.crt || (echo "Failed!" ; exit)
+  echo "Success."
+  cat $certsdir/$domain.crt $intermediate_cert &gt;$chaineddir/$domain-chained.pem
+done
+
+echo "Reloading web server configuration..."
+doas /usr/sbin/rcctl reload nginx || (echo "Failed!"; exit)
+echo "Success."
+</pre></div>
+
+<p>
+Damit der Benutzer `lets` auch die Webserver-Konfiguration neu laden
+kann muss er entsprechende Rechte dafür haben. Das lässt sich unter
+OpenBSD schön für genau diesen Zweck eingeschränkt in der Datei
+`/etc/doas.conf` mit der folgenden Zeile konfigurieren. Unter anderen
+Betriebssystemen muss man entsprechend `sudo` konfigurieren und
+verwenden.
+</p>
+
+<div class="highlight"><pre><span></span><span class="n">permit</span> <span class="n">nopass</span> <span class="n">lets</span> <span class="n">as</span> <span class="n">root</span> <span class="n">cmd</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">rcctl</span> <span class="n">args</span> <span class="n">reload</span> <span class="n">nginx</span>
+</pre></div>
+
+<p>
+Jetzt kann man noch den `cron` entsprechend konfigurieren, damit er
+einmal im Monat ein neues Zertifikat anfordert. Ich mag es, wenn ich
+dann Post bekomme.
+</p>
+
+<div class="highlight"><pre><span></span><span class="n">MAILTO</span><span class="o">=</span><span class="n">cert</span><span class="err">@</span><span class="n">example</span><span class="p">.</span><span class="n">com</span>
+<span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="o">*</span> <span class="o">*</span> <span class="err">$</span><span class="n">HOME</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">renew_certs</span><span class="p">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</div>
+</div>
+    </div>
+    </article>
+</div>
+
+
+
+
+
+
+
+        </div>
+        <!--End of body content-->
+
+        <footer id="footer">
+            Contents © 2016         <a href="mailto:n.tesla@example.com">derSuessmann</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+        </footer>
+</div>
+</div>
+
+
+            <script src="../assets/js/all-nocdn.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
+    moment.locale("en");
+    fancydates(0, "YYYY-MM-DD HH:mm");
+    </script><!-- end fancy dates -->
+</body>
+</html>

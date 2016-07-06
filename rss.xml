@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>derSuessmann</title><link>https://derSuessmann.github.io/</link><description>Here is everything beta...</description><atom:link rel="self" href="https://derSuessmann.github.io/rss.xml" type="application/rss+xml"></atom:link><language>de</language><lastBuildDate>Wed, 06 Jul 2016 16:07:34 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Zertifikate von Let's Encrypt verwenden</title><link>https://derSuessmann.github.io/posts/zertifikate-von-lets-encrypt-verwenden/</link><dc:creator>derSuessmann</dc:creator><description>&lt;p&gt;
+.. title: Zertifikate von Let's Encrypt verwenden
+.. slug: zertifikate-von-lets-encrypt-verwenden
+.. date: 2016-07-06 17:16:50 UTC+02:00
+.. tags: 
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+&lt;/p&gt;
+
+&lt;div id="outline-container-orgheadline1" class="outline-2"&gt;
+&lt;h2 id="orgheadline1"&gt;Installation von acme-tiny&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgheadline1"&gt;
+&lt;p&gt;
+Mein Favorit der Let's Encrypt Clients ist &lt;a href="https://github.com/diafygi/acme-tiny"&gt;acme-tiny&lt;/a&gt;. Es ist ein sehr
+kurzes Python-Skript. Das erleichtert einen Code-Review. Die
+Vorarbeiten für die Zertifikatserstellung werden leicht mit OpenSSL
+durchgeführt. Es benötigt keine root-Rechte und funktioniert gut. In
+der folgenden Beschreibung gehen wir davon aus, dass der Benutzer
+`lets` als normaler Benutzer auf einem OpenBSD-System mit nginx als
+Web-Server existiert.
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orgheadline2" class="outline-3"&gt;
+&lt;h3 id="orgheadline2"&gt;Erstellen der Verzeichnisstruktur&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgheadline2"&gt;
+&lt;p&gt;
+Im Verzeichnis des Benutzers `lets` wird folgende Verzeichnisstruktur
+angelegt.
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir bin
+mkdir src
+mkdir reqs
+mkdir certs
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orgheadline3" class="outline-3"&gt;
+&lt;h3 id="orgheadline3"&gt;Clonen des Repositories&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgheadline3"&gt;
+&lt;p&gt;
+Damit man das Skript leicht installieren und eventuell auch
+aktualisieren kann wird das Repository in `src` geclont.
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cd src
+git clone https://github.com/diafygi/acme-tiny.git
+cd
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+Das Skript kopiert man nach dem Code Review nach `bin`.
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cp src/acme-tiny/acme_tiny.py bin
+chmod +x bin/acme_tiny.py
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orgheadline4" class="outline-3"&gt;
+&lt;h3 id="orgheadline4"&gt;Erstellen des privaten Schlüssels für den Let's Encrypt Account&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgheadline4"&gt;
+&lt;p&gt;
+Für den Account benötigt man ein Schlüsselpaar. Das kann man leicht mit
+dem folgenden Kommando erstellen. Aus Sicherheitsgründen sollte es auch
+nur für den Benutzer lesbar sein.
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;openssl genrsa 4096 &amp;gt; account.key
+chmod 400 account.key
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orgheadline5" class="outline-3"&gt;
+&lt;h3 id="orgheadline5"&gt;Erstellen eines Certificate Signing Requests (CSR)&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgheadline5"&gt;
+&lt;p&gt;
+Für jede Domain, für die Let's Encrypt ein Zertifikat ausstellen soll
+benötigt man einen Certificate Signing Request. Im Certificate Signing
+Request wird der öffentliche Schlüssel der Domain zum Unterschreiben an
+Let's Encrypt gesandt. Also müssen wir am besten für jede Domain einen
+eigenes Domain-Schlüsselpaar und einen Request erstellen.
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;openssl genrsa 4096 &amp;gt; example.key
+openssl req -new -sha256 -key example.key -subj "/CN=example.com" &amp;gt; ./requests/example.csr
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+Jetzt wird der Schlüssel nur noch vom Server benötigt. Ich habe ihn als
+root (sudo/doas) in das Verzeichnis `/etc/ssl/private` verschoben.
+&lt;/p&gt;
+
+&lt;p&gt;
+Man kann auch ein Zertifikat für mehrere Domains in einem Zertifikat
+erstellen lassen. Das nutze ich zur Zeit aber nicht.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orgheadline6" class="outline-3"&gt;
+&lt;h3 id="orgheadline6"&gt;Konfiguration des Verzeichnisses für die Challenges&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgheadline6"&gt;
+&lt;p&gt;
+Let's Encrypt verifiziert mit einer Challenge, dass man die Kontrolle
+über die Domain für das Zertifikat hat. Dazu muss der Client eine Datei
+anlegen können, die der Let's Encrypt Server unter der Adresse
+&lt;a href="http://domain/.well-known/acme-challenge/..."&gt;http://domain/.well-known/acme-challenge/...&lt;/a&gt;
+abrufen kann. Dazu muss der Web-Server ein entsprechendes Verzeichnis
+haben.
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;listen&lt;/span&gt; &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;server_name&lt;/span&gt; &lt;span class="n"&gt;example&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;well&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;known&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;acme&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+	&lt;span class="n"&gt;alias&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;challenges&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+	&lt;span class="n"&gt;try_files&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;uri&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;404&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+Dieser Schritt hat mich den meisten Ärger gekostet, da meine
+Konfiguration des nginx als Reverse Proxy trotz scheinbar korrekter
+Pfadangabe irgendwie in den falschen Verzeichnissen gesucht hat. Eine
+Umstellung der Konfigurationsdateien hat da Wunder gewirkt. Man sollte
+nicht zu stark an den nginx-Konfigurationsdateien herumoptimieren.
+&lt;/p&gt;
+
+&lt;p&gt;
+Jetzt hat man die Vorarbeiten abgeschlossen und kann die Zertifikate
+anfordern.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orgheadline7" class="outline-3"&gt;
+&lt;h3 id="orgheadline7"&gt;Anfordern eines Zertifikats&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgheadline7"&gt;
+&lt;p&gt;
+Der folgende Aufruf fordert das Zertifikat für die Domain an.
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;python acme_tiny.py --account-key ./account.key --csr ~/requests/example.csr --acme-dir /var/www/challenges/ &amp;gt; ~/certs/example.crt
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+Für die Server benötigt man meistens eine Zertifikatskette. In der
+Zertifikatskette sind die Zertifikate der Domain und der
+unterschreibenden Certification Authority aneinandergehängt. Diese Kette
+kann man mit den folgenden Schritten erstellen.
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl -fsS https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem -o ~/certs/intermediate.pem
+cat ~/certs/example.crt intermediate.pem &amp;gt; /etc/ssl/acme/example-chained.pem
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+Hier sieht man auch einen Kniff, den ich angewendet habe, um möglichst
+eine Trennung der Rechte zu erreichen. Der private Schlüssel der Domain
+(`example.key`), der nur zur Erstellung des Certificate Requests und
+später von Server verwendet wird liegt in einem Verzeichnis, auf das nur
+root zugreifen kann. Das Verzeichnis mit den Zertifikaten
+(`/etc/ssl/acme/` gehört hingegen dem Benutzer `acme`, der nur einfacher
+Anwender ist. Alle dürfen auf das Verzeichnis lesend zugreifen.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orgheadline8" class="outline-3"&gt;
+&lt;h3 id="orgheadline8"&gt;Erneuern des Zertifikat&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgheadline8"&gt;
+&lt;p&gt;
+Da das Zertifikate nur 90 Tage gültig ist, muss man vor Ablauf der Frist
+ein neues anfordern. Das kann man wie oben beschrieben mit dem gleichen
+Aufruf von `acme&lt;sub&gt;tiny.py&lt;/sub&gt;` durchführen. Unter den unix-artigen
+Betriebssystemen kann man aber auch ein einfaches Skript erstellen und
+von `cron` ausführen lassen.
+&lt;/p&gt;
+
+&lt;p&gt;
+Das folgende Skript funktioniert unter OpenBSD und muss etwas für andere
+Unix-Artige angepasst werden. Nennen wir es `renew&lt;sub&gt;cert.sh&lt;/sub&gt;`.
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;#!/bin/sh
+# Renew certificates with Let's Encrypt
+
+base="/home/lets"
+alias acme_tiny="$base/bin/acme_tiny.py"
+chaineddir="/etc/ssl/acme"
+
+accountkey="$base/account.key"
+reqsdir="$base/reqs"
+certsdir="$base/certs"
+challengedir="/var/www/challenges"
+intermediate_cert="$certsdir/intermediate.pem"
+intermediate_cert_url="https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem"
+
+echo "Downloading intermediate certificate..."
+# get intermediate certificate with curl
+# -f: fail without writing html garbage to output file
+# -s: silent mode without progress meter
+# -S: output error message if download fails
+curl -fsS $intermediate_cert_url -o $intermediate_cert &amp;amp;&amp;amp; echo "Success."
+
+# The script continues even if the download of the intermediate
+# certificate fails. The old intermediate certificate should still
+# exist and be useable.
+
+for csr in $reqsdir/*.csr; do
+  domain=`basename $csr .csr`
+  echo "Requesting certificate for $domain..."
+  acme_tiny --account-key $accountkey --csr $csr --acme-dir $challengedir &amp;gt; $certsdir/$domain.crt || (echo "Failed!" ; exit)
+  echo "Success."
+  cat $certsdir/$domain.crt $intermediate_cert &amp;gt;$chaineddir/$domain-chained.pem
+done
+
+echo "Reloading web server configuration..."
+doas /usr/sbin/rcctl reload nginx || (echo "Failed!"; exit)
+echo "Success."
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+Damit der Benutzer `lets` auch die Webserver-Konfiguration neu laden
+kann muss er entsprechende Rechte dafür haben. Das lässt sich unter
+OpenBSD schön für genau diesen Zweck eingeschränkt in der Datei
+`/etc/doas.conf` mit der folgenden Zeile konfigurieren. Unter anderen
+Betriebssystemen muss man entsprechend `sudo` konfigurieren und
+verwenden.
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;permit&lt;/span&gt; &lt;span class="n"&gt;nopass&lt;/span&gt; &lt;span class="n"&gt;lets&lt;/span&gt; &lt;span class="n"&gt;as&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;cmd&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sbin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;rcctl&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt; &lt;span class="n"&gt;reload&lt;/span&gt; &lt;span class="n"&gt;nginx&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+Jetzt kann man noch den `cron` entsprechend konfigurieren, damit er
+einmal im Monat ein neues Zertifikat anfordert. Ich mag es, wenn ich
+dann Post bekomme.
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;MAILTO&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;cert&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;example&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;HOME&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;renew_certs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><guid>https://derSuessmann.github.io/posts/zertifikate-von-lets-encrypt-verwenden/</guid><pubDate>Wed, 06 Jul 2016 15:16:50 GMT</pubDate></item></channel></rss>
