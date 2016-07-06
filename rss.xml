@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>derSuessmann</title><link>https://derSuessmann.github.io/</link><description>Here is everything beta...</description><atom:link rel="self" href="https://derSuessmann.github.io/rss.xml" type="application/rss+xml"></atom:link><language>de</language><lastBuildDate>Wed, 06 Jul 2016 16:07:34 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Zertifikate von Let's Encrypt verwenden</title><link>https://derSuessmann.github.io/posts/zertifikate-von-lets-encrypt-verwenden/</link><dc:creator>derSuessmann</dc:creator><description>&lt;p&gt;
-.. title: Zertifikate von Let's Encrypt verwenden
-.. slug: zertifikate-von-lets-encrypt-verwenden
-.. date: 2016-07-06 17:16:50 UTC+02:00
-.. tags: 
-.. category: 
-.. link: 
-.. description: 
-.. type: text
-&lt;/p&gt;
-
-&lt;div id="outline-container-orgheadline1" class="outline-2"&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>derSuessmann</title><link>https://derSuessmann.github.io/</link><description>Here is everything beta...</description><atom:link href="https://derSuessmann.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>de</language><lastBuildDate>Wed, 06 Jul 2016 17:08:44 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Programme in Posts</title><link>https://derSuessmann.github.io/posts/programme-in-posts/</link><dc:creator>derSuessmann</dc:creator><description>&lt;div&gt;&lt;p&gt;Schreibe hier deinen Eintrag hin.&lt;/p&gt;
+&lt;table class="codetable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;&lt;a href="https://derSuessmann.github.io/posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-1"&gt;1&lt;/a&gt;
+&lt;a href="https://derSuessmann.github.io/posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-2"&gt;2&lt;/a&gt;
+&lt;a href="https://derSuessmann.github.io/posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-3"&gt;3&lt;/a&gt;
+&lt;a href="https://derSuessmann.github.io/posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-4"&gt;4&lt;/a&gt;
+&lt;a href="https://derSuessmann.github.io/posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-5"&gt;5&lt;/a&gt;
+&lt;a href="https://derSuessmann.github.io/posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-6"&gt;6&lt;/a&gt;
+&lt;a href="https://derSuessmann.github.io/posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-7"&gt;7&lt;/a&gt;
+&lt;a href="https://derSuessmann.github.io/posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-8"&gt;8&lt;/a&gt;
+&lt;a href="https://derSuessmann.github.io/posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-9"&gt;9&lt;/a&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre class="code python"&gt;&lt;a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-1"&gt;&lt;/a&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sieve_of_eratosthenes&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+&lt;a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-2"&gt;&lt;/a&gt;    &lt;span class="n"&gt;factors&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;defaultdict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-3"&gt;&lt;/a&gt;    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-4"&gt;&lt;/a&gt;        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;factors&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+&lt;a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-5"&gt;&lt;/a&gt;            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;factors&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-6"&gt;&lt;/a&gt;                &lt;span class="n"&gt;factors&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-7"&gt;&lt;/a&gt;        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-8"&gt;&lt;/a&gt;            &lt;span class="n"&gt;factors&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-9"&gt;&lt;/a&gt;            &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</description><guid>https://derSuessmann.github.io/posts/programme-in-posts/</guid><pubDate>Wed, 06 Jul 2016 16:50:15 GMT</pubDate></item><item><title>Zertifikate von Let's Encrypt verwenden</title><link>https://derSuessmann.github.io/posts/zertifikate-von-lets-encrypt-verwenden/</link><dc:creator>derSuessmann</dc:creator><description>&lt;div id="outline-container-orgheadline1" class="outline-2"&gt;
 &lt;h2 id="orgheadline1"&gt;Installation von acme-tiny&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-orgheadline1"&gt;
 &lt;p&gt;
@@ -19,7 +26,7 @@ kurzes Python-Skript. Das erleichtert einen Code-Review. Die
 Vorarbeiten für die Zertifikatserstellung werden leicht mit OpenSSL
 durchgeführt. Es benötigt keine root-Rechte und funktioniert gut. In
 der folgenden Beschreibung gehen wir davon aus, dass der Benutzer
-`lets` als normaler Benutzer auf einem OpenBSD-System mit nginx als
+&lt;code&gt;lets&lt;/code&gt; als normaler Benutzer auf einem OpenBSD-System mit nginx als
 Web-Server existiert.
 &lt;/p&gt;
 &lt;/div&gt;
@@ -28,7 +35,7 @@ Web-Server existiert.
 &lt;h3 id="orgheadline2"&gt;Erstellen der Verzeichnisstruktur&lt;/h3&gt;
 &lt;div class="outline-text-3" id="text-orgheadline2"&gt;
 &lt;p&gt;
-Im Verzeichnis des Benutzers `lets` wird folgende Verzeichnisstruktur
+Im Verzeichnis des Benutzers &lt;code&gt;lets&lt;/code&gt; wird folgende Verzeichnisstruktur
 angelegt.
 &lt;/p&gt;
 
@@ -45,16 +52,16 @@ mkdir certs
 &lt;div class="outline-text-3" id="text-orgheadline3"&gt;
 &lt;p&gt;
 Damit man das Skript leicht installieren und eventuell auch
-aktualisieren kann wird das Repository in `src` geclont.
+aktualisieren kann wird das Repository in &lt;code&gt;src&lt;/code&gt; geclont.
 &lt;/p&gt;
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cd src
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; src
 git clone https://github.com/diafygi/acme-tiny.git
-cd
+&lt;span class="nb"&gt;cd&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;
-Das Skript kopiert man nach dem Code Review nach `bin`.
+Das Skript kopiert man nach dem Code Review nach &lt;code&gt;bin&lt;/code&gt;.
 &lt;/p&gt;
 
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cp src/acme-tiny/acme_tiny.py bin
@@ -72,8 +79,8 @@ dem folgenden Kommando erstellen. Aus Sicherheitsgründen sollte es auch
 nur für den Benutzer lesbar sein.
 &lt;/p&gt;
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;openssl genrsa 4096 &amp;gt; account.key
-chmod 400 account.key
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;openssl genrsa &lt;span class="m"&gt;4096&lt;/span&gt; &amp;gt; account.key
+chmod &lt;span class="m"&gt;400&lt;/span&gt; account.key
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -89,13 +96,13 @@ Let's Encrypt gesandt. Also müssen wir am besten für jede Domain einen
 eigenes Domain-Schlüsselpaar und einen Request erstellen.
 &lt;/p&gt;
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;openssl genrsa 4096 &amp;gt; example.key
-openssl req -new -sha256 -key example.key -subj "/CN=example.com" &amp;gt; ./requests/example.csr
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;openssl genrsa &lt;span class="m"&gt;4096&lt;/span&gt; &amp;gt; example.key
+openssl req -new -sha256 -key example.key -subj &lt;span class="s2"&gt;"/CN=example.com"&lt;/span&gt; &amp;gt; ./requests/example.csr
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;
 Jetzt wird der Schlüssel nur noch vom Server benötigt. Ich habe ihn als
-root (sudo/doas) in das Verzeichnis `/etc/ssl/private` verschoben.
+&lt;code&gt;root&lt;/code&gt; (sudo/doas) in das Verzeichnis &lt;code&gt;/etc/ssl/private&lt;/code&gt; verschoben.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -169,10 +176,10 @@ cat ~/certs/example.crt intermediate.pem &amp;gt; /etc/ssl/acme/example-chained.
 &lt;p&gt;
 Hier sieht man auch einen Kniff, den ich angewendet habe, um möglichst
 eine Trennung der Rechte zu erreichen. Der private Schlüssel der Domain
-(`example.key`), der nur zur Erstellung des Certificate Requests und
+(&lt;code&gt;example.key&lt;/code&gt;), der nur zur Erstellung des Certificate Requests und
 später von Server verwendet wird liegt in einem Verzeichnis, auf das nur
 root zugreifen kann. Das Verzeichnis mit den Zertifikaten
-(`/etc/ssl/acme/` gehört hingegen dem Benutzer `acme`, der nur einfacher
+(&lt;code&gt;/etc/ssl/acme/&lt;/code&gt; gehört hingegen dem Benutzer &lt;code&gt;acme&lt;/code&gt;, der nur einfacher
 Anwender ist. Alle dürfen auf das Verzeichnis lesend zugreifen.
 &lt;/p&gt;
 &lt;/div&gt;
@@ -184,56 +191,56 @@ Anwender ist. Alle dürfen auf das Verzeichnis lesend zugreifen.
 &lt;p&gt;
 Da das Zertifikate nur 90 Tage gültig ist, muss man vor Ablauf der Frist
 ein neues anfordern. Das kann man wie oben beschrieben mit dem gleichen
-Aufruf von `acme&lt;sub&gt;tiny.py&lt;/sub&gt;` durchführen. Unter den unix-artigen
+Aufruf von &lt;code&gt;acme_tiny.py&lt;/code&gt; durchführen. Unter den unix-artigen
 Betriebssystemen kann man aber auch ein einfaches Skript erstellen und
-von `cron` ausführen lassen.
+von &lt;code&gt;cron&lt;/code&gt; ausführen lassen.
 &lt;/p&gt;
 
 &lt;p&gt;
 Das folgende Skript funktioniert unter OpenBSD und muss etwas für andere
-Unix-Artige angepasst werden. Nennen wir es `renew&lt;sub&gt;cert.sh&lt;/sub&gt;`.
+Unix-Artige angepasst werden. Nennen wir es &lt;code&gt;renew_cert.sh&lt;/code&gt;.
 &lt;/p&gt;
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;#!/bin/sh
-# Renew certificates with Let's Encrypt
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+&lt;span class="c1"&gt;# Renew certificates with Let's Encrypt&lt;/span&gt;
 
-base="/home/lets"
-alias acme_tiny="$base/bin/acme_tiny.py"
-chaineddir="/etc/ssl/acme"
+&lt;span class="nv"&gt;base&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"/home/lets"&lt;/span&gt;
+&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;acme_tiny&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$base&lt;/span&gt;&lt;span class="s2"&gt;/bin/acme_tiny.py"&lt;/span&gt;
+&lt;span class="nv"&gt;chaineddir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"/etc/ssl/acme"&lt;/span&gt;
 
-accountkey="$base/account.key"
-reqsdir="$base/reqs"
-certsdir="$base/certs"
-challengedir="/var/www/challenges"
-intermediate_cert="$certsdir/intermediate.pem"
-intermediate_cert_url="https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem"
+&lt;span class="nv"&gt;accountkey&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$base&lt;/span&gt;&lt;span class="s2"&gt;/account.key"&lt;/span&gt;
+&lt;span class="nv"&gt;reqsdir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$base&lt;/span&gt;&lt;span class="s2"&gt;/reqs"&lt;/span&gt;
+&lt;span class="nv"&gt;certsdir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$base&lt;/span&gt;&lt;span class="s2"&gt;/certs"&lt;/span&gt;
+&lt;span class="nv"&gt;challengedir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"/var/www/challenges"&lt;/span&gt;
+&lt;span class="nv"&gt;intermediate_cert&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$certsdir&lt;/span&gt;&lt;span class="s2"&gt;/intermediate.pem"&lt;/span&gt;
+&lt;span class="nv"&gt;intermediate_cert_url&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem"&lt;/span&gt;
 
-echo "Downloading intermediate certificate..."
-# get intermediate certificate with curl
-# -f: fail without writing html garbage to output file
-# -s: silent mode without progress meter
-# -S: output error message if download fails
-curl -fsS $intermediate_cert_url -o $intermediate_cert &amp;amp;&amp;amp; echo "Success."
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Downloading intermediate certificate..."&lt;/span&gt;
+&lt;span class="c1"&gt;# get intermediate certificate with curl&lt;/span&gt;
+&lt;span class="c1"&gt;# -f: fail without writing html garbage to output file&lt;/span&gt;
+&lt;span class="c1"&gt;# -s: silent mode without progress meter&lt;/span&gt;
+&lt;span class="c1"&gt;# -S: output error message if download fails&lt;/span&gt;
+curl -fsS &lt;span class="nv"&gt;$intermediate_cert_url&lt;/span&gt; -o &lt;span class="nv"&gt;$intermediate_cert&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Success."&lt;/span&gt;
 
-# The script continues even if the download of the intermediate
-# certificate fails. The old intermediate certificate should still
-# exist and be useable.
+&lt;span class="c1"&gt;# The script continues even if the download of the intermediate&lt;/span&gt;
+&lt;span class="c1"&gt;# certificate fails. The old intermediate certificate should still&lt;/span&gt;
+&lt;span class="c1"&gt;# exist and be useable.&lt;/span&gt;
 
-for csr in $reqsdir/*.csr; do
-  domain=`basename $csr .csr`
-  echo "Requesting certificate for $domain..."
-  acme_tiny --account-key $accountkey --csr $csr --acme-dir $challengedir &amp;gt; $certsdir/$domain.crt || (echo "Failed!" ; exit)
-  echo "Success."
-  cat $certsdir/$domain.crt $intermediate_cert &amp;gt;$chaineddir/$domain-chained.pem
-done
+&lt;span class="k"&gt;for&lt;/span&gt; csr in &lt;span class="nv"&gt;$reqsdir&lt;/span&gt;/*.csr&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="nv"&gt;domain&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;basename &lt;span class="nv"&gt;$csr&lt;/span&gt; .csr&lt;span class="sb"&gt;`&lt;/span&gt;
+  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Requesting certificate for &lt;/span&gt;&lt;span class="nv"&gt;$domain&lt;/span&gt;&lt;span class="s2"&gt;..."&lt;/span&gt;
+  acme_tiny --account-key &lt;span class="nv"&gt;$accountkey&lt;/span&gt; --csr &lt;span class="nv"&gt;$csr&lt;/span&gt; --acme-dir &lt;span class="nv"&gt;$challengedir&lt;/span&gt; &amp;gt; &lt;span class="nv"&gt;$certsdir&lt;/span&gt;/&lt;span class="nv"&gt;$domain&lt;/span&gt;.crt &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Failed!"&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;exit&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Success."&lt;/span&gt;
+  cat &lt;span class="nv"&gt;$certsdir&lt;/span&gt;/&lt;span class="nv"&gt;$domain&lt;/span&gt;.crt &lt;span class="nv"&gt;$intermediate_cert&lt;/span&gt; &amp;gt;&lt;span class="nv"&gt;$chaineddir&lt;/span&gt;/&lt;span class="nv"&gt;$domain&lt;/span&gt;-chained.pem
+&lt;span class="k"&gt;done&lt;/span&gt;
 
-echo "Reloading web server configuration..."
-doas /usr/sbin/rcctl reload nginx || (echo "Failed!"; exit)
-echo "Success."
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Reloading web server configuration..."&lt;/span&gt;
+doas /usr/sbin/rcctl reload nginx &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Failed!"&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;exit&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Success."&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;
-Damit der Benutzer `lets` auch die Webserver-Konfiguration neu laden
+Damit der Benutzer &lt;code&gt;lets&lt;/code&gt; auch die Webserver-Konfiguration neu laden
 kann muss er entsprechende Rechte dafür haben. Das lässt sich unter
 OpenBSD schön für genau diesen Zweck eingeschränkt in der Datei
 `/etc/doas.conf` mit der folgenden Zeile konfigurieren. Unter anderen
@@ -245,7 +252,7 @@ verwenden.
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;
-Jetzt kann man noch den `cron` entsprechend konfigurieren, damit er
+Jetzt kann man noch den &lt;code&gt;cron&lt;/code&gt; entsprechend konfigurieren, damit er
 einmal im Monat ein neues Zertifikat anfordert. Ich mag es, wenn ich
 dann Post bekomme.
 &lt;/p&gt;
@@ -253,6 +260,18 @@ dann Post bekomme.
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;MAILTO&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;cert&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;example&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
 &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;HOME&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;renew_certs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sieve_of_eratosthenes&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;factors&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;defaultdict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+	&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;factors&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+	    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;factors&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+		&lt;span class="n"&gt;factors&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+	&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+	    &lt;span class="n"&gt;factors&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+	    &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description><guid>https://derSuessmann.github.io/posts/zertifikate-von-lets-encrypt-verwenden/</guid><pubDate>Wed, 06 Jul 2016 15:16:50 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;</description><category>administration</category><category>certificate</category><category>python</category><category>security</category><category>tls</category><guid>https://derSuessmann.github.io/posts/zertifikate-von-lets-encrypt-verwenden/</guid><pubDate>Wed, 06 Jul 2016 15:16:50 GMT</pubDate></item></channel></rss>

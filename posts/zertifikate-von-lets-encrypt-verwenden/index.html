@@ -11,19 +11,23 @@
 <link rel="alternate" type="application/rss+xml" title="RSS (en)" href="../../en/rss.xml">
 <link rel="canonical" href="https://derSuessmann.github.io/posts/zertifikate-von-lets-encrypt-verwenden/">
 <!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="derSuessmann">
+<link rel="next" href="../programme-in-posts/" title="Programme in Posts" type="text/html">
 <meta property="og:site_name" content="derSuessmann">
 <meta property="og:title" content="Zertifikate von Let's Encrypt verwenden">
 <meta property="og:url" content="https://derSuessmann.github.io/posts/zertifikate-von-lets-encrypt-verwenden/">
-<meta property="og:description" content=".. title: Zertifikate von Let's Encrypt verwenden
-.. slug: zertifikate-von-lets-encrypt-verwenden
-.. date: 2016-07-06 17:16:50 UTC+02:00
-.. tags: 
-.. category: 
-.. link: 
-.. description: 
-.. type: tex">
+<meta property="og:description" content="Installation von acme-tiny
+
+
+Mein Favorit der Let's Encrypt Clients ist acme-tiny. Es ist ein sehr
+kurzes Python-Skript. Das erleichtert einen Code-Review. Die
+Vorarbeiten für die Zertifikatserstellun">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2016-07-06T17:16:50+02:00">
+<meta property="article:tag" content="administration">
+<meta property="article:tag" content="certificate">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="security">
+<meta property="article:tag" content="tls">
 <link rel="alternate" hreflang="en" href="../../en/posts/zertifikate-von-lets-encrypt-verwenden/">
 </head>
 <body>
@@ -97,18 +101,7 @@
         
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
-    <p>
-.. title: Zertifikate von Let's Encrypt verwenden
-.. slug: zertifikate-von-lets-encrypt-verwenden
-.. date: 2016-07-06 17:16:50 UTC+02:00
-.. tags: 
-.. category: 
-.. link: 
-.. description: 
-.. type: text
-</p>
-
-<div id="outline-container-orgheadline1" class="outline-2">
+    <div id="outline-container-orgheadline1" class="outline-2">
 <h2 id="orgheadline1">Installation von acme-tiny</h2>
 <div class="outline-text-2" id="text-orgheadline1">
 <p>
@@ -117,7 +110,7 @@ kurzes Python-Skript. Das erleichtert einen Code-Review. Die
 Vorarbeiten für die Zertifikatserstellung werden leicht mit OpenSSL
 durchgeführt. Es benötigt keine root-Rechte und funktioniert gut. In
 der folgenden Beschreibung gehen wir davon aus, dass der Benutzer
-`lets` als normaler Benutzer auf einem OpenBSD-System mit nginx als
+<code>lets</code> als normaler Benutzer auf einem OpenBSD-System mit nginx als
 Web-Server existiert.
 </p>
 </div>
@@ -126,7 +119,7 @@ Web-Server existiert.
 <h3 id="orgheadline2">Erstellen der Verzeichnisstruktur</h3>
 <div class="outline-text-3" id="text-orgheadline2">
 <p>
-Im Verzeichnis des Benutzers `lets` wird folgende Verzeichnisstruktur
+Im Verzeichnis des Benutzers <code>lets</code> wird folgende Verzeichnisstruktur
 angelegt.
 </p>
 
@@ -143,16 +136,16 @@ mkdir certs
 <div class="outline-text-3" id="text-orgheadline3">
 <p>
 Damit man das Skript leicht installieren und eventuell auch
-aktualisieren kann wird das Repository in `src` geclont.
+aktualisieren kann wird das Repository in <code>src</code> geclont.
 </p>
 
-<div class="highlight"><pre><span></span>cd src
+<div class="highlight"><pre><span></span><span class="nb">cd</span> src
 git clone https://github.com/diafygi/acme-tiny.git
-cd
+<span class="nb">cd</span>
 </pre></div>
 
 <p>
-Das Skript kopiert man nach dem Code Review nach `bin`.
+Das Skript kopiert man nach dem Code Review nach <code>bin</code>.
 </p>
 
 <div class="highlight"><pre><span></span>cp src/acme-tiny/acme_tiny.py bin
@@ -170,8 +163,8 @@ dem folgenden Kommando erstellen. Aus Sicherheitsgründen sollte es auch
 nur für den Benutzer lesbar sein.
 </p>
 
-<div class="highlight"><pre><span></span>openssl genrsa 4096 &gt; account.key
-chmod 400 account.key
+<div class="highlight"><pre><span></span>openssl genrsa <span class="m">4096</span> &gt; account.key
+chmod <span class="m">400</span> account.key
 </pre></div>
 </div>
 </div>
@@ -187,13 +180,13 @@ Let's Encrypt gesandt. Also müssen wir am besten für jede Domain einen
 eigenes Domain-Schlüsselpaar und einen Request erstellen.
 </p>
 
-<div class="highlight"><pre><span></span>openssl genrsa 4096 &gt; example.key
-openssl req -new -sha256 -key example.key -subj "/CN=example.com" &gt; ./requests/example.csr
+<div class="highlight"><pre><span></span>openssl genrsa <span class="m">4096</span> &gt; example.key
+openssl req -new -sha256 -key example.key -subj <span class="s2">"/CN=example.com"</span> &gt; ./requests/example.csr
 </pre></div>
 
 <p>
 Jetzt wird der Schlüssel nur noch vom Server benötigt. Ich habe ihn als
-root (sudo/doas) in das Verzeichnis `/etc/ssl/private` verschoben.
+<code>root</code> (sudo/doas) in das Verzeichnis <code>/etc/ssl/private</code> verschoben.
 </p>
 
 <p>
@@ -267,10 +260,10 @@ cat ~/certs/example.crt intermediate.pem &gt; /etc/ssl/acme/example-chained.pem
 <p>
 Hier sieht man auch einen Kniff, den ich angewendet habe, um möglichst
 eine Trennung der Rechte zu erreichen. Der private Schlüssel der Domain
-(`example.key`), der nur zur Erstellung des Certificate Requests und
+(<code>example.key</code>), der nur zur Erstellung des Certificate Requests und
 später von Server verwendet wird liegt in einem Verzeichnis, auf das nur
 root zugreifen kann. Das Verzeichnis mit den Zertifikaten
-(`/etc/ssl/acme/` gehört hingegen dem Benutzer `acme`, der nur einfacher
+(<code>/etc/ssl/acme/</code> gehört hingegen dem Benutzer <code>acme</code>, der nur einfacher
 Anwender ist. Alle dürfen auf das Verzeichnis lesend zugreifen.
 </p>
 </div>
@@ -282,56 +275,56 @@ Anwender ist. Alle dürfen auf das Verzeichnis lesend zugreifen.
 <p>
 Da das Zertifikate nur 90 Tage gültig ist, muss man vor Ablauf der Frist
 ein neues anfordern. Das kann man wie oben beschrieben mit dem gleichen
-Aufruf von `acme<sub>tiny.py</sub>` durchführen. Unter den unix-artigen
+Aufruf von <code>acme_tiny.py</code> durchführen. Unter den unix-artigen
 Betriebssystemen kann man aber auch ein einfaches Skript erstellen und
-von `cron` ausführen lassen.
+von <code>cron</code> ausführen lassen.
 </p>
 
 <p>
 Das folgende Skript funktioniert unter OpenBSD und muss etwas für andere
-Unix-Artige angepasst werden. Nennen wir es `renew<sub>cert.sh</sub>`.
+Unix-Artige angepasst werden. Nennen wir es <code>renew_cert.sh</code>.
 </p>
 
-<div class="highlight"><pre><span></span>#!/bin/sh
-# Renew certificates with Let's Encrypt
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+<span class="c1"># Renew certificates with Let's Encrypt</span>
 
-base="/home/lets"
-alias acme_tiny="$base/bin/acme_tiny.py"
-chaineddir="/etc/ssl/acme"
+<span class="nv">base</span><span class="o">=</span><span class="s2">"/home/lets"</span>
+<span class="nb">alias</span> <span class="nv">acme_tiny</span><span class="o">=</span><span class="s2">"</span><span class="nv">$base</span><span class="s2">/bin/acme_tiny.py"</span>
+<span class="nv">chaineddir</span><span class="o">=</span><span class="s2">"/etc/ssl/acme"</span>
 
-accountkey="$base/account.key"
-reqsdir="$base/reqs"
-certsdir="$base/certs"
-challengedir="/var/www/challenges"
-intermediate_cert="$certsdir/intermediate.pem"
-intermediate_cert_url="https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem"
+<span class="nv">accountkey</span><span class="o">=</span><span class="s2">"</span><span class="nv">$base</span><span class="s2">/account.key"</span>
+<span class="nv">reqsdir</span><span class="o">=</span><span class="s2">"</span><span class="nv">$base</span><span class="s2">/reqs"</span>
+<span class="nv">certsdir</span><span class="o">=</span><span class="s2">"</span><span class="nv">$base</span><span class="s2">/certs"</span>
+<span class="nv">challengedir</span><span class="o">=</span><span class="s2">"/var/www/challenges"</span>
+<span class="nv">intermediate_cert</span><span class="o">=</span><span class="s2">"</span><span class="nv">$certsdir</span><span class="s2">/intermediate.pem"</span>
+<span class="nv">intermediate_cert_url</span><span class="o">=</span><span class="s2">"https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem"</span>
 
-echo "Downloading intermediate certificate..."
-# get intermediate certificate with curl
-# -f: fail without writing html garbage to output file
-# -s: silent mode without progress meter
-# -S: output error message if download fails
-curl -fsS $intermediate_cert_url -o $intermediate_cert &amp;&amp; echo "Success."
+<span class="nb">echo</span> <span class="s2">"Downloading intermediate certificate..."</span>
+<span class="c1"># get intermediate certificate with curl</span>
+<span class="c1"># -f: fail without writing html garbage to output file</span>
+<span class="c1"># -s: silent mode without progress meter</span>
+<span class="c1"># -S: output error message if download fails</span>
+curl -fsS <span class="nv">$intermediate_cert_url</span> -o <span class="nv">$intermediate_cert</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">"Success."</span>
 
-# The script continues even if the download of the intermediate
-# certificate fails. The old intermediate certificate should still
-# exist and be useable.
+<span class="c1"># The script continues even if the download of the intermediate</span>
+<span class="c1"># certificate fails. The old intermediate certificate should still</span>
+<span class="c1"># exist and be useable.</span>
 
-for csr in $reqsdir/*.csr; do
-  domain=`basename $csr .csr`
-  echo "Requesting certificate for $domain..."
-  acme_tiny --account-key $accountkey --csr $csr --acme-dir $challengedir &gt; $certsdir/$domain.crt || (echo "Failed!" ; exit)
-  echo "Success."
-  cat $certsdir/$domain.crt $intermediate_cert &gt;$chaineddir/$domain-chained.pem
-done
+<span class="k">for</span> csr in <span class="nv">$reqsdir</span>/*.csr<span class="p">;</span> <span class="k">do</span>
+  <span class="nv">domain</span><span class="o">=</span><span class="sb">`</span>basename <span class="nv">$csr</span> .csr<span class="sb">`</span>
+  <span class="nb">echo</span> <span class="s2">"Requesting certificate for </span><span class="nv">$domain</span><span class="s2">..."</span>
+  acme_tiny --account-key <span class="nv">$accountkey</span> --csr <span class="nv">$csr</span> --acme-dir <span class="nv">$challengedir</span> &gt; <span class="nv">$certsdir</span>/<span class="nv">$domain</span>.crt <span class="o">||</span> <span class="o">(</span><span class="nb">echo</span> <span class="s2">"Failed!"</span> <span class="p">;</span> <span class="nb">exit</span><span class="o">)</span>
+  <span class="nb">echo</span> <span class="s2">"Success."</span>
+  cat <span class="nv">$certsdir</span>/<span class="nv">$domain</span>.crt <span class="nv">$intermediate_cert</span> &gt;<span class="nv">$chaineddir</span>/<span class="nv">$domain</span>-chained.pem
+<span class="k">done</span>
 
-echo "Reloading web server configuration..."
-doas /usr/sbin/rcctl reload nginx || (echo "Failed!"; exit)
-echo "Success."
+<span class="nb">echo</span> <span class="s2">"Reloading web server configuration..."</span>
+doas /usr/sbin/rcctl reload nginx <span class="o">||</span> <span class="o">(</span><span class="nb">echo</span> <span class="s2">"Failed!"</span><span class="p">;</span> <span class="nb">exit</span><span class="o">)</span>
+<span class="nb">echo</span> <span class="s2">"Success."</span>
 </pre></div>
 
 <p>
-Damit der Benutzer `lets` auch die Webserver-Konfiguration neu laden
+Damit der Benutzer <code>lets</code> auch die Webserver-Konfiguration neu laden
 kann muss er entsprechende Rechte dafür haben. Das lässt sich unter
 OpenBSD schön für genau diesen Zweck eingeschränkt in der Datei
 `/etc/doas.conf` mit der folgenden Zeile konfigurieren. Unter anderen
@@ -343,7 +336,7 @@ verwenden.
 </pre></div>
 
 <p>
-Jetzt kann man noch den `cron` entsprechend konfigurieren, damit er
+Jetzt kann man noch den <code>cron</code> entsprechend konfigurieren, damit er
 einmal im Monat ein neues Zertifikat anfordert. Ich mag es, wenn ich
 dann Post bekomme.
 </p>
@@ -351,11 +344,34 @@ dann Post bekomme.
 <div class="highlight"><pre><span></span><span class="n">MAILTO</span><span class="o">=</span><span class="n">cert</span><span class="err">@</span><span class="n">example</span><span class="p">.</span><span class="n">com</span>
 <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="o">*</span> <span class="o">*</span> <span class="err">$</span><span class="n">HOME</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">renew_certs</span><span class="p">.</span><span class="n">sh</span>
 </pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sieve_of_eratosthenes</span><span class="p">():</span>
+    <span class="n">factors</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">count</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">factors</span><span class="p">[</span><span class="n">n</span><span class="p">]:</span>
+	    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">factors</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+		<span class="n">factors</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+	<span class="k">else</span><span class="p">:</span>
+	    <span class="n">factors</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	    <span class="k">yield</span> <span class="n">n</span>
+</pre></div>
 </div>
 </div>
 </div>
     </div>
-    <aside class="postpromonav"><nav></nav></aside></article>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../categories/administration/" rel="tag">administration</a></li>
+            <li><a class="tag p-category" href="../../categories/certificate/" rel="tag">certificate</a></li>
+            <li><a class="tag p-category" href="../../categories/python/" rel="tag">python</a></li>
+            <li><a class="tag p-category" href="../../categories/security/" rel="tag">security</a></li>
+            <li><a class="tag p-category" href="../../categories/tls/" rel="tag">tls</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="next">
+                <a href="../programme-in-posts/" rel="next" title="Programme in Posts">Nächster Eintrag</a>
+            </li>
+        </ul></nav></aside></article>
 </div>
         <!--End of body content-->
 

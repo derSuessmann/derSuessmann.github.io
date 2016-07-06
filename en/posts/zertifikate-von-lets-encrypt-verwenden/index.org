@@ -1,11 +1,13 @@
+#+BEGIN_COMMENT
 .. title: Zertifikate von Let's Encrypt verwenden
 .. slug: zertifikate-von-lets-encrypt-verwenden
 .. date: 2016-07-06 17:16:50 UTC+02:00
-.. tags: 
-.. category: 
+.. tags: certificate, tls, security, administration, python
+.. category: administration
 .. link: 
 .. description: 
 .. type: text
+#+END_COMMENT
 
 * Installation von acme-tiny
 
@@ -14,15 +16,15 @@ kurzes Python-Skript. Das erleichtert einen Code-Review. Die
 Vorarbeiten für die Zertifikatserstellung werden leicht mit OpenSSL
 durchgeführt. Es benötigt keine root-Rechte und funktioniert gut. In
 der folgenden Beschreibung gehen wir davon aus, dass der Benutzer
-`lets` als normaler Benutzer auf einem OpenBSD-System mit nginx als
+=lets= als normaler Benutzer auf einem OpenBSD-System mit nginx als
 Web-Server existiert.
 
 ** Erstellen der Verzeichnisstruktur
 
-Im Verzeichnis des Benutzers `lets` wird folgende Verzeichnisstruktur
+Im Verzeichnis des Benutzers =lets= wird folgende Verzeichnisstruktur
 angelegt.
 
-#+BEGIN_SRC shell 
+#+BEGIN_SRC sh 
 mkdir bin
 mkdir src
 mkdir reqs
@@ -32,17 +34,17 @@ mkdir certs
 ** Clonen des Repositories
 
 Damit man das Skript leicht installieren und eventuell auch
-aktualisieren kann wird das Repository in `src` geclont.
+aktualisieren kann wird das Repository in =src= geclont.
 
-#+BEGIN_SRC shell
+#+BEGIN_SRC sh
 cd src
 git clone https://github.com/diafygi/acme-tiny.git
 cd
 #+END_SRC
 
-Das Skript kopiert man nach dem Code Review nach `bin`.
+Das Skript kopiert man nach dem Code Review nach =bin=.
 
-#+BEGIN_SRC shell
+#+BEGIN_SRC sh
 cp src/acme-tiny/acme_tiny.py bin
 chmod +x bin/acme_tiny.py
 #+END_SRC
@@ -53,7 +55,7 @@ Für den Account benötigt man ein Schlüsselpaar. Das kann man leicht mit
 dem folgenden Kommando erstellen. Aus Sicherheitsgründen sollte es auch
 nur für den Benutzer lesbar sein.
 
-#+BEGIN_SRC shell
+#+BEGIN_SRC sh
 openssl genrsa 4096 > account.key
 chmod 400 account.key
 #+END_SRC
@@ -66,13 +68,13 @@ Request wird der öffentliche Schlüssel der Domain zum Unterschreiben an
 Let's Encrypt gesandt. Also müssen wir am besten für jede Domain einen
 eigenes Domain-Schlüsselpaar und einen Request erstellen.
 
-#+BEGIN_SRC shell
+#+BEGIN_SRC sh
 openssl genrsa 4096 > example.key
 openssl req -new -sha256 -key example.key -subj "/CN=example.com" > ./requests/example.csr
 #+END_SRC
 
 Jetzt wird der Schlüssel nur noch vom Server benötigt. Ich habe ihn als
-root (sudo/doas) in das Verzeichnis `/etc/ssl/private` verschoben.
+=root= (sudo/doas) in das Verzeichnis =/etc/ssl/private= verschoben.
 
 Man kann auch ein Zertifikat für mehrere Domains in einem Zertifikat
 erstellen lassen. Das nutze ich zur Zeit aber nicht.
@@ -113,7 +115,7 @@ anfordern.
 
 Der folgende Aufruf fordert das Zertifikat für die Domain an.
 
-#+BEGIN_SRC shell
+#+BEGIN_SRC sh
 python acme_tiny.py --account-key ./account.key --csr ~/requests/example.csr --acme-dir /var/www/challenges/ > ~/certs/example.crt
 #+END_SRC
 
@@ -122,31 +124,31 @@ Zertifikatskette sind die Zertifikate der Domain und der
 unterschreibenden Certification Authority aneinandergehängt. Diese Kette
 kann man mit den folgenden Schritten erstellen.
 
-#+BEGIN_SRC shell
+#+BEGIN_SRC sh
 curl -fsS https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem -o ~/certs/intermediate.pem
 cat ~/certs/example.crt intermediate.pem > /etc/ssl/acme/example-chained.pem
 #+END_SRC
 
 Hier sieht man auch einen Kniff, den ich angewendet habe, um möglichst
 eine Trennung der Rechte zu erreichen. Der private Schlüssel der Domain
-(`example.key`), der nur zur Erstellung des Certificate Requests und
+(=example.key=), der nur zur Erstellung des Certificate Requests und
 später von Server verwendet wird liegt in einem Verzeichnis, auf das nur
 root zugreifen kann. Das Verzeichnis mit den Zertifikaten
-(`/etc/ssl/acme/` gehört hingegen dem Benutzer `acme`, der nur einfacher
+(=/etc/ssl/acme/= gehört hingegen dem Benutzer =acme=, der nur einfacher
 Anwender ist. Alle dürfen auf das Verzeichnis lesend zugreifen.
 
 ** Erneuern des Zertifikat
 
 Da das Zertifikate nur 90 Tage gültig ist, muss man vor Ablauf der Frist
 ein neues anfordern. Das kann man wie oben beschrieben mit dem gleichen
-Aufruf von `acme_tiny.py` durchführen. Unter den unix-artigen
+Aufruf von =acme_tiny.py= durchführen. Unter den unix-artigen
 Betriebssystemen kann man aber auch ein einfaches Skript erstellen und
-von `cron` ausführen lassen.
+von =cron= ausführen lassen.
 
 Das folgende Skript funktioniert unter OpenBSD und muss etwas für andere
-Unix-Artige angepasst werden. Nennen wir es `renew_cert.sh`.
+Unix-Artige angepasst werden. Nennen wir es =renew_cert.sh=.
 
-#+BEGIN_SRC shell
+#+BEGIN_SRC sh
 #!/bin/sh
 # Renew certificates with Let's Encrypt
 
@@ -185,7 +187,7 @@ doas /usr/sbin/rcctl reload nginx || (echo "Failed!"; exit)
 echo "Success."
 #+END_SRC
 
-Damit der Benutzer `lets` auch die Webserver-Konfiguration neu laden
+Damit der Benutzer =lets= auch die Webserver-Konfiguration neu laden
 kann muss er entsprechende Rechte dafür haben. Das lässt sich unter
 OpenBSD schön für genau diesen Zweck eingeschränkt in der Datei
 `/etc/doas.conf` mit der folgenden Zeile konfigurieren. Unter anderen
@@ -196,7 +198,7 @@ verwenden.
 permit nopass lets as root cmd /usr/sbin/rcctl args reload nginx
 #+END_SRC
 
-Jetzt kann man noch den `cron` entsprechend konfigurieren, damit er
+Jetzt kann man noch den =cron= entsprechend konfigurieren, damit er
 einmal im Monat ein neues Zertifikat anfordert. Ich mag es, wenn ich
 dann Post bekomme.
 
@@ -205,3 +207,15 @@ MAILTO=cert@example.com
 0 0 1 * * $HOME/bin/renew_certs.sh
 #+END_SRC
 
+
+#+BEGIN_SRC python
+   def sieve_of_eratosthenes():
+       factors = defaultdict(set)
+       for n in count(2):
+           if factors[n]:
+               for m in factors.pop(n):
+                   factors[n+m].add(m)
+           else:
+               factors[n*n].add(n)
+               yield n
+#+END_SRC

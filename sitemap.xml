@@ -15,11 +15,35 @@
  </url>
  <url>
   <loc>https://derSuessmann.github.io/archive.html</loc>
-  <lastmod>2016-07-06T16:07:00Z</lastmod>
+  <lastmod>2016-07-06T16:50:00Z</lastmod>
  </url>
  <url>
   <loc>https://derSuessmann.github.io/categories/</loc>
-  <lastmod>2016-07-06T16:07:00Z</lastmod>
+  <lastmod>2016-07-06T16:48:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://derSuessmann.github.io/categories/administration/</loc>
+  <lastmod>2016-07-06T16:48:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://derSuessmann.github.io/categories/cat_administration/</loc>
+  <lastmod>2016-07-06T16:48:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://derSuessmann.github.io/categories/certificate/</loc>
+  <lastmod>2016-07-06T16:48:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://derSuessmann.github.io/categories/python/</loc>
+  <lastmod>2016-07-06T16:48:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://derSuessmann.github.io/categories/security/</loc>
+  <lastmod>2016-07-06T16:48:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://derSuessmann.github.io/categories/tls/</loc>
+  <lastmod>2016-07-06T16:48:00Z</lastmod>
  </url>
  <url>
   <loc>https://derSuessmann.github.io/en/</loc>
@@ -31,15 +55,44 @@
  </url>
  <url>
   <loc>https://derSuessmann.github.io/en/archive.html</loc>
-  <lastmod>2016-07-06T16:07:00Z</lastmod>
+  <lastmod>2016-07-06T16:50:00Z</lastmod>
  </url>
  <url>
   <loc>https://derSuessmann.github.io/en/categories/</loc>
-  <lastmod>2016-07-06T16:07:00Z</lastmod>
+  <lastmod>2016-07-06T16:48:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://derSuessmann.github.io/en/categories/administration/</loc>
+  <lastmod>2016-07-06T16:48:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://derSuessmann.github.io/en/categories/cat_administration/</loc>
+  <lastmod>2016-07-06T16:48:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://derSuessmann.github.io/en/categories/certificate/</loc>
+  <lastmod>2016-07-06T16:48:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://derSuessmann.github.io/en/categories/python/</loc>
+  <lastmod>2016-07-06T16:48:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://derSuessmann.github.io/en/categories/security/</loc>
+  <lastmod>2016-07-06T16:48:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://derSuessmann.github.io/en/categories/tls/</loc>
+  <lastmod>2016-07-06T16:48:00Z</lastmod>
  </url>
  <url>
   <loc>https://derSuessmann.github.io/en/galleries/</loc>
   <lastmod>2016-07-06T16:07:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://derSuessmann.github.io/en/posts/programme-in-posts/</loc>
+  <lastmod>2016-07-06T16:50:00Z</lastmod>
+  <xhtml:link rel="alternate" hreflang="de" href="https://derSuessmann.github.io/posts/programme-in-posts/" />
  </url>
  <url>
   <loc>https://derSuessmann.github.io/en/posts/zertifikate-von-lets-encrypt-verwenden/</loc>
@@ -53,6 +106,10 @@
  <url>
   <loc>https://derSuessmann.github.io/listings/</loc>
   <lastmod>2016-07-06T16:07:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://derSuessmann.github.io/posts/programme-in-posts/</loc>
+  <lastmod>2016-07-06T16:50:00Z</lastmod>
  </url>
  <url>
   <loc>https://derSuessmann.github.io/posts/zertifikate-von-lets-encrypt-verwenden/</loc>
