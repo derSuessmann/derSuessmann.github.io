@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>derSuessmann</title><link>https://derSuessmann.github.io/</link><description>Here is everything beta...</description><atom:link href="https://derSuessmann.github.io/en/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Wed, 06 Jul 2016 17:08:44 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Programme in Posts</title><link>https://derSuessmann.github.io/en/posts/programme-in-posts/</link><dc:creator>derSuessmann</dc:creator><description>&lt;div&gt;&lt;p&gt;Schreibe hier deinen Eintrag hin.&lt;/p&gt;
-&lt;table class="codetable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;&lt;a href="https://derSuessmann.github.io/en/posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-1"&gt;1&lt;/a&gt;
-&lt;a href="https://derSuessmann.github.io/en/posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-2"&gt;2&lt;/a&gt;
-&lt;a href="https://derSuessmann.github.io/en/posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-3"&gt;3&lt;/a&gt;
-&lt;a href="https://derSuessmann.github.io/en/posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-4"&gt;4&lt;/a&gt;
-&lt;a href="https://derSuessmann.github.io/en/posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-5"&gt;5&lt;/a&gt;
-&lt;a href="https://derSuessmann.github.io/en/posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-6"&gt;6&lt;/a&gt;
-&lt;a href="https://derSuessmann.github.io/en/posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-7"&gt;7&lt;/a&gt;
-&lt;a href="https://derSuessmann.github.io/en/posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-8"&gt;8&lt;/a&gt;
-&lt;a href="https://derSuessmann.github.io/en/posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-9"&gt;9&lt;/a&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre class="code python"&gt;&lt;a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-1"&gt;&lt;/a&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sieve_of_eratosthenes&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-&lt;a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-2"&gt;&lt;/a&gt;    &lt;span class="n"&gt;factors&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;defaultdict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-3"&gt;&lt;/a&gt;    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-4"&gt;&lt;/a&gt;        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;factors&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
-&lt;a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-5"&gt;&lt;/a&gt;            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;factors&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-6"&gt;&lt;/a&gt;                &lt;span class="n"&gt;factors&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-7"&gt;&lt;/a&gt;        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-8"&gt;&lt;/a&gt;            &lt;span class="n"&gt;factors&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-9"&gt;&lt;/a&gt;            &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</description><guid>https://derSuessmann.github.io/en/posts/programme-in-posts/</guid><pubDate>Wed, 06 Jul 2016 16:50:15 GMT</pubDate></item><item><title>Zertifikate von Let's Encrypt verwenden</title><link>https://derSuessmann.github.io/en/posts/zertifikate-von-lets-encrypt-verwenden/</link><dc:creator>derSuessmann</dc:creator><description>&lt;div id="outline-container-orgheadline1" class="outline-2"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>derSuessmann</title><link>https://derSuessmann.github.io/</link><description>Everything is beta here...</description><atom:link rel="self" type="application/rss+xml" href="https://derSuessmann.github.io/en/rss.xml"></atom:link><language>en</language><lastBuildDate>Thu, 07 Jul 2016 05:04:58 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Physik mit Nikola</title><link>https://derSuessmann.github.io/en/posts/physik-mit-nikola/</link><dc:creator>derSuessmann</dc:creator><description>&lt;p&gt;
+Einfache mathematische Formel:
+&lt;/p&gt;
+
+&lt;p&gt;
+\( a^2 + b^2 = c^2 \) 
+&lt;/p&gt;
+
+&lt;p&gt;
+Etwas physikalischer:
+&lt;/p&gt;
+
+\begin{equation}
+\Delta s = \SI{4.5}{\meter}
+\end{equation}</description><guid>https://derSuessmann.github.io/en/posts/physik-mit-nikola/</guid><pubDate>Thu, 07 Jul 2016 04:09:32 GMT</pubDate></item><item><title>Zertifikate von Let's Encrypt verwenden</title><link>https://derSuessmann.github.io/en/posts/zertifikate-von-lets-encrypt-verwenden/</link><dc:creator>derSuessmann</dc:creator><description>&lt;div id="outline-container-orgheadline1" class="outline-2"&gt;
 &lt;h2 id="orgheadline1"&gt;Installation von acme-tiny&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-orgheadline1"&gt;
 &lt;p&gt;

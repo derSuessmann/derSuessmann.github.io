@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <base href="https://derSuessmann.github.io/">
-<meta name="description" content="Here is everything beta...">
+<meta name="description" content="Hier ist alles beta...">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>derSuessmann</title>
 <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
@@ -11,7 +11,22 @@
 <link rel="alternate" type="application/rss+xml" title="RSS (de)" href="rss.xml">
 <link rel="alternate" type="application/rss+xml" title="RSS (en)" href="en/rss.xml">
 <link rel="canonical" href="https://derSuessmann.github.io/">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/programme-in-posts/" type="text/html">
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js","[Contrib]/siunitx/siunitx.js"],
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+    },
+    // displayAlign: 'left', // Change this to 'center' to center equations.
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}}
+    },
+    TeX: {extensions: ["AMSmath.js","AMSsymbols.js", "sinuitx.js"]}
+});
+MathJax.Ajax.config.path["Contrib"] = "//cdn.mathjax.org/mathjax/contrib";
+</script><!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/physik-mit-nikola/" type="text/html">
 </head>
 <body>
 <a href="#content" class="sr-only sr-only-focusable">Springe zum Hauptinhalt</a>
@@ -53,7 +68,6 @@
 <li><a href="https://derSuessmann.github.io/en/" rel="alternate" hreflang="en">English</a></li>
 
                 
-                    
                 
             </ul>
 </div>
@@ -69,38 +83,29 @@
 
     
 <div class="postindex">
-    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/programme-in-posts/" class="u-url">Programme in Posts</a></h1>
+    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/physik-mit-nikola/" class="u-url">Physik mit Nikola</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn">
                 derSuessmann
             </span></p>
-            <p class="dateline"><a href="posts/programme-in-posts/" rel="bookmark"><time class="published dt-published" datetime="2016-07-06T18:50:15+02:00" title="2016-07-06 18:50">2016-07-06 18:50</time></a></p>
+            <p class="dateline"><a href="posts/physik-mit-nikola/" rel="bookmark"><time class="published dt-published" datetime="2016-07-07T06:09:32+02:00" title="2016-07-07 06:09">2016-07-07 06:09</time></a></p>
         </div>
     </header><div class="e-content entry-content">
-    <div>
-<p>Schreibe hier deinen Eintrag hin.</p>
-<table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-1">1</a>
-<a href="posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-2">2</a>
-<a href="posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-3">3</a>
-<a href="posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-4">4</a>
-<a href="posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-5">5</a>
-<a href="posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-6">6</a>
-<a href="posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-7">7</a>
-<a href="posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-8">8</a>
-<a href="posts/programme-in-posts/#rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-9">9</a></pre></div></td>
-<td class="code"><pre class="code python"><a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-1"></a><span class="k">def</span> <span class="nf">sieve_of_eratosthenes</span><span class="p">():</span>
-<a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-2"></a>    <span class="n">factors</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
-<a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-3"></a>    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">count</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
-<a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-4"></a>        <span class="k">if</span> <span class="n">factors</span><span class="p">[</span><span class="n">n</span><span class="p">]:</span>
-<a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-5"></a>            <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">factors</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-<a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-6"></a>                <span class="n">factors</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-<a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-7"></a>        <span class="k">else</span><span class="p">:</span>
-<a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-8"></a>            <span class="n">factors</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-<a name="rest_code_cdd2b349ca0744dd81eecaf71a38ab0b-9"></a>            <span class="k">yield</span> <span class="n">n</span>
-</pre></td>
-</tr></table>
-</div>
+    <p>
+Einfache mathematische Formel:
+</p>
+
+<p>
+\( a^2 + b^2 = c^2 \) 
+</p>
+
+<p>
+Etwas physikalischer:
+</p>
+
+\begin{equation}
+\Delta s = \SI{4.5}{\meter}
+\end{equation}
     </div>
     </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/zertifikate-von-lets-encrypt-verwenden/" class="u-url">Zertifikate von Let's Encrypt verwenden</a></h1>
         <div class="metadata">
@@ -376,13 +381,27 @@ dann Post bekomme.
 
 
 
-
-
-        </div>
+            <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js","[Contrib]/siunitx/siunitx.js"],
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+    },
+    // displayAlign: 'left', // Change this to 'center' to center equations.
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}}
+    },
+    TeX: {extensions: ["AMSmath.js","AMSsymbols.js", "sinuitx.js"]}
+});
+MathJax.Ajax.config.path["Contrib"] = "//cdn.mathjax.org/mathjax/contrib";
+</script>
+</div>
         <!--End of body content-->
 
-        <footer id="footer">
-            Contents © 2016         <a href="mailto:n.tesla@example.com">derSuessmann</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+        <footer id="footer"><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a><br>This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://derSuessmann.github.io" property="cc:attributionName" rel="cc:attributionURL">https://derSuessmann.github.io</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+ derSuessmann, 2016.
             
         </footer>
 </div>

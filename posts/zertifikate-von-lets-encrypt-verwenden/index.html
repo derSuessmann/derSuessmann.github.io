@@ -10,8 +10,23 @@
 <link rel="alternate" type="application/rss+xml" title="RSS (de)" href="../../rss.xml">
 <link rel="alternate" type="application/rss+xml" title="RSS (en)" href="../../en/rss.xml">
 <link rel="canonical" href="https://derSuessmann.github.io/posts/zertifikate-von-lets-encrypt-verwenden/">
-<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="derSuessmann">
-<link rel="next" href="../programme-in-posts/" title="Programme in Posts" type="text/html">
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js","[Contrib]/siunitx/siunitx.js"],
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+    },
+    // displayAlign: 'left', // Change this to 'center' to center equations.
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}}
+    },
+    TeX: {extensions: ["AMSmath.js","AMSsymbols.js", "sinuitx.js"]}
+});
+MathJax.Ajax.config.path["Contrib"] = "//cdn.mathjax.org/mathjax/contrib";
+</script><!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="derSuessmann">
+<link rel="next" href="../physik-mit-nikola/" title="Physik mit Nikola" type="text/html">
 <meta property="og:site_name" content="derSuessmann">
 <meta property="og:title" content="Zertifikate von Let's Encrypt verwenden">
 <meta property="og:url" content="https://derSuessmann.github.io/posts/zertifikate-von-lets-encrypt-verwenden/">
@@ -70,11 +85,6 @@ Vorarbeiten für die Zertifikatserstellun">
 <li><a href="https://derSuessmann.github.io/en/" rel="alternate" hreflang="en">English</a></li>
 
                 
-                    
-    <li>
-    <a href="index.org" id="sourcelink">Source</a>
-    </li>
-
                 
             </ul>
 </div>
@@ -95,7 +105,6 @@ Vorarbeiten für die Zertifikatserstellun">
             </span></p>
             <p class="dateline"><a href="." rel="bookmark"><time class="published dt-published" datetime="2016-07-06T17:16:50+02:00" itemprop="datePublished" title="2016-07-06 17:16">2016-07-06 17:16</time></a></p>
             
-        <p class="sourceline"><a href="index.org" id="sourcelink">Source</a></p>
 
         </div>
         
@@ -369,14 +378,14 @@ dann Post bekomme.
         </ul>
 <ul class="pager hidden-print">
 <li class="next">
-                <a href="../programme-in-posts/" rel="next" title="Programme in Posts">Nächster Eintrag</a>
+                <a href="../physik-mit-nikola/" rel="next" title="Physik mit Nikola">Nächster Eintrag</a>
             </li>
         </ul></nav></aside></article>
 </div>
         <!--End of body content-->
 
-        <footer id="footer">
-            Contents © 2016         <a href="mailto:n.tesla@example.com">derSuessmann</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+        <footer id="footer"><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a><br>This work by <a xmlns:cc="http://creativecommons.org/ns#" href="https://derSuessmann.github.io" property="cc:attributionName" rel="cc:attributionURL">https://derSuessmann.github.io</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+ derSuessmann, 2016.
             
         </footer>
 </div>

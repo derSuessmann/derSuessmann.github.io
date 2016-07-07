@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>derSuessmann (mathjax)</title><link>https://derSuessmann.github.io/</link><description></description><atom:link rel="self" type="application/rss+xml" href="https://derSuessmann.github.io/categories/mathjax.xml"></atom:link><language>de</language><lastBuildDate>Thu, 07 Jul 2016 05:04:58 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Physik mit Nikola</title><link>https://derSuessmann.github.io/posts/physik-mit-nikola/</link><dc:creator>derSuessmann</dc:creator><description>&lt;p&gt;
+Einfache mathematische Formel:
+&lt;/p&gt;
+
+&lt;p&gt;
+\( a^2 + b^2 = c^2 \) 
+&lt;/p&gt;
+
+&lt;p&gt;
+Etwas physikalischer:
+&lt;/p&gt;
+
+\begin{equation}
+\Delta s = \SI{4.5}{\meter}
+\end{equation}</description><category>mathjax</category><guid>https://derSuessmann.github.io/posts/physik-mit-nikola/</guid><pubDate>Thu, 07 Jul 2016 04:09:32 GMT</pubDate></item></channel></rss>
