@@ -22,28 +22,28 @@ MathJax.Hub.Config({
     "HTML-CSS": {
         styles: {'.MathJax_Display': {"margin": 0}}
     },
-    TeX: {extensions: ["AMSmath.js","AMSsymbols.js", "sinuitx.js"]}
+    TeX: {extensions: ["AMSmath.js","AMSsymbols.js", "sinuitx.js"],
+        preamble: ["\sisetup{output-decimal-marker ={,},exponent-product=\cdot,per-mode=fraction}"]}
 });
-MathJax.Ajax.config.path["Contrib"] = "//cdn.mathjax.org/mathjax/contrib";
 </script><!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="derSuessmann">
 <link rel="prev" href="../zertifikate-von-lets-encrypt-verwenden/" title="Zertifikate von Let's Encrypt verwenden" type="text/html">
 <meta property="og:site_name" content="derSuessmann">
 <meta property="og:title" content="Physik mit Nikola">
 <meta property="og:url" content="https://derSuessmann.github.io/posts/physik-mit-nikola/">
-<meta property="og:description" content="Einfache mathematische Formel:
+<meta property="og:description" content="Für Texte mit physikalischen Formeln möchte ich die LaTeX-Notation verwenden.
+Dank MathJax funktioniert das auch schon lange recht gut.
 
 
 
-\( a^2 + b^2 = c^2 \) 
+Einfache mathematische Formel:
 
 
 
-Etwas physikalischer:
+\( a^2 + b^2 = c^2 \)
 
 
-\begin{equation}
-\Delta s = \SI{4.5}{\meter}
-\end{equation}">
+
+Um">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2016-07-07T06:09:32+02:00">
 <meta property="article:tag" content="mathjax">
@@ -115,19 +115,29 @@ Etwas physikalischer:
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
     <p>
+Für Texte mit physikalischen Formeln möchte ich die LaTeX-Notation verwenden.
+Dank MathJax funktioniert das auch schon lange recht gut.
+</p>
+
+<p>
 Einfache mathematische Formel:
 </p>
 
 <p>
-\( a^2 + b^2 = c^2 \) 
+\( a^2 + b^2 = c^2 \)
 </p>
 
 <p>
-Etwas physikalischer:
+Um aber Ergebnisse
+mit Wert und Einheit gut darzustellen, verwende ich das siunitx-Paket in LaTeX.
+Lange waren die Kommandos in MathJax nicht verfügbar. Seit einem Jahr gibt es
+eine MathJax-Erweiterung, die die Funktionalität des LaTeX-Pakets ansatzweise
+nachbildet. Leider funktioniert der <code>\sisetup</code>-Befehl nicht, so dass die
+Darstellung recht amerikanisch aussieht.
 </p>
 
 \begin{equation}
-\Delta s = \SI{4.5}{\meter}
+\Delta s = \SI{4.5e-2}{\meter}
 \end{equation}
     </div>
     <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags"></ul>
@@ -147,9 +157,9 @@ MathJax.Hub.Config({
     "HTML-CSS": {
         styles: {'.MathJax_Display': {"margin": 0}}
     },
-    TeX: {extensions: ["AMSmath.js","AMSsymbols.js", "sinuitx.js"]}
+    TeX: {extensions: ["AMSmath.js","AMSsymbols.js", "sinuitx.js"],
+        preamble: ["\sisetup{output-decimal-marker ={,},exponent-product=\cdot,per-mode=fraction}"]}
 });
-MathJax.Ajax.config.path["Contrib"] = "//cdn.mathjax.org/mathjax/contrib";
 </script></article>
 </div>
         <!--End of body content-->

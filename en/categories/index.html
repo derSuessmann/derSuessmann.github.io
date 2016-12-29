@@ -23,9 +23,9 @@ MathJax.Hub.Config({
     "HTML-CSS": {
         styles: {'.MathJax_Display': {"margin": 0}}
     },
-    TeX: {extensions: ["AMSmath.js","AMSsymbols.js", "sinuitx.js"]}
+    TeX: {extensions: ["AMSmath.js","AMSsymbols.js", "sinuitx.js"],
+        preamble: ["\sisetup{output-decimal-marker ={,},exponent-product=\cdot,per-mode=fraction}"]}
 });
-MathJax.Ajax.config.path["Contrib"] = "//cdn.mathjax.org/mathjax/contrib";
 </script><!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]-->
 </head>
 <body>
@@ -84,7 +84,7 @@ MathJax.Ajax.config.path["Contrib"] = "//cdn.mathjax.org/mathjax/contrib";
         <h2>Categories</h2>
             <ul class="list-inline">
 <li>
-<a class="reference badge" href="cat_administration/">administration</a>
+<a class="reference badge" href="../../categories/cat_administration/">administration</a>
             </li>
             </ul>
 <h2>Tags</h2>

@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>derSuessmann (mathjax)</title><link>https://derSuessmann.github.io/</link><description></description><atom:link rel="self" type="application/rss+xml" href="https://derSuessmann.github.io/categories/mathjax.xml"></atom:link><language>de</language><lastBuildDate>Thu, 07 Jul 2016 05:04:58 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Physik mit Nikola</title><link>https://derSuessmann.github.io/posts/physik-mit-nikola/</link><dc:creator>derSuessmann</dc:creator><description>&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>derSuessmann (mathjax)</title><link>https://derSuessmann.github.io/</link><description></description><atom:link type="application/rss+xml" rel="self" href="https://derSuessmann.github.io/categories/mathjax.xml"></atom:link><language>de</language><lastBuildDate>Sun, 16 Oct 2016 10:33:44 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Physik mit Nikola</title><link>https://derSuessmann.github.io/posts/physik-mit-nikola/</link><dc:creator>derSuessmann</dc:creator><description>&lt;p&gt;
+Für Texte mit physikalischen Formeln möchte ich die LaTeX-Notation verwenden.
+Dank MathJax funktioniert das auch schon lange recht gut.
+&lt;/p&gt;
+
+&lt;p&gt;
 Einfache mathematische Formel:
 &lt;/p&gt;
 
 &lt;p&gt;
-\( a^2 + b^2 = c^2 \) 
+\( a^2 + b^2 = c^2 \)
 &lt;/p&gt;
 
 &lt;p&gt;
-Etwas physikalischer:
+Um aber Ergebnisse
+mit Wert und Einheit gut darzustellen, verwende ich das siunitx-Paket in LaTeX.
+Lange waren die Kommandos in MathJax nicht verfügbar. Seit einem Jahr gibt es
+eine MathJax-Erweiterung, die die Funktionalität des LaTeX-Pakets ansatzweise
+nachbildet. Leider funktioniert der &lt;code&gt;\sisetup&lt;/code&gt;-Befehl nicht, so dass die
+Darstellung recht amerikanisch aussieht.
 &lt;/p&gt;
 
 \begin{equation}
-\Delta s = \SI{4.5}{\meter}
+\Delta s = \SI{4.5e-2}{\meter}
 \end{equation}</description><category>mathjax</category><guid>https://derSuessmann.github.io/posts/physik-mit-nikola/</guid><pubDate>Thu, 07 Jul 2016 04:09:32 GMT</pubDate></item></channel></rss>

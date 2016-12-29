@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>derSuessmann (security)</title><link>https://derSuessmann.github.io/</link><description></description><atom:link href="https://derSuessmann.github.io/categories/security.xml" rel="self" type="application/rss+xml"></atom:link><language>de</language><lastBuildDate>Wed, 06 Jul 2016 17:08:44 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Zertifikate von Let's Encrypt verwenden</title><link>https://derSuessmann.github.io/posts/zertifikate-von-lets-encrypt-verwenden/</link><dc:creator>derSuessmann</dc:creator><description>&lt;div id="outline-container-orgheadline1" class="outline-2"&gt;
-&lt;h2 id="orgheadline1"&gt;Installation von acme-tiny&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgheadline1"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>derSuessmann (security)</title><link>https://derSuessmann.github.io/</link><description></description><atom:link type="application/rss+xml" href="https://derSuessmann.github.io/categories/security.xml" rel="self"></atom:link><language>de</language><lastBuildDate>Sat, 27 Aug 2016 07:27:29 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Zertifikate von Let's Encrypt verwenden</title><link>https://derSuessmann.github.io/posts/zertifikate-von-lets-encrypt-verwenden/</link><dc:creator>derSuessmann</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h2 id="sec-1"&gt;Installation von acme-tiny&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
 Mein Favorit der Let's Encrypt Clients ist &lt;a href="https://github.com/diafygi/acme-tiny"&gt;acme-tiny&lt;/a&gt;. Es ist ein sehr
 kurzes Python-Skript. Das erleichtert einen Code-Review. Die
@@ -13,9 +13,9 @@ Web-Server existiert.
 &lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgheadline2" class="outline-3"&gt;
-&lt;h3 id="orgheadline2"&gt;Erstellen der Verzeichnisstruktur&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgheadline2"&gt;
+&lt;div id="outline-container-sec-1-1" class="outline-3"&gt;
+&lt;h3 id="sec-1-1"&gt;Erstellen der Verzeichnisstruktur&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-1-1"&gt;
 &lt;p&gt;
 Im Verzeichnis des Benutzers &lt;code&gt;lets&lt;/code&gt; wird folgende Verzeichnisstruktur
 angelegt.
@@ -29,9 +29,9 @@ mkdir certs
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgheadline3" class="outline-3"&gt;
-&lt;h3 id="orgheadline3"&gt;Clonen des Repositories&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgheadline3"&gt;
+&lt;div id="outline-container-sec-1-2" class="outline-3"&gt;
+&lt;h3 id="sec-1-2"&gt;Clonen des Repositories&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-1-2"&gt;
 &lt;p&gt;
 Damit man das Skript leicht installieren und eventuell auch
 aktualisieren kann wird das Repository in &lt;code&gt;src&lt;/code&gt; geclont.
@@ -52,9 +52,9 @@ chmod +x bin/acme_tiny.py
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgheadline4" class="outline-3"&gt;
-&lt;h3 id="orgheadline4"&gt;Erstellen des privaten Schlüssels für den Let's Encrypt Account&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgheadline4"&gt;
+&lt;div id="outline-container-sec-1-3" class="outline-3"&gt;
+&lt;h3 id="sec-1-3"&gt;Erstellen des privaten Schlüssels für den Let's Encrypt Account&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-1-3"&gt;
 &lt;p&gt;
 Für den Account benötigt man ein Schlüsselpaar. Das kann man leicht mit
 dem folgenden Kommando erstellen. Aus Sicherheitsgründen sollte es auch
@@ -67,9 +67,9 @@ chmod &lt;span class="m"&gt;400&lt;/span&gt; account.key
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgheadline5" class="outline-3"&gt;
-&lt;h3 id="orgheadline5"&gt;Erstellen eines Certificate Signing Requests (CSR)&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgheadline5"&gt;
+&lt;div id="outline-container-sec-1-4" class="outline-3"&gt;
+&lt;h3 id="sec-1-4"&gt;Erstellen eines Certificate Signing Requests (CSR)&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-1-4"&gt;
 &lt;p&gt;
 Für jede Domain, für die Let's Encrypt ein Zertifikat ausstellen soll
 benötigt man einen Certificate Signing Request. Im Certificate Signing
@@ -94,9 +94,9 @@ erstellen lassen. Das nutze ich zur Zeit aber nicht.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgheadline6" class="outline-3"&gt;
-&lt;h3 id="orgheadline6"&gt;Konfiguration des Verzeichnisses für die Challenges&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgheadline6"&gt;
+&lt;div id="outline-container-sec-1-5" class="outline-3"&gt;
+&lt;h3 id="sec-1-5"&gt;Konfiguration des Verzeichnisses für die Challenges&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-1-5"&gt;
 &lt;p&gt;
 Let's Encrypt verifiziert mit einer Challenge, dass man die Kontrolle
 über die Domain für das Zertifikat hat. Dazu muss der Client eine Datei
@@ -134,9 +134,9 @@ anfordern.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgheadline7" class="outline-3"&gt;
-&lt;h3 id="orgheadline7"&gt;Anfordern eines Zertifikats&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgheadline7"&gt;
+&lt;div id="outline-container-sec-1-6" class="outline-3"&gt;
+&lt;h3 id="sec-1-6"&gt;Anfordern eines Zertifikats&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-1-6"&gt;
 &lt;p&gt;
 Der folgende Aufruf fordert das Zertifikat für die Domain an.
 &lt;/p&gt;
@@ -152,7 +152,7 @@ kann man mit den folgenden Schritten erstellen.
 &lt;/p&gt;
 
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl -fsS https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem -o ~/certs/intermediate.pem
-cat ~/certs/example.crt intermediate.pem &amp;gt; /etc/ssl/acme/example-chained.pem
+cat ~/certs/example.crt intermediate.pem &amp;gt; /etc/ssl/lets/example-chained.pem
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;
@@ -161,15 +161,15 @@ eine Trennung der Rechte zu erreichen. Der private Schlüssel der Domain
 (&lt;code&gt;example.key&lt;/code&gt;), der nur zur Erstellung des Certificate Requests und
 später von Server verwendet wird liegt in einem Verzeichnis, auf das nur
 root zugreifen kann. Das Verzeichnis mit den Zertifikaten
-(&lt;code&gt;/etc/ssl/acme/&lt;/code&gt; gehört hingegen dem Benutzer &lt;code&gt;acme&lt;/code&gt;, der nur einfacher
-Anwender ist. Alle dürfen auf das Verzeichnis lesend zugreifen.
+(&lt;code&gt;/etc/ssl/lets/&lt;/code&gt; gehört hingegen dem Benutzer &lt;code&gt;lets&lt;/code&gt;, der nur einfacher
+Anwender ist. Alle dürfen auf das Verzeichnis nur lesend zugreifen.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgheadline8" class="outline-3"&gt;
-&lt;h3 id="orgheadline8"&gt;Erneuern des Zertifikat&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgheadline8"&gt;
+&lt;div id="outline-container-sec-1-7" class="outline-3"&gt;
+&lt;h3 id="sec-1-7"&gt;Erneuern des Zertifikat&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-1-7"&gt;
 &lt;p&gt;
 Da das Zertifikate nur 90 Tage gültig ist, muss man vor Ablauf der Frist
 ein neues anfordern. Das kann man wie oben beschrieben mit dem gleichen

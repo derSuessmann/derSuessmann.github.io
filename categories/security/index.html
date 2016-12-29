@@ -22,9 +22,9 @@ MathJax.Hub.Config({
     "HTML-CSS": {
         styles: {'.MathJax_Display': {"margin": 0}}
     },
-    TeX: {extensions: ["AMSmath.js","AMSsymbols.js", "sinuitx.js"]}
+    TeX: {extensions: ["AMSmath.js","AMSsymbols.js", "sinuitx.js"],
+        preamble: ["\sisetup{output-decimal-marker ={,},exponent-product=\cdot,per-mode=fraction}"]}
 });
-MathJax.Ajax.config.path["Contrib"] = "//cdn.mathjax.org/mathjax/contrib";
 </script><!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><link rel="alternate" type="application/rss+xml" title="RSS for tag security (de)" href="../security.xml">
 <link rel="alternate" type="application/rss+xml" title="RSS for tag security (en)" href="../../en/categories/security.xml">
 </head>
