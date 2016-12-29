@@ -1,5 +1,236 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>derSuessmann (administration)</title><link>https://derSuessmann.github.io/</link><description></description><atom:link type="application/rss+xml" href="https://derSuessmann.github.io/categories/administration.xml" rel="self"></atom:link><language>de</language><lastBuildDate>Sat, 27 Aug 2016 07:27:29 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Zertifikate von Let's Encrypt verwenden</title><link>https://derSuessmann.github.io/posts/zertifikate-von-lets-encrypt-verwenden/</link><dc:creator>derSuessmann</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>derSuessmann (administration)</title><link>https://derSuessmann.github.io/</link><description></description><atom:link rel="self" href="https://derSuessmann.github.io/categories/administration.xml" type="application/rss+xml"></atom:link><language>de</language><lastBuildDate>Thu, 29 Dec 2016 15:25:04 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Eigenen Git-Server einrichten</title><link>https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/</link><dc:creator>derSuessmann</dc:creator><description>&lt;p&gt;
+Im Unterricht möchte ich die Schülerinnen und Schüler an einem gemeinsamen Projekt arbeiten lassen. Dazu benötigen sie eine Versionsverwaltung. &lt;sup&gt;&lt;a id="fnr.1" name="fnr.1" class="footref" href="https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/#fn.1"&gt;1&lt;/a&gt;&lt;/sup&gt;
+&lt;/p&gt;
+
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h2 id="sec-1"&gt;Alternativen&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+In der Vergangenheit habe ich deshalb mit &lt;a href="https://about.gitlab.com/"&gt;Gitlab&lt;/a&gt; herum experimentiert. Es war aber zu aufwendig, den Server stabil zu betreiben. Mehr oder weniger zufällig bin ich auf &lt;a href="https://gogs.io"&gt;Gogs - Go Git Server gestoßen&lt;/a&gt;. Es gibt einen Fork des Projekts namens &lt;a href="https://gitea.io"&gt;Gitea - Git with a cup of tea&lt;/a&gt;. Ich habe Gitea den Vorzug gegeben, da die Entwicklung von Gogs in der Vergangenheit eingeschlafen war. Gitea hat eine Menge Mitarbeiter, Gogs nur zwei. Allerdings sieht die Dokumentation von Gogs aufgeräumter aus. Momentan scheint der Unterschied zwischen Gogs und Gitea minimal zu sein.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h2 id="sec-2"&gt;Ubuntu Server 16.04 LTS bereitstellen&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+Den Gitea-Server kann man natürlich auf einem Ubuntu-Server installieren. Dazu habe ich die folgenden Schritte nach der Grundinstallation des Ubuntu-Servers mit dem OpenSSH-Server durchgeführt. Ob man den Server nativ oder virtualisiert betreibt bleibt dem eigenen Geschmack überlassen. Man kann Gogs und Gitea auch in einem Docker-Container betreiben. Die Installation ist dann ebenfalls super einfach.
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-2-1" class="outline-3"&gt;
+&lt;h3 id="sec-2-1"&gt;Virtuelle Maschine mit Ubuntu Server 16.04 LTS aufsetzen&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-2-1"&gt;
+&lt;p&gt;
+Meistens betreibe ich meine Server als &lt;a href="http://www.linux-kvm.org/"&gt;KVM - Kernel based Virtual Machines&lt;/a&gt;. Die virtuelle Maschine ist dann schnell mit der folgenden Anweisung aufgesetzt.
+&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;virt-install --connect qemu:///system &lt;span class="se"&gt;\&lt;/span&gt;
+  --name gitserver &lt;span class="se"&gt;\&lt;/span&gt;
+  --ram &lt;span class="m"&gt;1024&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+  --disk &lt;span class="nv"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/var/lib/libvirt/images/gitserver.qcow2,size&lt;span class="o"&gt;=&lt;/span&gt;100,format&lt;span class="o"&gt;=&lt;/span&gt;qcow2 &lt;span class="se"&gt;\&lt;/span&gt;
+  --vcpus &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+  --network &lt;span class="nv"&gt;bridge&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;br0 &lt;span class="se"&gt;\&lt;/span&gt;
+  --graphics none &lt;span class="se"&gt;\&lt;/span&gt;
+  --console pty,target_type&lt;span class="o"&gt;=&lt;/span&gt;serial &lt;span class="se"&gt;\&lt;/span&gt;
+  --location &lt;span class="s1"&gt;'http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/'&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+  --extra-args &lt;span class="s1"&gt;'console=ttyS0,115200n8 serial'&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+Natürlich kann man auch Xen, VirtualBox, VMware oder sonst eine Virtualisierungslösung verwenden.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-2-2" class="outline-3"&gt;
+&lt;h3 id="sec-2-2"&gt;Git installieren und Benutzer &lt;code&gt;git&lt;/code&gt; anlegen&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-2-2"&gt;
+&lt;p&gt;
+Auf unserem Git-Server benötigen wir natürlich &lt;code&gt;git&lt;/code&gt;. Das muss noch installiert werden. Damit könnte man schon seine Versionsverwaltung auf dem Server betreiben. Das bietet aber keinerlei Komfort.
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install git
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+Der Gitea-Server soll unter dem (normalen) Benutzer &lt;code&gt;git&lt;/code&gt; laufen. Den muss man mit dem folgenden Kommando noch anlegen.
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo adduser git
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-2-3" class="outline-3"&gt;
+&lt;h3 id="sec-2-3"&gt;MariaDB installieren und Datenbank anlegen&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-2-3"&gt;
+&lt;p&gt;
+Gogs und Gitea benötigen eine Datenbank. Sie können dabei MySQL (MariaDB), PostgreSQL, SQLite3, MSSQL und TiDB verwenden. Eine Empfehlung habe ich nicht gefunden. Da ich mit MySQL gut vertraut bin, habe ich mich für MySQL (MariaDB) entschieden und mit der folgenden Anweisung auf dem Server installiert.
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install mariadb-server
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+Mit den beiden folgenden SQL-Anweisungen wird die Datenbank für Gitea eingerichtet und dem Benutzer &lt;code&gt;git&lt;/code&gt; die vollen Rechte auf der Datenbank gegeben.
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;DATABASE&lt;/span&gt; &lt;span class="k"&gt;IF&lt;/span&gt; &lt;span class="k"&gt;NOT&lt;/span&gt; &lt;span class="k"&gt;EXISTS&lt;/span&gt; &lt;span class="n"&gt;gitea&lt;/span&gt; &lt;span class="nb"&gt;CHARACTER&lt;/span&gt; &lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="n"&gt;utf8&lt;/span&gt; &lt;span class="k"&gt;COLLATE&lt;/span&gt; &lt;span class="n"&gt;utf8_general_ci&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;ALL&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;gitea&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="s1"&gt;'git'&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="s1"&gt;'localhost'&lt;/span&gt; &lt;span class="n"&gt;identified&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="s1"&gt;'&amp;lt;Passwort&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+Schreibt man die SQL-Anweisungen von oben in die &lt;code&gt;create_gitea.sql&lt;/code&gt;, so kann man die Datenbank für Gitea mit dem folgenden Kommando einrichten.
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo mysql -uroot &amp;lt; create_gitea.sql
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-2-4" class="outline-3"&gt;
+&lt;h3 id="sec-2-4"&gt;Gitea installieren und konfigurieren&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-2-4"&gt;
+&lt;p&gt;
+Nach den Vorbereitungen kann man jetzt Gitea installieren und konfigurieren. Mir erschien die Installation als Binärdatei am einfachsten. Dazu braucht man als Benutzer &lt;code&gt;git&lt;/code&gt; nur die ausführbare Datei in ein passendes Verzeichnis herunterzuladen und zu starten:
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;su git
+&lt;span class="nb"&gt;cd&lt;/span&gt; ~
+mkdir gitea
+&lt;span class="nb"&gt;cd&lt;/span&gt; gitea
+wget -O gitea https://dl.gitea.io/gitea/1.0.0/gitea-1.0.0-linux-amd64
+chmod +x gitea
+./gitea web
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+Jetzt läuft der Gitea-Server und kann konfiguriert werden.
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-2-4-1" class="outline-4"&gt;
+&lt;h4 id="sec-2-4-1"&gt;Konfiguration&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-2-4-1"&gt;
+&lt;p&gt;
+Die Konfiguration erfolgt im Web-Browser unter der auf der Konsole angezeigten Adresse (bei mir &lt;a href="http://git:3000/"&gt;http://git:3000/&lt;/a&gt;).
+&lt;/p&gt;
+
+
+&lt;div id="fig:INSTALL-1" class="figure"&gt;
+&lt;p&gt;&lt;img src="https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/gitea_install_1.png" alt="gitea_install_1.png"&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Figure 1:&lt;/span&gt; Konfiguration oberer Bereich&lt;/p&gt;
+&lt;/div&gt;
+
+
+&lt;div id="fig:INSTALL-2" class="figure"&gt;
+&lt;p&gt;&lt;img src="https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/gitea_install_2.png" alt="gitea_install_2.png"&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Figure 2:&lt;/span&gt; Konfiguration mittlerer Bereich&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+Den Mail-Server habe ich erst einmal nicht konfiguriert (siehe Abbildung &lt;a href="https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/#fig:INSTALL-3"&gt;3&lt;/a&gt;).
+&lt;/p&gt;
+
+&lt;div id="fig:INSTALL-3" class="figure"&gt;
+&lt;p&gt;&lt;img src="https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/gitea_install_3.png" alt="gitea_install_3.png"&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Figure 3:&lt;/span&gt; Konfiguration unterer Bereich&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+Jetzt ist der Gitea-Server fertig konfiguriert.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-2-4-2" class="outline-4"&gt;
+&lt;h4 id="sec-2-4-2"&gt;Benutzer aus Active Directory verwenden&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-2-4-2"&gt;
+&lt;p&gt;
+Die Schülerinnen und Schüler haben ein Konto im Schulnetzwerk. Damit diese Konten für die Anmeldung am Gitea-Server verwendet werden muss man noch die Authentikation mit dem Active Directory konfigurieren. 
+&lt;/p&gt;
+
+&lt;p&gt;
+Also fügen wir einen Authentikator hinzu:
+&lt;/p&gt;
+
+&lt;div id="fig:AD-1" class="figure"&gt;
+&lt;p&gt;&lt;img src="https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/gitea_active_directory_1.png" alt="gitea_active_directory_1.png"&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Figure 4:&lt;/span&gt; LDAP (AD) als Authentikator hinzufügen&lt;/p&gt;
+&lt;/div&gt;
+
+
+&lt;div id="fig:AD-2" class="figure"&gt;
+&lt;p&gt;&lt;img src="https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/gitea_active_directory_2.png" alt="gitea_active_directory_2.png"&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Figure 5:&lt;/span&gt; LDAP (AD) konfigurieren&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+Der Gitea-Server ist jetzt fertig konfiguriert. Wir beenden den laufenden Prozess mit CTRL-C und melden uns als Benutzer &lt;code&gt;git&lt;/code&gt; ab.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-2-5" class="outline-3"&gt;
+&lt;h3 id="sec-2-5"&gt;Systemd&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-2-5"&gt;
+&lt;p&gt;
+Damit der Gitea-Server beim Starten der Server-Maschine auch gestartet wird muss man das dem Systemd mitteilen. Dazu legt man die Datei &lt;code&gt;/lib/systemd/system/gitea.service&lt;/code&gt; mit dem folgenden Inhalt an.
+&lt;/p&gt;
+&lt;pre class="example"&gt;
+[Unit]
+Description=Gitea (Git with a cup of tea)
+After=syslog.target
+After=network.target
+After=mysqld.service
+#After=postgresql.service
+#After=memcached.service
+#After=redis.service
+
+[Service]
+# Modify these two values and uncomment them if you have
+# repos with lots of files and get an HTTP error 500 because
+# of that
+###
+#LimitMEMLOCK=infinity
+#LimitNOFILE=65535
+Type=simple
+User=git
+Group=git
+WorkingDirectory=/home/git/gitea
+ExecStart=/home/git/gitea/gitea web
+Restart=always
+Environment=USER=git HOME=/home/git
+
+[Install]
+WantedBy=multi-user.target
+&lt;/pre&gt;
+
+&lt;p&gt;
+Jetzt noch schnell den Service aktivieren und über Systemd starten.
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo systemctl &lt;span class="nb"&gt;enable&lt;/span&gt; gitea.service
+sudo systemctl start gitea.service
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+Jetzt ist unser Gitea-Server fertig.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="footnotes"&gt;
+&lt;h2 class="footnotes"&gt;Footnotes: &lt;/h2&gt;
+&lt;div id="text-footnotes"&gt;
+
+&lt;div class="footdef"&gt;&lt;sup&gt;&lt;a id="fn.1" name="fn.1" class="footnum" href="https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/#fnr.1"&gt;1&lt;/a&gt;&lt;/sup&gt; &lt;p&gt;Einfach ein Projekt auf Github dafür einzurichten scheidet aus. Da ein eigenes Konto auf Github einrichten müsste. Unterricht soll aber in einer kontrollierten Umgebung stattfinden.&lt;/p&gt;&lt;/div&gt;
+
+
+&lt;/div&gt;
+&lt;/div&gt;</description><category>administration</category><category>git</category><category>github</category><category>server</category><guid>https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/</guid><pubDate>Thu, 29 Dec 2016 13:10:17 GMT</pubDate></item><item><title>Zertifikate von Let's Encrypt verwenden</title><link>https://derSuessmann.github.io/posts/zertifikate-von-lets-encrypt-verwenden/</link><dc:creator>derSuessmann</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
 &lt;h2 id="sec-1"&gt;Installation von acme-tiny&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
