@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0"><channel><title>derSuessmann</title><link>https://derSuessmann.github.io/</link><description>Everything is beta here...</description><atom:link href="https://derSuessmann.github.io/en/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 29 Dec 2016 15:30:55 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Eigenen Git-Server einrichten</title><link>https://derSuessmann.github.io/en/posts/eigenen-git-server-einrichten/</link><dc:creator>derSuessmann</dc:creator><description>&lt;p&gt;
-Im Unterricht möchte ich die Schülerinnen und Schüler an einem gemeinsamen Projekt arbeiten lassen. Dazu benötigen sie eine Versionsverwaltung. &lt;sup&gt;&lt;a id="fnr.1" name="fnr.1" class="footref" href="https://derSuessmann.github.io/en/posts/eigenen-git-server-einrichten/#fn.1"&gt;1&lt;/a&gt;&lt;/sup&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>derSuessmann</title><link>https://derSuessmann.github.io/</link><description>Everything is beta here...</description><atom:link rel="self" href="https://derSuessmann.github.io/en/rss.xml" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Fri, 30 Dec 2016 10:01:43 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Setting up a git server</title><link>https://derSuessmann.github.io/en/posts/eigenen-git-server-einrichten/</link><dc:creator>derSuessmann</dc:creator><description>&lt;p&gt;
+I would like my students working on projects in teams. They will need a version control system for this.&lt;sup&gt;&lt;a id="fnr.1" name="fnr.1" class="footref" href="https://derSuessmann.github.io/en/posts/eigenen-git-server-einrichten/#fn.1"&gt;1&lt;/a&gt;&lt;/sup&gt;
 &lt;/p&gt;
 
 &lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h2 id="sec-1"&gt;Alternativen&lt;/h2&gt;
+&lt;h2 id="sec-1"&gt;Alternatives&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
-In der Vergangenheit habe ich deshalb mit &lt;a href="https://about.gitlab.com/"&gt;Gitlab&lt;/a&gt; herum experimentiert. Es war aber zu aufwendig, den Server stabil zu betreiben. Mehr oder weniger zufällig bin ich auf &lt;a href="https://gogs.io"&gt;Gogs - Go Git Server gestoßen&lt;/a&gt;. Es gibt einen Fork des Projekts namens &lt;a href="https://gitea.io"&gt;Gitea - Git with a cup of tea&lt;/a&gt;. Ich habe Gitea den Vorzug gegeben, da die Entwicklung von Gogs in der Vergangenheit eingeschlafen war. Gitea hat eine Menge Mitarbeiter, Gogs nur zwei. Allerdings sieht die Dokumentation von Gogs aufgeräumter aus. Momentan scheint der Unterschied zwischen Gogs und Gitea minimal zu sein.
+I have experimented a bit with &lt;a href="https://about.gitlab.com/"&gt;Gitlab&lt;/a&gt;, but it required to much effort setting up and keeping the server running stable. Rather by chance I found &lt;a href="https://gogs.io"&gt;Gogs - Go Git Server&lt;/a&gt;. There is a fork called &lt;a href="https://gitea.io"&gt;Gitea - Git with a cup of tea&lt;/a&gt;. I preferred Gitea, because the development of Gogs froze in the past several times. Gitea is supported by a larger team while Gogs has only two project members. Never the less the documentation of Gogs seems to be better structured and cleaner. The difference between the two project seem to be marginal at the moment.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h2 id="sec-2"&gt;Ubuntu Server 16.04 LTS bereitstellen&lt;/h2&gt;
+&lt;h2 id="sec-2"&gt;Setting up a Ubuntu Server 16.04 LTS&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;p&gt;
-Den Gitea-Server kann man natürlich auf einem Ubuntu-Server installieren. Dazu habe ich die folgenden Schritte nach der Grundinstallation des Ubuntu-Servers mit dem OpenSSH-Server durchgeführt. Ob man den Server nativ oder virtualisiert betreibt bleibt dem eigenen Geschmack überlassen. Man kann Gogs und Gitea auch in einem Docker-Container betreiben. Die Installation ist dann ebenfalls super einfach.
+It is possible to install Gitea on a Ubuntu server. I prepared the basic Ubuntu server with an OpenSSH server with the following steps. It is at your own descretion wether to run the server natively or on a virtual machine. You may even run Gogs or Gitea as a Docker container. This is also quite easy.
 &lt;/p&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div id="outline-container-sec-2-1" class="outline-3"&gt;
-&lt;h3 id="sec-2-1"&gt;Virtuelle Maschine mit Ubuntu Server 16.04 LTS aufsetzen&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-2-1"&gt;
+&lt;div id="outline-container-sec-3" class="outline-2"&gt;
+&lt;h2 id="sec-3"&gt;Setting up a virtual machine with Ubuntu Server 16.04 LTS&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-3"&gt;
 &lt;p&gt;
-Meistens betreibe ich meine Server als &lt;a href="http://www.linux-kvm.org/"&gt;KVM - Kernel based Virtual Machines&lt;/a&gt;. Die virtuelle Maschine ist dann schnell mit der folgenden Anweisung aufgesetzt.
+Most of the time I run my servers as &lt;a href="http://www.linux-kvm.org/"&gt;KVM - Kernel based Virtual Machines&lt;/a&gt;. Creating the virtual machine is just a breeze with the following command.
 &lt;/p&gt;
 
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;virt-install --connect qemu:///system &lt;span class="se"&gt;\&lt;/span&gt;
@@ -40,57 +41,57 @@ Meistens betreibe ich meine Server als &lt;a href="http://www.linux-kvm.org/"&gt
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;
-Natürlich kann man auch Xen, VirtualBox, VMware oder sonst eine Virtualisierungslösung verwenden.
+You may use also Xen, VirtualBox, VMware or any other virtualisation environment.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-sec-2-2" class="outline-3"&gt;
-&lt;h3 id="sec-2-2"&gt;Git installieren und Benutzer &lt;code&gt;git&lt;/code&gt; anlegen&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-2-2"&gt;
+&lt;div id="outline-container-sec-4" class="outline-2"&gt;
+&lt;h2 id="sec-4"&gt;Installing git and creating the user &lt;code&gt;git&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-4"&gt;
 &lt;p&gt;
-Auf unserem Git-Server benötigen wir natürlich &lt;code&gt;git&lt;/code&gt;. Das muss noch installiert werden. Damit könnte man schon seine Versionsverwaltung auf dem Server betreiben. Das bietet aber keinerlei Komfort.
+We will need &lt;code&gt;git&lt;/code&gt; on our server for sure. This has to be installed. It would be possible running version control with the server now, but it sure lacks the comfort anyone expects in the times of Github.
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install git
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;
-Der Gitea-Server soll unter dem (normalen) Benutzer &lt;code&gt;git&lt;/code&gt; laufen. Den muss man mit dem folgenden Kommando noch anlegen.
+The Gitea server should run as a normal user with no special privileges. The following command will create the user &lt;code&gt;git&lt;/code&gt; for this.
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo adduser git
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-sec-2-3" class="outline-3"&gt;
-&lt;h3 id="sec-2-3"&gt;MariaDB installieren und Datenbank anlegen&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-2-3"&gt;
+&lt;div id="outline-container-sec-5" class="outline-2"&gt;
+&lt;h2 id="sec-5"&gt;Installing MariaDB and creating a database&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-5"&gt;
 &lt;p&gt;
-Gogs und Gitea benötigen eine Datenbank. Sie können dabei MySQL (MariaDB), PostgreSQL, SQLite3, MSSQL und TiDB verwenden. Eine Empfehlung habe ich nicht gefunden. Da ich mit MySQL gut vertraut bin, habe ich mich für MySQL (MariaDB) entschieden und mit der folgenden Anweisung auf dem Server installiert.
+Gitea as well as Gogs needs a database. The options are MySQL (MariaDB), PostgreSQL, SQLite3, MSSQL und TiDB. There is no recommendation to be found in the documentation of both projects. Finally, I decided to use MySQL (MariaDB) just because I have some experience with MySQL. The following command will install it on the Ubuntu server.
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install mariadb-server
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;
-Mit den beiden folgenden SQL-Anweisungen wird die Datenbank für Gitea eingerichtet und dem Benutzer &lt;code&gt;git&lt;/code&gt; die vollen Rechte auf der Datenbank gegeben.
+The database setup just needs two SQL statements for creating the database and granting the user git full access.
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;DATABASE&lt;/span&gt; &lt;span class="k"&gt;IF&lt;/span&gt; &lt;span class="k"&gt;NOT&lt;/span&gt; &lt;span class="k"&gt;EXISTS&lt;/span&gt; &lt;span class="n"&gt;gitea&lt;/span&gt; &lt;span class="nb"&gt;CHARACTER&lt;/span&gt; &lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="n"&gt;utf8&lt;/span&gt; &lt;span class="k"&gt;COLLATE&lt;/span&gt; &lt;span class="n"&gt;utf8_general_ci&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;ALL&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;gitea&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="s1"&gt;'git'&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="s1"&gt;'localhost'&lt;/span&gt; &lt;span class="n"&gt;identified&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="s1"&gt;'&amp;lt;Passwort&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;ALL&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;gitea&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="s1"&gt;'git'&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="s1"&gt;'localhost'&lt;/span&gt; &lt;span class="n"&gt;identified&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="s1"&gt;'&amp;lt;password&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;
-Schreibt man die SQL-Anweisungen von oben in die &lt;code&gt;create_gitea.sql&lt;/code&gt;, so kann man die Datenbank für Gitea mit dem folgenden Kommando einrichten.
+Writing these statement into the file &lt;code&gt;create_gitea.sql&lt;/code&gt; allows us setting up the database with the following command.
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo mysql -uroot &amp;lt; create_gitea.sql
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-sec-2-4" class="outline-3"&gt;
-&lt;h3 id="sec-2-4"&gt;Gitea installieren und konfigurieren&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-2-4"&gt;
+&lt;div id="outline-container-sec-6" class="outline-2"&gt;
+&lt;h2 id="sec-6"&gt;Installing and configuring Gitea&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-6"&gt;
 &lt;p&gt;
-Nach den Vorbereitungen kann man jetzt Gitea installieren und konfigurieren. Mir erschien die Installation als Binärdatei am einfachsten. Dazu braucht man als Benutzer &lt;code&gt;git&lt;/code&gt; nur die ausführbare Datei in ein passendes Verzeichnis herunterzuladen und zu starten:
+You may start the Gitea installation and configuration after these preparations. The installation from a binary file seems the easiest to me. You only have to download the file as the user &lt;code&gt;git&lt;/code&gt; into a suitable directory and run it:
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;su git
 &lt;span class="nb"&gt;cd&lt;/span&gt; ~
@@ -102,83 +103,75 @@ chmod +x gitea
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;
-Jetzt läuft der Gitea-Server und kann konfiguriert werden.
+Now the Gitea server is running and you may configure it.
 &lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-sec-2-4-1" class="outline-4"&gt;
-&lt;h4 id="sec-2-4-1"&gt;Konfiguration&lt;/h4&gt;
-&lt;div class="outline-text-4" id="text-2-4-1"&gt;
+&lt;div id="outline-container-sec-6-1" class="outline-3"&gt;
+&lt;h3 id="sec-6-1"&gt;Configuring&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-6-1"&gt;
 &lt;p&gt;
-Die Konfiguration erfolgt im Web-Browser unter der auf der Konsole angezeigten Adresse (bei mir &lt;a href="http://git:3000/"&gt;http://git:3000/&lt;/a&gt;).
+You configure Gitea in the web browser at the address shown at the console (e.g. &lt;a href="http://git:3000/"&gt;http://git:3000/&lt;/a&gt;).
 &lt;/p&gt;
 
 
 &lt;div id="fig:INSTALL-1" class="figure"&gt;
 &lt;p&gt;&lt;img src="https://derSuessmann.github.io/en/posts/eigenen-git-server-einrichten/gitea_install_1.png" alt="gitea_install_1.png"&gt;
 &lt;/p&gt;
-&lt;p&gt;&lt;span class="figure-number"&gt;Figure 1:&lt;/span&gt; Konfiguration oberer Bereich&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Figure 1:&lt;/span&gt; Configuring first part&lt;/p&gt;
 &lt;/div&gt;
 
 
 &lt;div id="fig:INSTALL-2" class="figure"&gt;
 &lt;p&gt;&lt;img src="https://derSuessmann.github.io/en/posts/eigenen-git-server-einrichten/gitea_install_2.png" alt="gitea_install_2.png"&gt;
 &lt;/p&gt;
-&lt;p&gt;&lt;span class="figure-number"&gt;Figure 2:&lt;/span&gt; Konfiguration mittlerer Bereich&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Figure 2:&lt;/span&gt; Configuring second part&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;p&gt;
-Den Mail-Server habe ich erst einmal nicht konfiguriert (siehe Abbildung &lt;a href="https://derSuessmann.github.io/en/posts/eigenen-git-server-einrichten/#fig:INSTALL-3"&gt;3&lt;/a&gt;).
+I do not need a mail server at the moment, so I decided not to configure it for now (see figure &lt;a href="https://derSuessmann.github.io/en/posts/eigenen-git-server-einrichten/#fig:INSTALL-3"&gt;3&lt;/a&gt;), but I do not want self registration and would like only signed in users to view the pages
 &lt;/p&gt;
 
 &lt;div id="fig:INSTALL-3" class="figure"&gt;
 &lt;p&gt;&lt;img src="https://derSuessmann.github.io/en/posts/eigenen-git-server-einrichten/gitea_install_3.png" alt="gitea_install_3.png"&gt;
 &lt;/p&gt;
-&lt;p&gt;&lt;span class="figure-number"&gt;Figure 3:&lt;/span&gt; Konfiguration unterer Bereich&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Figure 3:&lt;/span&gt; Configring third part&lt;/p&gt;
 &lt;/div&gt;
-
-&lt;p&gt;
-Jetzt ist der Gitea-Server fertig konfiguriert.
-&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-sec-2-4-2" class="outline-4"&gt;
-&lt;h4 id="sec-2-4-2"&gt;Benutzer aus Active Directory verwenden&lt;/h4&gt;
-&lt;div class="outline-text-4" id="text-2-4-2"&gt;
+&lt;div id="outline-container-sec-6-2" class="outline-3"&gt;
+&lt;h3 id="sec-6-2"&gt;Using user accounts from Active Directory&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-6-2"&gt;
 &lt;p&gt;
-Die Schülerinnen und Schüler haben ein Konto im Schulnetzwerk. Damit diese Konten für die Anmeldung am Gitea-Server verwendet werden muss man noch die Authentikation mit dem Active Directory konfigurieren. 
-&lt;/p&gt;
-
-&lt;p&gt;
-Also fügen wir einen Authentikator hinzu:
+The students have already an account at school. An additional authentication method must be added to allow the students to log in with their standard credentials.
 &lt;/p&gt;
 
 &lt;div id="fig:AD-1" class="figure"&gt;
 &lt;p&gt;&lt;img src="https://derSuessmann.github.io/en/posts/eigenen-git-server-einrichten/gitea_active_directory_1.png" alt="gitea_active_directory_1.png"&gt;
 &lt;/p&gt;
-&lt;p&gt;&lt;span class="figure-number"&gt;Figure 4:&lt;/span&gt; LDAP (AD) als Authentikator hinzufügen&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Figure 4:&lt;/span&gt; Adding LDAP (AD) authentication&lt;/p&gt;
 &lt;/div&gt;
 
 
 &lt;div id="fig:AD-2" class="figure"&gt;
 &lt;p&gt;&lt;img src="https://derSuessmann.github.io/en/posts/eigenen-git-server-einrichten/gitea_active_directory_2.png" alt="gitea_active_directory_2.png"&gt;
 &lt;/p&gt;
-&lt;p&gt;&lt;span class="figure-number"&gt;Figure 5:&lt;/span&gt; LDAP (AD) konfigurieren&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Figure 5:&lt;/span&gt; Configuring LDAP (AD)&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;p&gt;
-Der Gitea-Server ist jetzt fertig konfiguriert. Wir beenden den laufenden Prozess mit CTRL-C und melden uns als Benutzer &lt;code&gt;git&lt;/code&gt; ab.
+The Gitea is now completely set up. We stop the running process with CTRL-C and log out as user &lt;code&gt;git&lt;/code&gt;.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-sec-2-5" class="outline-3"&gt;
-&lt;h3 id="sec-2-5"&gt;Systemd&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-2-5"&gt;
+&lt;div id="outline-container-sec-7" class="outline-2"&gt;
+&lt;h2 id="sec-7"&gt;Systemd&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-7"&gt;
 &lt;p&gt;
-Damit der Gitea-Server beim Starten der Server-Maschine auch gestartet wird muss man das dem Systemd mitteilen. Dazu legt man die Datei &lt;code&gt;/lib/systemd/system/gitea.service&lt;/code&gt; mit dem folgenden Inhalt an.
+You have to tell Systemd to start the Gite server on system startup. This is done by creating the file &lt;code&gt;/lib/systemd/system/gitea.service&lt;/code&gt; with the following content.
 &lt;/p&gt;
 &lt;pre class="example"&gt;
 [Unit]
@@ -210,33 +203,31 @@ WantedBy=multi-user.target
 &lt;/pre&gt;
 
 &lt;p&gt;
-Jetzt noch schnell den Service aktivieren und über Systemd starten.
+… and enabling and starting the service with Systemd.
 &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo systemctl &lt;span class="nb"&gt;enable&lt;/span&gt; gitea.service
 sudo systemctl start gitea.service
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;
-Jetzt ist unser Gitea-Server fertig.
+Our Gitea server is now available.
 &lt;/p&gt;
-&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id="footnotes"&gt;
 &lt;h2 class="footnotes"&gt;Footnotes: &lt;/h2&gt;
 &lt;div id="text-footnotes"&gt;
 
-&lt;div class="footdef"&gt;&lt;sup&gt;&lt;a id="fn.1" name="fn.1" class="footnum" href="https://derSuessmann.github.io/en/posts/eigenen-git-server-einrichten/#fnr.1"&gt;1&lt;/a&gt;&lt;/sup&gt; &lt;p&gt;Einfach ein Projekt auf Github dafür einzurichten scheidet aus. Da ein eigenes Konto auf Github einrichten müsste. Unterricht soll aber in einer kontrollierten Umgebung stattfinden.&lt;/p&gt;&lt;/div&gt;
+&lt;div class="footdef"&gt;&lt;sup&gt;&lt;a id="fn.1" name="fn.1" class="footnum" href="https://derSuessmann.github.io/en/posts/eigenen-git-server-einrichten/#fnr.1"&gt;1&lt;/a&gt;&lt;/sup&gt; &lt;p&gt;The students could simply use Github repositories, but that is a no go. Every student would have to create a Github account. That is not acceptable. Furthermore, teaching and learning always needs a protected environment.&lt;/p&gt;&lt;/div&gt;
 
 
 &lt;/div&gt;
-&lt;/div&gt;</description><guid>https://derSuessmann.github.io/en/posts/eigenen-git-server-einrichten/</guid><pubDate>Thu, 29 Dec 2016 13:10:17 GMT</pubDate></item><item><title>Physik mit Nikola</title><link>https://derSuessmann.github.io/en/posts/physik-mit-nikola/</link><dc:creator>derSuessmann</dc:creator><description>&lt;p&gt;
-Für Texte mit physikalischen Formeln möchte ich die LaTeX-Notation verwenden.
-Dank MathJax funktioniert das auch schon lange recht gut.
+&lt;/div&gt;</description><category>administration</category><category>git</category><category>github</category><category>server</category><guid>https://derSuessmann.github.io/en/posts/eigenen-git-server-einrichten/</guid><pubDate>Thu, 29 Dec 2016 13:10:17 GMT</pubDate></item><item><title>Physics with Nikola</title><link>https://derSuessmann.github.io/en/posts/physics-with-nikola/</link><dc:creator>derSuessmann</dc:creator><description>&lt;p&gt;
+I would like to use LaTeX notation in physics texts. Thankfully, there is MathJax. MathJax renders LaTeX formulas in HTML documents for quite some time.
 &lt;/p&gt;
 
 &lt;p&gt;
-Einfache mathematische Formel:
+A simple mathematical formula:
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -244,36 +235,24 @@ Einfache mathematische Formel:
 &lt;/p&gt;
 
 &lt;p&gt;
-Um aber Ergebnisse
-mit Wert und Einheit gut darzustellen, verwende ich das siunitx-Paket in LaTeX.
-Lange waren die Kommandos in MathJax nicht verfügbar. Seit einem Jahr gibt es
-eine MathJax-Erweiterung, die die Funktionalität des LaTeX-Pakets ansatzweise
-nachbildet. Leider funktioniert der &lt;code&gt;\sisetup&lt;/code&gt;-Befehl nicht, so dass die
-Darstellung recht amerikanisch aussieht.
+But physics require the rendering of a value with a unit. I use the siunitx package in LaTeX for this. These commands where not available in MathJax for a long time. There is a MathJax extension available since one year. This extension provides some of the functionality of the LaTeX package. Especially, the &lt;code&gt;\sisetup&lt;/code&gt; command is not working. The format of the output is not customizable as in LaTeX.
 &lt;/p&gt;
 
 \begin{equation}
 \Delta s = \SI{4.5e-2}{\meter}
-\end{equation}</description><guid>https://derSuessmann.github.io/en/posts/physik-mit-nikola/</guid><pubDate>Thu, 07 Jul 2016 04:09:32 GMT</pubDate></item><item><title>Zertifikate von Let's Encrypt verwenden</title><link>https://derSuessmann.github.io/en/posts/zertifikate-von-lets-encrypt-verwenden/</link><dc:creator>derSuessmann</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h2 id="sec-1"&gt;Installation von acme-tiny&lt;/h2&gt;
+\end{equation}</description><guid>https://derSuessmann.github.io/en/posts/physics-with-nikola/</guid><pubDate>Thu, 07 Jul 2016 04:09:32 GMT</pubDate></item><item><title>Zertifikate von Let's Encrypt verwenden</title><link>https://derSuessmann.github.io/en/posts/zertifikate-von-lets-encrypt-verwenden/</link><dc:creator>derSuessmann</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h2 id="sec-1"&gt;Installing acme-tiny&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
-Mein Favorit der Let's Encrypt Clients ist &lt;a href="https://github.com/diafygi/acme-tiny"&gt;acme-tiny&lt;/a&gt;. Es ist ein sehr
-kurzes Python-Skript. Das erleichtert einen Code-Review. Die
-Vorarbeiten für die Zertifikatserstellung werden leicht mit OpenSSL
-durchgeführt. Es benötigt keine root-Rechte und funktioniert gut. In
-der folgenden Beschreibung gehen wir davon aus, dass der Benutzer
-&lt;code&gt;lets&lt;/code&gt; als normaler Benutzer auf einem OpenBSD-System mit nginx als
-Web-Server existiert.
+My favorite Let's Encrypt clients is &lt;a href="https://github.com/diafygi/acme-tiny"&gt;acme-tiny&lt;/a&gt;. It is just a very short Python script, which makes a code review easy. Som preparations must be done with OpenSSL. &lt;code&gt;acme-tiny&lt;/code&gt; does not require root privileges. It just works. The user &lt;code&gt;lets&lt;/code&gt; has to exist on an OpenBSD system with an nginx web server for the following description.
 &lt;/p&gt;
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-1-1" class="outline-3"&gt;
-&lt;h3 id="sec-1-1"&gt;Erstellen der Verzeichnisstruktur&lt;/h3&gt;
+&lt;h3 id="sec-1-1"&gt;Creating the directoy structure&lt;/h3&gt;
 &lt;div class="outline-text-3" id="text-1-1"&gt;
 &lt;p&gt;
-Im Verzeichnis des Benutzers &lt;code&gt;lets&lt;/code&gt; wird folgende Verzeichnisstruktur
-angelegt.
+Create the following directories in the home directory of &lt;code&gt;lets&lt;/code&gt;.
 &lt;/p&gt;
 
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir bin
@@ -285,11 +264,10 @@ mkdir certs
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-1-2" class="outline-3"&gt;
-&lt;h3 id="sec-1-2"&gt;Clonen des Repositories&lt;/h3&gt;
+&lt;h3 id="sec-1-2"&gt;Cloning the repository&lt;/h3&gt;
 &lt;div class="outline-text-3" id="text-1-2"&gt;
 &lt;p&gt;
-Damit man das Skript leicht installieren und eventuell auch
-aktualisieren kann wird das Repository in &lt;code&gt;src&lt;/code&gt; geclont.
+There may be updates of the script in the future. To facilitate this we are cloning the Github repository into the &lt;code&gt;src&lt;/code&gt; directory.
 &lt;/p&gt;
 
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; src
@@ -298,7 +276,7 @@ git clone https://github.com/diafygi/acme-tiny.git
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;
-Das Skript kopiert man nach dem Code Review nach &lt;code&gt;bin&lt;/code&gt;.
+Now you should always review the source code of the script. If the code review is showing no issue, we are copying the script into the &lt;code&gt;bin&lt;/code&gt; directory. 
 &lt;/p&gt;
 
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cp src/acme-tiny/acme_tiny.py bin
@@ -308,12 +286,10 @@ chmod +x bin/acme_tiny.py
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-1-3" class="outline-3"&gt;
-&lt;h3 id="sec-1-3"&gt;Erstellen des privaten Schlüssels für den Let's Encrypt Account&lt;/h3&gt;
+&lt;h3 id="sec-1-3"&gt;Creating a private key for the Let's Encrypt account&lt;/h3&gt;
 &lt;div class="outline-text-3" id="text-1-3"&gt;
 &lt;p&gt;
-Für den Account benötigt man ein Schlüsselpaar. Das kann man leicht mit
-dem folgenden Kommando erstellen. Aus Sicherheitsgründen sollte es auch
-nur für den Benutzer lesbar sein.
+You will need a key pair for the account. The following command will generate a private and a public key for your account. The private key should only be readable by the user &lt;code&gt;lets&lt;/code&gt;.
 &lt;/p&gt;
 
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;openssl genrsa &lt;span class="m"&gt;4096&lt;/span&gt; &amp;gt; account.key
@@ -323,14 +299,10 @@ chmod &lt;span class="m"&gt;400&lt;/span&gt; account.key
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-1-4" class="outline-3"&gt;
-&lt;h3 id="sec-1-4"&gt;Erstellen eines Certificate Signing Requests (CSR)&lt;/h3&gt;
+&lt;h3 id="sec-1-4"&gt;Creating a certificate signing request (CSR)&lt;/h3&gt;
 &lt;div class="outline-text-3" id="text-1-4"&gt;
 &lt;p&gt;
-Für jede Domain, für die Let's Encrypt ein Zertifikat ausstellen soll
-benötigt man einen Certificate Signing Request. Im Certificate Signing
-Request wird der öffentliche Schlüssel der Domain zum Unterschreiben an
-Let's Encrypt gesandt. Also müssen wir am besten für jede Domain einen
-eigenes Domain-Schlüsselpaar und einen Request erstellen.
+You must create a a domain key pair and certificate signing request for each domain. The certificate signing request contains the public key for the domain. It will be send to Let's Encrypt for signing.
 &lt;/p&gt;
 
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;openssl genrsa &lt;span class="m"&gt;4096&lt;/span&gt; &amp;gt; example.key
@@ -338,72 +310,58 @@ openssl req -new -sha256 -key example.key -subj &lt;span class="s2"&gt;"/CN=exam
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;
-Jetzt wird der Schlüssel nur noch vom Server benötigt. Ich habe ihn als
-&lt;code&gt;root&lt;/code&gt; (sudo/doas) in das Verzeichnis &lt;code&gt;/etc/ssl/private&lt;/code&gt; verschoben.
+Only the server process will require the private key from now on. I move it as user &lt;code&gt;root&lt;/code&gt; (sudo/doas) into the &lt;code&gt;/etc/ssl/private&lt;/code&gt; directory, where only &lt;code&gt;root&lt;/code&gt; can access it.
 &lt;/p&gt;
 
 &lt;p&gt;
-Man kann auch ein Zertifikat für mehrere Domains in einem Zertifikat
-erstellen lassen. Das nutze ich zur Zeit aber nicht.
+It is also possible to request one certificate for several domains, but I do not use this at the moment.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-1-5" class="outline-3"&gt;
-&lt;h3 id="sec-1-5"&gt;Konfiguration des Verzeichnisses für die Challenges&lt;/h3&gt;
+&lt;h3 id="sec-1-5"&gt;Configuring the challenges directory&lt;/h3&gt;
 &lt;div class="outline-text-3" id="text-1-5"&gt;
 &lt;p&gt;
-Let's Encrypt verifiziert mit einer Challenge, dass man die Kontrolle
-über die Domain für das Zertifikat hat. Dazu muss der Client eine Datei
-anlegen können, die der Let's Encrypt Server unter der Adresse
-&lt;a href="http://domain/.well-known/acme-challenge/..."&gt;http://domain/.well-known/acme-challenge/...&lt;/a&gt;
-abrufen kann. Dazu muss der Web-Server ein entsprechendes Verzeichnis
-haben.
+Let's Encrypt must verify the you have control over the requested domain. This is done by checking a special file that the acme-tiny client puts on the web server at &lt;a href="http://domain/.well-known/acme-challenge/..."&gt;http://domain/.well-known/acme-challenge/...&lt;/a&gt;.
 &lt;/p&gt;
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;listen&lt;/span&gt; &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="n"&gt;server_name&lt;/span&gt; &lt;span class="n"&gt;example&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;pre class="example"&gt;
+server {
+    listen 80;
+    server_name example.com;
 
-    &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;well&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;known&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;acme&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;challenge&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-	&lt;span class="n"&gt;alias&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;challenges&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-	&lt;span class="n"&gt;try_files&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;uri&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;404&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;
+    location /.well-known/acme-challenge/ {
+        alias /var/www/challenges/;
+        try_files $uri =404;
+    }
 
-    &lt;span class="p"&gt;...&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+    ...
+}
+&lt;/pre&gt;
 
 &lt;p&gt;
-Dieser Schritt hat mich den meisten Ärger gekostet, da meine
-Konfiguration des nginx als Reverse Proxy trotz scheinbar korrekter
-Pfadangabe irgendwie in den falschen Verzeichnissen gesucht hat. Eine
-Umstellung der Konfigurationsdateien hat da Wunder gewirkt. Man sollte
-nicht zu stark an den nginx-Konfigurationsdateien herumoptimieren.
+This step kept me for quite some time. The reverse proxy did search in the wrong directory, but the configuration seemed to be quite in order. I had to restructure my nginx configuration files. Now it is working like a charm. The lesson learned is: Do not overoptimize configuration files.
 &lt;/p&gt;
 
 &lt;p&gt;
-Jetzt hat man die Vorarbeiten abgeschlossen und kann die Zertifikate
-anfordern.
+Now we have completed the preparations for the certificate requests.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-1-6" class="outline-3"&gt;
-&lt;h3 id="sec-1-6"&gt;Anfordern eines Zertifikats&lt;/h3&gt;
+&lt;h3 id="sec-1-6"&gt;Requesting a certificate&lt;/h3&gt;
 &lt;div class="outline-text-3" id="text-1-6"&gt;
 &lt;p&gt;
-Der folgende Aufruf fordert das Zertifikat für die Domain an.
+The following command request the certificate for the example domain.
 &lt;/p&gt;
 
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;python acme_tiny.py --account-key ./account.key --csr ~/requests/example.csr --acme-dir /var/www/challenges/ &amp;gt; ~/certs/example.crt
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;
-Für die Server benötigt man meistens eine Zertifikatskette. In der
-Zertifikatskette sind die Zertifikate der Domain und der
-unterschreibenden Certification Authority aneinandergehängt. Diese Kette
-kann man mit den folgenden Schritten erstellen.
+Normally a server requires a certificate chain. The certificate chain is a file with the concatenation of the domain and the intermediate and root certificate of the certification authority. The following steps create this file.
 &lt;/p&gt;
 
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl -fsS https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem -o ~/certs/intermediate.pem
@@ -411,31 +369,17 @@ cat ~/certs/example.crt intermediate.pem &amp;gt; /etc/ssl/lets/example-chained.
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;
-Hier sieht man auch einen Kniff, den ich angewendet habe, um möglichst
-eine Trennung der Rechte zu erreichen. Der private Schlüssel der Domain
-(&lt;code&gt;example.key&lt;/code&gt;), der nur zur Erstellung des Certificate Requests und
-später von Server verwendet wird liegt in einem Verzeichnis, auf das nur
-root zugreifen kann. Das Verzeichnis mit den Zertifikaten
-(&lt;code&gt;/etc/ssl/lets/&lt;/code&gt; gehört hingegen dem Benutzer &lt;code&gt;lets&lt;/code&gt;, der nur einfacher
-Anwender ist. Alle dürfen auf das Verzeichnis nur lesend zugreifen.
+This shows the trick to separate the privileges. The domain's private key (&lt;code&gt;example.key&lt;/code&gt;), which is only required during creation of the certificate request and aftewards by the server, is stored in a directory only accessible by &lt;code&gt;root&lt;/code&gt;. The directory with the certificates (&lt;code&gt;/etc/ssl/lets/&lt;/code&gt;) is owned by &lt;code&gt;lets&lt;/code&gt; who has only normal user privileges. Everybody has readonly access.  
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-1-7" class="outline-3"&gt;
-&lt;h3 id="sec-1-7"&gt;Erneuern des Zertifikat&lt;/h3&gt;
+&lt;h3 id="sec-1-7"&gt;Certificate renewal&lt;/h3&gt;
 &lt;div class="outline-text-3" id="text-1-7"&gt;
 &lt;p&gt;
-Da das Zertifikate nur 90 Tage gültig ist, muss man vor Ablauf der Frist
-ein neues anfordern. Das kann man wie oben beschrieben mit dem gleichen
-Aufruf von &lt;code&gt;acme_tiny.py&lt;/code&gt; durchführen. Unter den unix-artigen
-Betriebssystemen kann man aber auch ein einfaches Skript erstellen und
-von &lt;code&gt;cron&lt;/code&gt; ausführen lassen.
-&lt;/p&gt;
-
-&lt;p&gt;
-Das folgende Skript funktioniert unter OpenBSD und muss etwas für andere
-Unix-Artige angepasst werden. Nennen wir es &lt;code&gt;renew_cert.sh&lt;/code&gt;.
+Since the certificate is only valid for 90 days, you must request a new one before expiration. You may use the same call of &lt;code&gt;acme-tiny.py&lt;/code&gt; like shown above. Since we are running OpenBSD it is advisable to write a script and run it using &lt;code&gt;cron&lt;/code&gt;.
+The following script works with OpenBSD for other unix like operating systems you have to adapt the script. Let's call it &lt;code&gt;renew_cert.sh&lt;/code&gt;.
 &lt;/p&gt;
 
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
@@ -477,38 +421,21 @@ doas /usr/sbin/rcctl reload nginx &lt;span class="o"&gt;||&lt;/span&gt; &lt;span
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;
-Damit der Benutzer &lt;code&gt;lets&lt;/code&gt; auch die Webserver-Konfiguration neu laden
-kann muss er entsprechende Rechte dafür haben. Das lässt sich unter
-OpenBSD schön für genau diesen Zweck eingeschränkt in der Datei
-`/etc/doas.conf` mit der folgenden Zeile konfigurieren. Unter anderen
-Betriebssystemen muss man entsprechend `sudo` konfigurieren und
-verwenden.
+After renewal the web server must load its configurtion again. The user &lt;code&gt;lets&lt;/code&gt; should do this after renewing the certificate, but he needs the privileges for this. The can be done with a simple line in the &lt;code&gt;doas&lt;/code&gt; configuration file &lt;code&gt;/etc/doas.conf&lt;/code&gt;. The user &lt;code&gt;lets&lt;/code&gt; may now reload and only reload the web server configuration. For other operating systems you may achieve similar effects with the sudo configuration.
 &lt;/p&gt;
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;permit&lt;/span&gt; &lt;span class="n"&gt;nopass&lt;/span&gt; &lt;span class="n"&gt;lets&lt;/span&gt; &lt;span class="n"&gt;as&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;cmd&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sbin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;rcctl&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt; &lt;span class="n"&gt;reload&lt;/span&gt; &lt;span class="n"&gt;nginx&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class="example"&gt;
+permit nopass lets as root cmd /usr/sbin/rcctl args reload nginx
+&lt;/pre&gt;
 
 &lt;p&gt;
-Jetzt kann man noch den &lt;code&gt;cron&lt;/code&gt; entsprechend konfigurieren, damit er
-einmal im Monat ein neues Zertifikat anfordert. Ich mag es, wenn ich
-dann Post bekomme.
+&lt;code&gt;cron&lt;/code&gt; will now request a new certificate each month with the following &lt;code&gt;crontab&lt;/code&gt;. I like it when I receive mail from my script each time it runs.
 &lt;/p&gt;
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;MAILTO&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;cert&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;example&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
-&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;HOME&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;renew_certs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sieve_of_eratosthenes&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="n"&gt;factors&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;defaultdict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-	&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;factors&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
-	    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;factors&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-		&lt;span class="n"&gt;factors&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-	&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-	    &lt;span class="n"&gt;factors&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-	    &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class="example"&gt;
+MAILTO=cert@example.com
+0 0 1 * * $HOME/bin/renew_certs.sh
+&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description><guid>https://derSuessmann.github.io/en/posts/zertifikate-von-lets-encrypt-verwenden/</guid><pubDate>Wed, 06 Jul 2016 15:16:50 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;</description><category>administration</category><category>certificate</category><category>python</category><category>security</category><category>tls</category><guid>https://derSuessmann.github.io/en/posts/zertifikate-von-lets-encrypt-verwenden/</guid><pubDate>Wed, 06 Jul 2016 15:16:50 GMT</pubDate></item></channel></rss>

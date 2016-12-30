@@ -123,13 +123,13 @@
  </url>
  <url>
   <loc>https://derSuessmann.github.io/en/posts/eigenen-git-server-einrichten/</loc>
-  <lastmod>2016-12-29T15:30:00Z</lastmod>
+  <lastmod>2016-12-30T09:56:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="de" href="https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/" />
  </url>
  <url>
-  <loc>https://derSuessmann.github.io/en/posts/physik-mit-nikola/</loc>
-  <lastmod>2016-12-29T15:30:00Z</lastmod>
-  <xhtml:link rel="alternate" hreflang="de" href="https://derSuessmann.github.io/posts/physik-mit-nikola/" />
+  <loc>https://derSuessmann.github.io/en/posts/physics-with-nikola/</loc>
+  <lastmod>2016-12-29T16:15:00Z</lastmod>
+  <xhtml:link rel="alternate" hreflang="de" href="https://derSuessmann.github.io/posts/physics-with-nikola/" />
  </url>
  <url>
   <loc>https://derSuessmann.github.io/en/posts/zertifikate-von-lets-encrypt-verwenden/</loc>
@@ -147,13 +147,15 @@
  <url>
   <loc>https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/</loc>
   <lastmod>2016-12-29T15:30:00Z</lastmod>
+  <xhtml:link rel="alternate" hreflang="en" href="https://derSuessmann.github.io/en/posts/eigenen-git-server-einrichten/" />
  </url>
  <url>
-  <loc>https://derSuessmann.github.io/posts/physik-mit-nikola/</loc>
-  <lastmod>2016-12-29T15:30:00Z</lastmod>
+  <loc>https://derSuessmann.github.io/posts/physics-with-nikola/</loc>
+  <lastmod>2016-12-29T16:15:00Z</lastmod>
  </url>
  <url>
   <loc>https://derSuessmann.github.io/posts/zertifikate-von-lets-encrypt-verwenden/</loc>
   <lastmod>2016-12-29T15:30:00Z</lastmod>
+  <xhtml:link rel="alternate" hreflang="en" href="https://derSuessmann.github.io/en/posts/zertifikate-von-lets-encrypt-verwenden/" />
  </url>
 </urlset>

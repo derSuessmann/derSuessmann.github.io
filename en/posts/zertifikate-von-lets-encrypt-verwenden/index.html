@@ -25,16 +25,14 @@ MathJax.Hub.Config({
         preamble: ["\sisetup{output-decimal-marker ={,},exponent-product=\cdot,per-mode=fraction}"]}
 });
 </script><!--[if lt IE 9]><script src="../../../assets/js/html5.js"></script><![endif]--><meta name="author" content="derSuessmann">
-<link rel="next" href="../physik-mit-nikola/" title="Physik mit Nikola" type="text/html">
+<link rel="next" href="../physics-with-nikola/" title="Physics with Nikola" type="text/html">
 <meta property="og:site_name" content="derSuessmann">
 <meta property="og:title" content="Zertifikate von Let's Encrypt verwenden">
 <meta property="og:url" content="https://derSuessmann.github.io/en/posts/zertifikate-von-lets-encrypt-verwenden/">
-<meta property="og:description" content="Installation von acme-tiny
+<meta property="og:description" content="Installing acme-tiny
 
 
-Mein Favorit der Let's Encrypt Clients ist acme-tiny. Es ist ein sehr
-kurzes Python-Skript. Das erleichtert einen Code-Review. Die
-Vorarbeiten für die Zertifikatserstellun">
+My favorite Let's Encrypt clients is acme-tiny. It is just a very short Python script, which makes a code review easy. Som preparations must be done with OpenSSL. acme-tiny does">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2016-07-06T17:16:50+02:00">
 <meta property="article:tag" content="administration">
@@ -107,28 +105,25 @@ Vorarbeiten für die Zertifikatserstellun">
 
         </div>
         
+        <div class="metadata posttranslations translations">
+            <h3 class="posttranslations-intro">Also available in:</h3>
+                <p><a href="../../../posts/zertifikate-von-lets-encrypt-verwenden/" rel="alternate" hreflang="de">Deutsch</a></p>
+        </div>
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
     <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">Installation von acme-tiny</h2>
+<h2 id="sec-1">Installing acme-tiny</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-Mein Favorit der Let's Encrypt Clients ist <a href="https://github.com/diafygi/acme-tiny">acme-tiny</a>. Es ist ein sehr
-kurzes Python-Skript. Das erleichtert einen Code-Review. Die
-Vorarbeiten für die Zertifikatserstellung werden leicht mit OpenSSL
-durchgeführt. Es benötigt keine root-Rechte und funktioniert gut. In
-der folgenden Beschreibung gehen wir davon aus, dass der Benutzer
-<code>lets</code> als normaler Benutzer auf einem OpenBSD-System mit nginx als
-Web-Server existiert.
+My favorite Let's Encrypt clients is <a href="https://github.com/diafygi/acme-tiny">acme-tiny</a>. It is just a very short Python script, which makes a code review easy. Som preparations must be done with OpenSSL. <code>acme-tiny</code> does not require root privileges. It just works. The user <code>lets</code> has to exist on an OpenBSD system with an nginx web server for the following description.
 </p>
 </div>
 
 <div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1">Erstellen der Verzeichnisstruktur</h3>
+<h3 id="sec-1-1">Creating the directoy structure</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
-Im Verzeichnis des Benutzers <code>lets</code> wird folgende Verzeichnisstruktur
-angelegt.
+Create the following directories in the home directory of <code>lets</code>.
 </p>
 
 <div class="highlight"><pre><span></span>mkdir bin
@@ -140,11 +135,10 @@ mkdir certs
 </div>
 
 <div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2">Clonen des Repositories</h3>
+<h3 id="sec-1-2">Cloning the repository</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
-Damit man das Skript leicht installieren und eventuell auch
-aktualisieren kann wird das Repository in <code>src</code> geclont.
+There may be updates of the script in the future. To facilitate this we are cloning the Github repository into the <code>src</code> directory.
 </p>
 
 <div class="highlight"><pre><span></span><span class="nb">cd</span> src
@@ -153,7 +147,7 @@ git clone https://github.com/diafygi/acme-tiny.git
 </pre></div>
 
 <p>
-Das Skript kopiert man nach dem Code Review nach <code>bin</code>.
+Now you should always review the source code of the script. If the code review is showing no issue, we are copying the script into the <code>bin</code> directory. 
 </p>
 
 <div class="highlight"><pre><span></span>cp src/acme-tiny/acme_tiny.py bin
@@ -163,12 +157,10 @@ chmod +x bin/acme_tiny.py
 </div>
 
 <div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3">Erstellen des privaten Schlüssels für den Let's Encrypt Account</h3>
+<h3 id="sec-1-3">Creating a private key for the Let's Encrypt account</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
-Für den Account benötigt man ein Schlüsselpaar. Das kann man leicht mit
-dem folgenden Kommando erstellen. Aus Sicherheitsgründen sollte es auch
-nur für den Benutzer lesbar sein.
+You will need a key pair for the account. The following command will generate a private and a public key for your account. The private key should only be readable by the user <code>lets</code>.
 </p>
 
 <div class="highlight"><pre><span></span>openssl genrsa <span class="m">4096</span> &gt; account.key
@@ -178,14 +170,10 @@ chmod <span class="m">400</span> account.key
 </div>
 
 <div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4">Erstellen eines Certificate Signing Requests (CSR)</h3>
+<h3 id="sec-1-4">Creating a certificate signing request (CSR)</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
-Für jede Domain, für die Let's Encrypt ein Zertifikat ausstellen soll
-benötigt man einen Certificate Signing Request. Im Certificate Signing
-Request wird der öffentliche Schlüssel der Domain zum Unterschreiben an
-Let's Encrypt gesandt. Also müssen wir am besten für jede Domain einen
-eigenes Domain-Schlüsselpaar und einen Request erstellen.
+You must create a a domain key pair and certificate signing request for each domain. The certificate signing request contains the public key for the domain. It will be send to Let's Encrypt for signing.
 </p>
 
 <div class="highlight"><pre><span></span>openssl genrsa <span class="m">4096</span> &gt; example.key
@@ -193,72 +181,58 @@ openssl req -new -sha256 -key example.key -subj <span class="s2">"/CN=example.co
 </pre></div>
 
 <p>
-Jetzt wird der Schlüssel nur noch vom Server benötigt. Ich habe ihn als
-<code>root</code> (sudo/doas) in das Verzeichnis <code>/etc/ssl/private</code> verschoben.
+Only the server process will require the private key from now on. I move it as user <code>root</code> (sudo/doas) into the <code>/etc/ssl/private</code> directory, where only <code>root</code> can access it.
 </p>
 
 <p>
-Man kann auch ein Zertifikat für mehrere Domains in einem Zertifikat
-erstellen lassen. Das nutze ich zur Zeit aber nicht.
+It is also possible to request one certificate for several domains, but I do not use this at the moment.
 </p>
 </div>
 </div>
 
 <div id="outline-container-sec-1-5" class="outline-3">
-<h3 id="sec-1-5">Konfiguration des Verzeichnisses für die Challenges</h3>
+<h3 id="sec-1-5">Configuring the challenges directory</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
-Let's Encrypt verifiziert mit einer Challenge, dass man die Kontrolle
-über die Domain für das Zertifikat hat. Dazu muss der Client eine Datei
-anlegen können, die der Let's Encrypt Server unter der Adresse
-<a href="http://domain/.well-known/acme-challenge/...">http://domain/.well-known/acme-challenge/...</a>
-abrufen kann. Dazu muss der Web-Server ein entsprechendes Verzeichnis
-haben.
+Let's Encrypt must verify the you have control over the requested domain. This is done by checking a special file that the acme-tiny client puts on the web server at <a href="http://domain/.well-known/acme-challenge/...">http://domain/.well-known/acme-challenge/...</a>.
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">server</span> <span class="p">{</span>
-    <span class="n">listen</span> <span class="mi">80</span><span class="p">;</span>
-    <span class="n">server_name</span> <span class="n">example</span><span class="p">.</span><span class="n">com</span><span class="p">;</span>
+<pre class="example">
+server {
+    listen 80;
+    server_name example.com;
 
-    <span class="n">location</span> <span class="o">/</span><span class="p">.</span><span class="n">well</span><span class="o">-</span><span class="n">known</span><span class="o">/</span><span class="n">acme</span><span class="o">-</span><span class="n">challenge</span><span class="o">/</span> <span class="p">{</span>
-	<span class="n">alias</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">challenges</span><span class="o">/</span><span class="p">;</span>
-	<span class="n">try_files</span> <span class="err">$</span><span class="n">uri</span> <span class="o">=</span><span class="mi">404</span><span class="p">;</span>
-    <span class="p">}</span>
+    location /.well-known/acme-challenge/ {
+        alias /var/www/challenges/;
+        try_files $uri =404;
+    }
 
-    <span class="p">...</span>
-<span class="p">}</span>
-</pre></div>
+    ...
+}
+</pre>
 
 <p>
-Dieser Schritt hat mich den meisten Ärger gekostet, da meine
-Konfiguration des nginx als Reverse Proxy trotz scheinbar korrekter
-Pfadangabe irgendwie in den falschen Verzeichnissen gesucht hat. Eine
-Umstellung der Konfigurationsdateien hat da Wunder gewirkt. Man sollte
-nicht zu stark an den nginx-Konfigurationsdateien herumoptimieren.
+This step kept me for quite some time. The reverse proxy did search in the wrong directory, but the configuration seemed to be quite in order. I had to restructure my nginx configuration files. Now it is working like a charm. The lesson learned is: Do not overoptimize configuration files.
 </p>
 
 <p>
-Jetzt hat man die Vorarbeiten abgeschlossen und kann die Zertifikate
-anfordern.
+Now we have completed the preparations for the certificate requests.
 </p>
 </div>
 </div>
 
 <div id="outline-container-sec-1-6" class="outline-3">
-<h3 id="sec-1-6">Anfordern eines Zertifikats</h3>
+<h3 id="sec-1-6">Requesting a certificate</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
-Der folgende Aufruf fordert das Zertifikat für die Domain an.
+The following command request the certificate for the example domain.
 </p>
 
 <div class="highlight"><pre><span></span>python acme_tiny.py --account-key ./account.key --csr ~/requests/example.csr --acme-dir /var/www/challenges/ &gt; ~/certs/example.crt
 </pre></div>
 
 <p>
-Für die Server benötigt man meistens eine Zertifikatskette. In der
-Zertifikatskette sind die Zertifikate der Domain und der
-unterschreibenden Certification Authority aneinandergehängt. Diese Kette
-kann man mit den folgenden Schritten erstellen.
+Normally a server requires a certificate chain. The certificate chain is a file with the concatenation of the domain and the intermediate and root certificate of the certification authority. The following steps create this file.
 </p>
 
 <div class="highlight"><pre><span></span>curl -fsS https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem -o ~/certs/intermediate.pem
@@ -266,31 +240,17 @@ cat ~/certs/example.crt intermediate.pem &gt; /etc/ssl/lets/example-chained.pem
 </pre></div>
 
 <p>
-Hier sieht man auch einen Kniff, den ich angewendet habe, um möglichst
-eine Trennung der Rechte zu erreichen. Der private Schlüssel der Domain
-(<code>example.key</code>), der nur zur Erstellung des Certificate Requests und
-später von Server verwendet wird liegt in einem Verzeichnis, auf das nur
-root zugreifen kann. Das Verzeichnis mit den Zertifikaten
-(<code>/etc/ssl/lets/</code> gehört hingegen dem Benutzer <code>lets</code>, der nur einfacher
-Anwender ist. Alle dürfen auf das Verzeichnis nur lesend zugreifen.
+This shows the trick to separate the privileges. The domain's private key (<code>example.key</code>), which is only required during creation of the certificate request and aftewards by the server, is stored in a directory only accessible by <code>root</code>. The directory with the certificates (<code>/etc/ssl/lets/</code>) is owned by <code>lets</code> who has only normal user privileges. Everybody has readonly access.  
 </p>
 </div>
 </div>
 
 <div id="outline-container-sec-1-7" class="outline-3">
-<h3 id="sec-1-7">Erneuern des Zertifikat</h3>
+<h3 id="sec-1-7">Certificate renewal</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
-Da das Zertifikate nur 90 Tage gültig ist, muss man vor Ablauf der Frist
-ein neues anfordern. Das kann man wie oben beschrieben mit dem gleichen
-Aufruf von <code>acme_tiny.py</code> durchführen. Unter den unix-artigen
-Betriebssystemen kann man aber auch ein einfaches Skript erstellen und
-von <code>cron</code> ausführen lassen.
-</p>
-
-<p>
-Das folgende Skript funktioniert unter OpenBSD und muss etwas für andere
-Unix-Artige angepasst werden. Nennen wir es <code>renew_cert.sh</code>.
+Since the certificate is only valid for 90 days, you must request a new one before expiration. You may use the same call of <code>acme-tiny.py</code> like shown above. Since we are running OpenBSD it is advisable to write a script and run it using <code>cron</code>.
+The following script works with OpenBSD for other unix like operating systems you have to adapt the script. Let's call it <code>renew_cert.sh</code>.
 </p>
 
 <div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
@@ -332,38 +292,21 @@ doas /usr/sbin/rcctl reload nginx <span class="o">||</span> <span class="o">(</s
 </pre></div>
 
 <p>
-Damit der Benutzer <code>lets</code> auch die Webserver-Konfiguration neu laden
-kann muss er entsprechende Rechte dafür haben. Das lässt sich unter
-OpenBSD schön für genau diesen Zweck eingeschränkt in der Datei
-`/etc/doas.conf` mit der folgenden Zeile konfigurieren. Unter anderen
-Betriebssystemen muss man entsprechend `sudo` konfigurieren und
-verwenden.
+After renewal the web server must load its configurtion again. The user <code>lets</code> should do this after renewing the certificate, but he needs the privileges for this. The can be done with a simple line in the <code>doas</code> configuration file <code>/etc/doas.conf</code>. The user <code>lets</code> may now reload and only reload the web server configuration. For other operating systems you may achieve similar effects with the sudo configuration.
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">permit</span> <span class="n">nopass</span> <span class="n">lets</span> <span class="n">as</span> <span class="n">root</span> <span class="n">cmd</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">rcctl</span> <span class="n">args</span> <span class="n">reload</span> <span class="n">nginx</span>
-</pre></div>
+<pre class="example">
+permit nopass lets as root cmd /usr/sbin/rcctl args reload nginx
+</pre>
 
 <p>
-Jetzt kann man noch den <code>cron</code> entsprechend konfigurieren, damit er
-einmal im Monat ein neues Zertifikat anfordert. Ich mag es, wenn ich
-dann Post bekomme.
+<code>cron</code> will now request a new certificate each month with the following <code>crontab</code>. I like it when I receive mail from my script each time it runs.
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">MAILTO</span><span class="o">=</span><span class="n">cert</span><span class="err">@</span><span class="n">example</span><span class="p">.</span><span class="n">com</span>
-<span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="o">*</span> <span class="o">*</span> <span class="err">$</span><span class="n">HOME</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">renew_certs</span><span class="p">.</span><span class="n">sh</span>
-</pre></div>
-
-
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sieve_of_eratosthenes</span><span class="p">():</span>
-    <span class="n">factors</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">count</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
-	<span class="k">if</span> <span class="n">factors</span><span class="p">[</span><span class="n">n</span><span class="p">]:</span>
-	    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">factors</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-		<span class="n">factors</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-	<span class="k">else</span><span class="p">:</span>
-	    <span class="n">factors</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-	    <span class="k">yield</span> <span class="n">n</span>
-</pre></div>
+<pre class="example">
+MAILTO=cert@example.com
+0 0 1 * * $HOME/bin/renew_certs.sh
+</pre>
 </div>
 </div>
 </div>
@@ -377,7 +320,7 @@ dann Post bekomme.
         </ul>
 <ul class="pager hidden-print">
 <li class="next">
-                <a href="../physik-mit-nikola/" rel="next" title="Physik mit Nikola">Next post</a>
+                <a href="../physics-with-nikola/" rel="next" title="Physics with Nikola">Next post</a>
             </li>
         </ul></nav></aside></article>
 </div>

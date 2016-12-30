@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0"><channel><title>derSuessmann (mathjax)</title><link>https://derSuessmann.github.io/</link><description></description><atom:link href="https://derSuessmann.github.io/en/categories/mathjax.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 29 Dec 2016 15:30:55 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Physik mit Nikola</title><link>https://derSuessmann.github.io/en/posts/physik-mit-nikola/</link><dc:creator>derSuessmann</dc:creator><description>&lt;p&gt;
-Für Texte mit physikalischen Formeln möchte ich die LaTeX-Notation verwenden.
-Dank MathJax funktioniert das auch schon lange recht gut.
+<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>derSuessmann (mathjax)</title><link>https://derSuessmann.github.io/</link><description></description><atom:link href="https://derSuessmann.github.io/en/categories/mathjax.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 29 Dec 2016 16:15:09 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Physics with Nikola</title><link>https://derSuessmann.github.io/en/posts/physics-with-nikola/</link><dc:creator>derSuessmann</dc:creator><description>&lt;p&gt;
+I would like to use LaTeX notation in physics texts. Thankfully, there is MathJax. MathJax renders LaTeX formulas in HTML documents for quite some time.
 &lt;/p&gt;
 
 &lt;p&gt;
-Einfache mathematische Formel:
+A simple mathematical formula:
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -13,14 +12,9 @@ Einfache mathematische Formel:
 &lt;/p&gt;
 
 &lt;p&gt;
-Um aber Ergebnisse
-mit Wert und Einheit gut darzustellen, verwende ich das siunitx-Paket in LaTeX.
-Lange waren die Kommandos in MathJax nicht verfügbar. Seit einem Jahr gibt es
-eine MathJax-Erweiterung, die die Funktionalität des LaTeX-Pakets ansatzweise
-nachbildet. Leider funktioniert der &lt;code&gt;\sisetup&lt;/code&gt;-Befehl nicht, so dass die
-Darstellung recht amerikanisch aussieht.
+But physics require the rendering of a value with a unit. I use the siunitx package in LaTeX for this. These commands where not available in MathJax for a long time. There is a MathJax extension available since one year. This extension provides some of the functionality of the LaTeX package. Especially, the &lt;code&gt;\sisetup&lt;/code&gt; command is not working. The format of the output is not customizable as in LaTeX.
 &lt;/p&gt;
 
 \begin{equation}
 \Delta s = \SI{4.5e-2}{\meter}
-\end{equation}</description><guid>https://derSuessmann.github.io/en/posts/physik-mit-nikola/</guid><pubDate>Thu, 07 Jul 2016 04:09:32 GMT</pubDate></item></channel></rss>
+\end{equation}</description><guid>https://derSuessmann.github.io/en/posts/physics-with-nikola/</guid><pubDate>Thu, 07 Jul 2016 04:09:32 GMT</pubDate></item></channel></rss>

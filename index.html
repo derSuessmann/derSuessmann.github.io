@@ -91,7 +91,7 @@ MathJax.Hub.Config({
         </div>
     </header><div class="e-content entry-content">
     <p>
-Im Unterricht möchte ich die Schülerinnen und Schüler an einem gemeinsamen Projekt arbeiten lassen. Dazu benötigen sie eine Versionsverwaltung. <sup><a id="fnr.1" name="fnr.1" class="footref" href="posts/eigenen-git-server-einrichten/#fn.1">1</a></sup></p>
+Im Unterricht möchte ich die Schülerinnen und Schüler an einem gemeinsamen Projekt arbeiten lassen. Dazu benötigen sie eine Versionsverwaltung.<sup><a id="fnr.1" name="fnr.1" class="footref" href="posts/eigenen-git-server-einrichten/#fn.1">1</a></sup></p>
 
 <div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1">Alternativen</h2>
@@ -134,10 +134,11 @@ Natürlich kann man auch Xen, VirtualBox, VMware oder sonst eine Virtualisierung
 </p>
 </div>
 </div>
+</div>
 
-<div id="outline-container-sec-2-2" class="outline-3">
-<h3 id="sec-2-2">Git installieren und Benutzer <code>git</code> anlegen</h3>
-<div class="outline-text-3" id="text-2-2">
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Git installieren und Benutzer <code>git</code> anlegen</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 Auf unserem Git-Server benötigen wir natürlich <code>git</code>. Das muss noch installiert werden. Damit könnte man schon seine Versionsverwaltung auf dem Server betreiben. Das bietet aber keinerlei Komfort.
 </p>
@@ -152,9 +153,9 @@ Der Gitea-Server soll unter dem (normalen) Benutzer <code>git</code> laufen. Den
 </div>
 </div>
 
-<div id="outline-container-sec-2-3" class="outline-3">
-<h3 id="sec-2-3">MariaDB installieren und Datenbank anlegen</h3>
-<div class="outline-text-3" id="text-2-3">
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">MariaDB installieren und Datenbank anlegen</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 Gogs und Gitea benötigen eine Datenbank. Sie können dabei MySQL (MariaDB), PostgreSQL, SQLite3, MSSQL und TiDB verwenden. Eine Empfehlung habe ich nicht gefunden. Da ich mit MySQL gut vertraut bin, habe ich mich für MySQL (MariaDB) entschieden und mit der folgenden Anweisung auf dem Server installiert.
 </p>
@@ -176,9 +177,9 @@ Schreibt man die SQL-Anweisungen von oben in die <code>create_gitea.sql</code>, 
 </div>
 </div>
 
-<div id="outline-container-sec-2-4" class="outline-3">
-<h3 id="sec-2-4">Gitea installieren und konfigurieren</h3>
-<div class="outline-text-3" id="text-2-4">
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">Gitea installieren und konfigurieren</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 Nach den Vorbereitungen kann man jetzt Gitea installieren und konfigurieren. Mir erschien die Installation als Binärdatei am einfachsten. Dazu braucht man als Benutzer <code>git</code> nur die ausführbare Datei in ein passendes Verzeichnis herunterzuladen und zu starten:
 </p>
@@ -196,9 +197,9 @@ Jetzt läuft der Gitea-Server und kann konfiguriert werden.
 </p>
 </div>
 
-<div id="outline-container-sec-2-4-1" class="outline-4">
-<h4 id="sec-2-4-1">Konfiguration</h4>
-<div class="outline-text-4" id="text-2-4-1">
+<div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1">Konfiguration</h3>
+<div class="outline-text-3" id="text-5-1">
 <p>
 Die Konfiguration erfolgt im Web-Browser unter der auf der Konsole angezeigten Adresse (bei mir <a href="http://git:3000/">http://git:3000/</a>).
 </p>
@@ -206,13 +207,13 @@ Die Konfiguration erfolgt im Web-Browser unter der auf der Konsole angezeigten A
 
 <div id="fig:INSTALL-1" class="figure">
 <p><img src="posts/eigenen-git-server-einrichten/gitea_install_1.png" alt="gitea_install_1.png"></p>
-<p><span class="figure-number">Figure 1:</span> Konfiguration oberer Bereich</p>
+<p><span class="figure-number">Abbildung 1:</span> Konfiguration oberer Bereich</p>
 </div>
 
 
 <div id="fig:INSTALL-2" class="figure">
 <p><img src="posts/eigenen-git-server-einrichten/gitea_install_2.png" alt="gitea_install_2.png"></p>
-<p><span class="figure-number">Figure 2:</span> Konfiguration mittlerer Bereich</p>
+<p><span class="figure-number">Abbildung 2:</span> Konfiguration mittlerer Bereich</p>
 </div>
 
 <p>
@@ -221,7 +222,7 @@ Den Mail-Server habe ich erst einmal nicht konfiguriert (siehe Abbildung <a href
 
 <div id="fig:INSTALL-3" class="figure">
 <p><img src="posts/eigenen-git-server-einrichten/gitea_install_3.png" alt="gitea_install_3.png"></p>
-<p><span class="figure-number">Figure 3:</span> Konfiguration unterer Bereich</p>
+<p><span class="figure-number">Abbildung 3:</span> Konfiguration unterer Bereich</p>
 </div>
 
 <p>
@@ -230,9 +231,9 @@ Jetzt ist der Gitea-Server fertig konfiguriert.
 </div>
 </div>
 
-<div id="outline-container-sec-2-4-2" class="outline-4">
-<h4 id="sec-2-4-2">Benutzer aus Active Directory verwenden</h4>
-<div class="outline-text-4" id="text-2-4-2">
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2">Benutzer aus Active Directory verwenden</h3>
+<div class="outline-text-3" id="text-5-2">
 <p>
 Die Schülerinnen und Schüler haben ein Konto im Schulnetzwerk. Damit diese Konten für die Anmeldung am Gitea-Server verwendet werden muss man noch die Authentikation mit dem Active Directory konfigurieren. 
 </p>
@@ -243,13 +244,13 @@ Also fügen wir einen Authentikator hinzu:
 
 <div id="fig:AD-1" class="figure">
 <p><img src="posts/eigenen-git-server-einrichten/gitea_active_directory_1.png" alt="gitea_active_directory_1.png"></p>
-<p><span class="figure-number">Figure 4:</span> LDAP (AD) als Authentikator hinzufügen</p>
+<p><span class="figure-number">Abbildung 4:</span> LDAP (AD) als Authentikator hinzufügen</p>
 </div>
 
 
 <div id="fig:AD-2" class="figure">
 <p><img src="posts/eigenen-git-server-einrichten/gitea_active_directory_2.png" alt="gitea_active_directory_2.png"></p>
-<p><span class="figure-number">Figure 5:</span> LDAP (AD) konfigurieren</p>
+<p><span class="figure-number">Abbildung 5:</span> LDAP (AD) konfigurieren</p>
 </div>
 
 <p>
@@ -259,9 +260,9 @@ Der Gitea-Server ist jetzt fertig konfiguriert. Wir beenden den laufenden Prozes
 </div>
 </div>
 
-<div id="outline-container-sec-2-5" class="outline-3">
-<h3 id="sec-2-5">Systemd</h3>
-<div class="outline-text-3" id="text-2-5">
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">Systemd</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 Damit der Gitea-Server beim Starten der Server-Maschine auch gestartet wird muss man das dem Systemd mitteilen. Dazu legt man die Datei <code>/lib/systemd/system/gitea.service</code> mit dem folgenden Inhalt an.
 </p>
@@ -306,9 +307,8 @@ Jetzt ist unser Gitea-Server fertig.
 </p>
 </div>
 </div>
-</div>
 <div id="footnotes">
-<h2 class="footnotes">Footnotes: </h2>
+<h2 class="footnotes">Fußnoten: </h2>
 <div id="text-footnotes">
 
 <div class="footdef">
@@ -319,21 +319,20 @@ Jetzt ist unser Gitea-Server fertig.
 </div>
 </div>
     </div>
-    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/physik-mit-nikola/" class="u-url">Physik mit Nikola</a></h1>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/physics-with-nikola/" class="u-url">Physics with Nikola</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn">
                 derSuessmann
             </span></p>
-            <p class="dateline"><a href="posts/physik-mit-nikola/" rel="bookmark"><time class="published dt-published" datetime="2016-07-07T06:09:32+02:00" title="2016-07-07 06:09">2016-07-07 06:09</time></a></p>
+            <p class="dateline"><a href="posts/physics-with-nikola/" rel="bookmark"><time class="published dt-published" datetime="2016-07-07T06:09:32+02:00" title="2016-07-07 06:09">2016-07-07 06:09</time></a></p>
         </div>
     </header><div class="e-content entry-content">
     <p>
-Für Texte mit physikalischen Formeln möchte ich die LaTeX-Notation verwenden.
-Dank MathJax funktioniert das auch schon lange recht gut.
+I would like to use LaTeX notation in physics texts. Thankfully, there is MathJax. MathJax renders LaTeX formulas in HTML documents for quite some time.
 </p>
 
 <p>
-Einfache mathematische Formel:
+A simple mathematical formula:
 </p>
 
 <p>
@@ -341,12 +340,7 @@ Einfache mathematische Formel:
 </p>
 
 <p>
-Um aber Ergebnisse
-mit Wert und Einheit gut darzustellen, verwende ich das siunitx-Paket in LaTeX.
-Lange waren die Kommandos in MathJax nicht verfügbar. Seit einem Jahr gibt es
-eine MathJax-Erweiterung, die die Funktionalität des LaTeX-Pakets ansatzweise
-nachbildet. Leider funktioniert der <code>\sisetup</code>-Befehl nicht, so dass die
-Darstellung recht amerikanisch aussieht.
+But physics require the rendering of a value with a unit. I use the siunitx package in LaTeX for this. These commands where not available in MathJax for a long time. There is a MathJax extension available since one year. This extension provides some of the functionality of the LaTeX package. Especially, the <code>\sisetup</code> command is not working. The format of the output is not customizable as in LaTeX.
 </p>
 
 \begin{equation}
@@ -468,18 +462,20 @@ abrufen kann. Dazu muss der Web-Server ein entsprechendes Verzeichnis
 haben.
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">server</span> <span class="p">{</span>
-    <span class="n">listen</span> <span class="mi">80</span><span class="p">;</span>
-    <span class="n">server_name</span> <span class="n">example</span><span class="p">.</span><span class="n">com</span><span class="p">;</span>
+<pre class="example">
+server {
+    listen 80;
+    server_name example.com;
 
-    <span class="n">location</span> <span class="o">/</span><span class="p">.</span><span class="n">well</span><span class="o">-</span><span class="n">known</span><span class="o">/</span><span class="n">acme</span><span class="o">-</span><span class="n">challenge</span><span class="o">/</span> <span class="p">{</span>
-	<span class="n">alias</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">challenges</span><span class="o">/</span><span class="p">;</span>
-	<span class="n">try_files</span> <span class="err">$</span><span class="n">uri</span> <span class="o">=</span><span class="mi">404</span><span class="p">;</span>
-    <span class="p">}</span>
+    location /.well-known/acme-challenge/ {
+        alias /var/www/challenges/;
+        try_files $uri =404;
+    }
 
-    <span class="p">...</span>
-<span class="p">}</span>
-</pre></div>
+    ...
+}
+</pre>
+
 
 <p>
 Dieser Schritt hat mich den meisten Ärger gekostet, da meine
@@ -592,8 +588,9 @@ Betriebssystemen muss man entsprechend `sudo` konfigurieren und
 verwenden.
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">permit</span> <span class="n">nopass</span> <span class="n">lets</span> <span class="n">as</span> <span class="n">root</span> <span class="n">cmd</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">rcctl</span> <span class="n">args</span> <span class="n">reload</span> <span class="n">nginx</span>
-</pre></div>
+<pre class="example">
+permit nopass lets as root cmd /usr/sbin/rcctl args reload nginx
+</pre>
 
 <p>
 Jetzt kann man noch den <code>cron</code> entsprechend konfigurieren, damit er
@@ -601,21 +598,10 @@ einmal im Monat ein neues Zertifikat anfordert. Ich mag es, wenn ich
 dann Post bekomme.
 </p>
 
-<div class="highlight"><pre><span></span><span class="n">MAILTO</span><span class="o">=</span><span class="n">cert</span><span class="err">@</span><span class="n">example</span><span class="p">.</span><span class="n">com</span>
-<span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="o">*</span> <span class="o">*</span> <span class="err">$</span><span class="n">HOME</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">renew_certs</span><span class="p">.</span><span class="n">sh</span>
-</pre></div>
-
-
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sieve_of_eratosthenes</span><span class="p">():</span>
-    <span class="n">factors</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">count</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
-	<span class="k">if</span> <span class="n">factors</span><span class="p">[</span><span class="n">n</span><span class="p">]:</span>
-	    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">factors</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-		<span class="n">factors</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-	<span class="k">else</span><span class="p">:</span>
-	    <span class="n">factors</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-	    <span class="k">yield</span> <span class="n">n</span>
-</pre></div>
+<pre class="example">
+MAILTO=cert@example.com
+0 0 1 * * $HOME/bin/renew_certs.sh
+</pre>
 </div>
 </div>
 </div>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0"><channel><title>derSuessmann (github)</title><link>https://derSuessmann.github.io/</link><description></description><atom:link href="https://derSuessmann.github.io/categories/github.xml" rel="self" type="application/rss+xml"></atom:link><language>de</language><lastBuildDate>Thu, 29 Dec 2016 15:30:55 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Eigenen Git-Server einrichten</title><link>https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/</link><dc:creator>derSuessmann</dc:creator><description>&lt;p&gt;
-Im Unterricht möchte ich die Schülerinnen und Schüler an einem gemeinsamen Projekt arbeiten lassen. Dazu benötigen sie eine Versionsverwaltung. &lt;sup&gt;&lt;a id="fnr.1" name="fnr.1" class="footref" href="https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/#fn.1"&gt;1&lt;/a&gt;&lt;/sup&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>derSuessmann (github)</title><link>https://derSuessmann.github.io/</link><description></description><atom:link href="https://derSuessmann.github.io/categories/github.xml" type="application/rss+xml" rel="self"></atom:link><language>de</language><lastBuildDate>Fri, 30 Dec 2016 09:54:09 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Eigenen Git-Server einrichten</title><link>https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/</link><dc:creator>derSuessmann</dc:creator><description>&lt;p&gt;
+Im Unterricht möchte ich die Schülerinnen und Schüler an einem gemeinsamen Projekt arbeiten lassen. Dazu benötigen sie eine Versionsverwaltung.&lt;sup&gt;&lt;a id="fnr.1" name="fnr.1" class="footref" href="https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/#fn.1"&gt;1&lt;/a&gt;&lt;/sup&gt;
 &lt;/p&gt;
 
 &lt;div id="outline-container-sec-1" class="outline-2"&gt;
@@ -44,10 +44,11 @@ Natürlich kann man auch Xen, VirtualBox, VMware oder sonst eine Virtualisierung
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;div id="outline-container-sec-2-2" class="outline-3"&gt;
-&lt;h3 id="sec-2-2"&gt;Git installieren und Benutzer &lt;code&gt;git&lt;/code&gt; anlegen&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-2-2"&gt;
+&lt;div id="outline-container-sec-3" class="outline-2"&gt;
+&lt;h2 id="sec-3"&gt;Git installieren und Benutzer &lt;code&gt;git&lt;/code&gt; anlegen&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-3"&gt;
 &lt;p&gt;
 Auf unserem Git-Server benötigen wir natürlich &lt;code&gt;git&lt;/code&gt;. Das muss noch installiert werden. Damit könnte man schon seine Versionsverwaltung auf dem Server betreiben. Das bietet aber keinerlei Komfort.
 &lt;/p&gt;
@@ -62,9 +63,9 @@ Der Gitea-Server soll unter dem (normalen) Benutzer &lt;code&gt;git&lt;/code&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-sec-2-3" class="outline-3"&gt;
-&lt;h3 id="sec-2-3"&gt;MariaDB installieren und Datenbank anlegen&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-2-3"&gt;
+&lt;div id="outline-container-sec-4" class="outline-2"&gt;
+&lt;h2 id="sec-4"&gt;MariaDB installieren und Datenbank anlegen&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-4"&gt;
 &lt;p&gt;
 Gogs und Gitea benötigen eine Datenbank. Sie können dabei MySQL (MariaDB), PostgreSQL, SQLite3, MSSQL und TiDB verwenden. Eine Empfehlung habe ich nicht gefunden. Da ich mit MySQL gut vertraut bin, habe ich mich für MySQL (MariaDB) entschieden und mit der folgenden Anweisung auf dem Server installiert.
 &lt;/p&gt;
@@ -86,9 +87,9 @@ Schreibt man die SQL-Anweisungen von oben in die &lt;code&gt;create_gitea.sql&lt
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-sec-2-4" class="outline-3"&gt;
-&lt;h3 id="sec-2-4"&gt;Gitea installieren und konfigurieren&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-2-4"&gt;
+&lt;div id="outline-container-sec-5" class="outline-2"&gt;
+&lt;h2 id="sec-5"&gt;Gitea installieren und konfigurieren&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-5"&gt;
 &lt;p&gt;
 Nach den Vorbereitungen kann man jetzt Gitea installieren und konfigurieren. Mir erschien die Installation als Binärdatei am einfachsten. Dazu braucht man als Benutzer &lt;code&gt;git&lt;/code&gt; nur die ausführbare Datei in ein passendes Verzeichnis herunterzuladen und zu starten:
 &lt;/p&gt;
@@ -106,9 +107,9 @@ Jetzt läuft der Gitea-Server und kann konfiguriert werden.
 &lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-sec-2-4-1" class="outline-4"&gt;
-&lt;h4 id="sec-2-4-1"&gt;Konfiguration&lt;/h4&gt;
-&lt;div class="outline-text-4" id="text-2-4-1"&gt;
+&lt;div id="outline-container-sec-5-1" class="outline-3"&gt;
+&lt;h3 id="sec-5-1"&gt;Konfiguration&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-5-1"&gt;
 &lt;p&gt;
 Die Konfiguration erfolgt im Web-Browser unter der auf der Konsole angezeigten Adresse (bei mir &lt;a href="http://git:3000/"&gt;http://git:3000/&lt;/a&gt;).
 &lt;/p&gt;
@@ -117,14 +118,14 @@ Die Konfiguration erfolgt im Web-Browser unter der auf der Konsole angezeigten A
 &lt;div id="fig:INSTALL-1" class="figure"&gt;
 &lt;p&gt;&lt;img src="https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/gitea_install_1.png" alt="gitea_install_1.png"&gt;
 &lt;/p&gt;
-&lt;p&gt;&lt;span class="figure-number"&gt;Figure 1:&lt;/span&gt; Konfiguration oberer Bereich&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Abbildung 1:&lt;/span&gt; Konfiguration oberer Bereich&lt;/p&gt;
 &lt;/div&gt;
 
 
 &lt;div id="fig:INSTALL-2" class="figure"&gt;
 &lt;p&gt;&lt;img src="https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/gitea_install_2.png" alt="gitea_install_2.png"&gt;
 &lt;/p&gt;
-&lt;p&gt;&lt;span class="figure-number"&gt;Figure 2:&lt;/span&gt; Konfiguration mittlerer Bereich&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Abbildung 2:&lt;/span&gt; Konfiguration mittlerer Bereich&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;p&gt;
@@ -134,7 +135,7 @@ Den Mail-Server habe ich erst einmal nicht konfiguriert (siehe Abbildung &lt;a h
 &lt;div id="fig:INSTALL-3" class="figure"&gt;
 &lt;p&gt;&lt;img src="https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/gitea_install_3.png" alt="gitea_install_3.png"&gt;
 &lt;/p&gt;
-&lt;p&gt;&lt;span class="figure-number"&gt;Figure 3:&lt;/span&gt; Konfiguration unterer Bereich&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Abbildung 3:&lt;/span&gt; Konfiguration unterer Bereich&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;p&gt;
@@ -143,9 +144,9 @@ Jetzt ist der Gitea-Server fertig konfiguriert.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-sec-2-4-2" class="outline-4"&gt;
-&lt;h4 id="sec-2-4-2"&gt;Benutzer aus Active Directory verwenden&lt;/h4&gt;
-&lt;div class="outline-text-4" id="text-2-4-2"&gt;
+&lt;div id="outline-container-sec-5-2" class="outline-3"&gt;
+&lt;h3 id="sec-5-2"&gt;Benutzer aus Active Directory verwenden&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-5-2"&gt;
 &lt;p&gt;
 Die Schülerinnen und Schüler haben ein Konto im Schulnetzwerk. Damit diese Konten für die Anmeldung am Gitea-Server verwendet werden muss man noch die Authentikation mit dem Active Directory konfigurieren. 
 &lt;/p&gt;
@@ -157,14 +158,14 @@ Also fügen wir einen Authentikator hinzu:
 &lt;div id="fig:AD-1" class="figure"&gt;
 &lt;p&gt;&lt;img src="https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/gitea_active_directory_1.png" alt="gitea_active_directory_1.png"&gt;
 &lt;/p&gt;
-&lt;p&gt;&lt;span class="figure-number"&gt;Figure 4:&lt;/span&gt; LDAP (AD) als Authentikator hinzufügen&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Abbildung 4:&lt;/span&gt; LDAP (AD) als Authentikator hinzufügen&lt;/p&gt;
 &lt;/div&gt;
 
 
 &lt;div id="fig:AD-2" class="figure"&gt;
 &lt;p&gt;&lt;img src="https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/gitea_active_directory_2.png" alt="gitea_active_directory_2.png"&gt;
 &lt;/p&gt;
-&lt;p&gt;&lt;span class="figure-number"&gt;Figure 5:&lt;/span&gt; LDAP (AD) konfigurieren&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Abbildung 5:&lt;/span&gt; LDAP (AD) konfigurieren&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;p&gt;
@@ -174,9 +175,9 @@ Der Gitea-Server ist jetzt fertig konfiguriert. Wir beenden den laufenden Prozes
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-sec-2-5" class="outline-3"&gt;
-&lt;h3 id="sec-2-5"&gt;Systemd&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-2-5"&gt;
+&lt;div id="outline-container-sec-6" class="outline-2"&gt;
+&lt;h2 id="sec-6"&gt;Systemd&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-6"&gt;
 &lt;p&gt;
 Damit der Gitea-Server beim Starten der Server-Maschine auch gestartet wird muss man das dem Systemd mitteilen. Dazu legt man die Datei &lt;code&gt;/lib/systemd/system/gitea.service&lt;/code&gt; mit dem folgenden Inhalt an.
 &lt;/p&gt;
@@ -221,9 +222,8 @@ Jetzt ist unser Gitea-Server fertig.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
 &lt;div id="footnotes"&gt;
-&lt;h2 class="footnotes"&gt;Footnotes: &lt;/h2&gt;
+&lt;h2 class="footnotes"&gt;Fußnoten: &lt;/h2&gt;
 &lt;div id="text-footnotes"&gt;
 
 &lt;div class="footdef"&gt;&lt;sup&gt;&lt;a id="fn.1" name="fn.1" class="footnum" href="https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/#fnr.1"&gt;1&lt;/a&gt;&lt;/sup&gt; &lt;p&gt;Einfach ein Projekt auf Github dafür einzurichten scheidet aus. Da ein eigenes Konto auf Github einrichten müsste. Unterricht soll aber in einer kontrollierten Umgebung stattfinden.&lt;/p&gt;&lt;/div&gt;
