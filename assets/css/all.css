@@ -659,6 +659,8 @@ article.post-micro {
     }
 }
 
+@import url('https://fonts.googleapis.com/css?family=Orbitron');
+.navbar-brand { color: green !important; font-family: 'Orbitron', sans-serif; }
 .highlight .hll { background-color: #ffffcc }
 .highlight  { background: #f0f0f0; }
 .highlight .c { color: #60a0b0; font-style: italic } /* Comment */
