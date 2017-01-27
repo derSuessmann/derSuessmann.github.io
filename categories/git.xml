@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>derSuessmann (git)</title><link>https://derSuessmann.github.io/</link><description></description><atom:link href="https://derSuessmann.github.io/categories/git.xml" type="application/rss+xml" rel="self"></atom:link><language>de</language><lastBuildDate>Fri, 30 Dec 2016 09:54:09 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Eigenen Git-Server einrichten</title><link>https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/</link><dc:creator>derSuessmann</dc:creator><description>&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>derSuessmann (Einträge über git)</title><link>https://derSuessmann.github.io/</link><description></description><atom:link href="https://derSuessmann.github.io/categories/git.xml" rel="self" type="application/rss+xml"></atom:link><language>de</language><lastBuildDate>Sat, 21 Jan 2017 18:34:19 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Eigenen Git-Server einrichten</title><link>https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/</link><dc:creator>derSuessmann</dc:creator><description>&lt;p&gt;
 Im Unterricht möchte ich die Schülerinnen und Schüler an einem gemeinsamen Projekt arbeiten lassen. Dazu benötigen sie eine Versionsverwaltung.&lt;sup&gt;&lt;a id="fnr.1" name="fnr.1" class="footref" href="https://derSuessmann.github.io/posts/eigenen-git-server-einrichten/#fn.1"&gt;1&lt;/a&gt;&lt;/sup&gt;
 &lt;/p&gt;
 
@@ -27,6 +27,7 @@ Den Gitea-Server kann man natürlich auf einem Ubuntu-Server installieren. Dazu 
 Meistens betreibe ich meine Server als &lt;a href="http://www.linux-kvm.org/"&gt;KVM - Kernel based Virtual Machines&lt;/a&gt;. Die virtuelle Maschine ist dann schnell mit der folgenden Anweisung aufgesetzt.
 &lt;/p&gt;
 
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;virt-install --connect qemu:///system &lt;span class="se"&gt;\&lt;/span&gt;
   --name gitserver &lt;span class="se"&gt;\&lt;/span&gt;
   --ram &lt;span class="m"&gt;1024&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
@@ -52,12 +53,14 @@ Natürlich kann man auch Xen, VirtualBox, VMware oder sonst eine Virtualisierung
 &lt;p&gt;
 Auf unserem Git-Server benötigen wir natürlich &lt;code&gt;git&lt;/code&gt;. Das muss noch installiert werden. Damit könnte man schon seine Versionsverwaltung auf dem Server betreiben. Das bietet aber keinerlei Komfort.
 &lt;/p&gt;
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install git
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;
 Der Gitea-Server soll unter dem (normalen) Benutzer &lt;code&gt;git&lt;/code&gt; laufen. Den muss man mit dem folgenden Kommando noch anlegen.
 &lt;/p&gt;
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo adduser git
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -69,12 +72,14 @@ Der Gitea-Server soll unter dem (normalen) Benutzer &lt;code&gt;git&lt;/code&gt;
 &lt;p&gt;
 Gogs und Gitea benötigen eine Datenbank. Sie können dabei MySQL (MariaDB), PostgreSQL, SQLite3, MSSQL und TiDB verwenden. Eine Empfehlung habe ich nicht gefunden. Da ich mit MySQL gut vertraut bin, habe ich mich für MySQL (MariaDB) entschieden und mit der folgenden Anweisung auf dem Server installiert.
 &lt;/p&gt;
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install mariadb-server
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;
 Mit den beiden folgenden SQL-Anweisungen wird die Datenbank für Gitea eingerichtet und dem Benutzer &lt;code&gt;git&lt;/code&gt; die vollen Rechte auf der Datenbank gegeben.
 &lt;/p&gt;
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;DATABASE&lt;/span&gt; &lt;span class="k"&gt;IF&lt;/span&gt; &lt;span class="k"&gt;NOT&lt;/span&gt; &lt;span class="k"&gt;EXISTS&lt;/span&gt; &lt;span class="n"&gt;gitea&lt;/span&gt; &lt;span class="nb"&gt;CHARACTER&lt;/span&gt; &lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="n"&gt;utf8&lt;/span&gt; &lt;span class="k"&gt;COLLATE&lt;/span&gt; &lt;span class="n"&gt;utf8_general_ci&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;ALL&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;gitea&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="s1"&gt;'git'&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="s1"&gt;'localhost'&lt;/span&gt; &lt;span class="n"&gt;identified&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="s1"&gt;'&amp;lt;Passwort&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -82,6 +87,7 @@ Mit den beiden folgenden SQL-Anweisungen wird die Datenbank für Gitea eingerich
 &lt;p&gt;
 Schreibt man die SQL-Anweisungen von oben in die &lt;code&gt;create_gitea.sql&lt;/code&gt;, so kann man die Datenbank für Gitea mit dem folgenden Kommando einrichten.
 &lt;/p&gt;
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo mysql -uroot &amp;lt; create_gitea.sql
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -93,6 +99,7 @@ Schreibt man die SQL-Anweisungen von oben in die &lt;code&gt;create_gitea.sql&lt
 &lt;p&gt;
 Nach den Vorbereitungen kann man jetzt Gitea installieren und konfigurieren. Mir erschien die Installation als Binärdatei am einfachsten. Dazu braucht man als Benutzer &lt;code&gt;git&lt;/code&gt; nur die ausführbare Datei in ein passendes Verzeichnis herunterzuladen und zu starten:
 &lt;/p&gt;
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;su git
 &lt;span class="nb"&gt;cd&lt;/span&gt; ~
 mkdir gitea
@@ -213,6 +220,7 @@ WantedBy=multi-user.target
 &lt;p&gt;
 Jetzt noch schnell den Service aktivieren und über Systemd starten.
 &lt;/p&gt;
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo systemctl &lt;span class="nb"&gt;enable&lt;/span&gt; gitea.service
 sudo systemctl start gitea.service
 &lt;/pre&gt;&lt;/div&gt;
