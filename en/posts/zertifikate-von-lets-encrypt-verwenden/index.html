@@ -130,7 +130,6 @@ My favorite Let's Encrypt clients is <a href="https://github.com/diafygi/acme-ti
 Create the following directories in the home directory of <code>lets</code>.
 </p>
 
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 <div class="highlight"><pre><span></span>mkdir bin
 mkdir src
 mkdir reqs
@@ -146,7 +145,6 @@ mkdir certs
 There may be updates of the script in the future. To facilitate this we are cloning the Github repository into the <code>src</code> directory.
 </p>
 
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 <div class="highlight"><pre><span></span><span class="nb">cd</span> src
 git clone https://github.com/diafygi/acme-tiny.git
 <span class="nb">cd</span>
@@ -156,7 +154,6 @@ git clone https://github.com/diafygi/acme-tiny.git
 Now you should always review the source code of the script. If the code review is showing no issue, we are copying the script into the <code>bin</code> directory. 
 </p>
 
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 <div class="highlight"><pre><span></span>cp src/acme-tiny/acme_tiny.py bin
 chmod +x bin/acme_tiny.py
 </pre></div>
@@ -170,7 +167,6 @@ chmod +x bin/acme_tiny.py
 You will need a key pair for the account. The following command will generate a private and a public key for your account. The private key should only be readable by the user <code>lets</code>.
 </p>
 
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 <div class="highlight"><pre><span></span>openssl genrsa <span class="m">4096</span> &gt; account.key
 chmod <span class="m">400</span> account.key
 </pre></div>
@@ -184,7 +180,6 @@ chmod <span class="m">400</span> account.key
 You must create a a domain key pair and certificate signing request for each domain. The certificate signing request contains the public key for the domain. It will be send to Let's Encrypt for signing.
 </p>
 
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 <div class="highlight"><pre><span></span>openssl genrsa <span class="m">4096</span> &gt; example.key
 openssl req -new -sha256 -key example.key -subj <span class="s2">"/CN=example.com"</span> &gt; ./requests/example.csr
 </pre></div>
@@ -237,7 +232,6 @@ Now we have completed the preparations for the certificate requests.
 The following command request the certificate for the example domain.
 </p>
 
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 <div class="highlight"><pre><span></span>python acme_tiny.py --account-key ./account.key --csr ~/requests/example.csr --acme-dir /var/www/challenges/ &gt; ~/certs/example.crt
 </pre></div>
 
@@ -245,7 +239,6 @@ The following command request the certificate for the example domain.
 Normally a server requires a certificate chain. The certificate chain is a file with the concatenation of the domain and the intermediate and root certificate of the certification authority. The following steps create this file.
 </p>
 
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 <div class="highlight"><pre><span></span>curl -fsS https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem -o ~/certs/intermediate.pem
 cat ~/certs/example.crt intermediate.pem &gt; /etc/ssl/lets/example-chained.pem
 </pre></div>
@@ -264,7 +257,6 @@ Since the certificate is only valid for 90 days, you must request a new one befo
 The following script works with OpenBSD for other unix like operating systems you have to adapt the script. Let's call it <code>renew_cert.sh</code>.
 </p>
 
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 <div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
 <span class="c1"># Renew certificates with Let's Encrypt</span>
 

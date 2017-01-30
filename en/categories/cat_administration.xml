@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>derSuessmann (Posts about administration)</title><link>https://derSuessmann.github.io/</link><description></description><atom:link href="https://derSuessmann.github.io/en/categories/cat_administration.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sat, 21 Jan 2017 18:34:19 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Setting up a git server</title><link>https://derSuessmann.github.io/en/posts/eigenen-git-server-einrichten/</link><dc:creator>derSuessmann</dc:creator><description>&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>derSuessmann (Posts about administration)</title><link>https://derSuessmann.github.io/</link><description></description><atom:link href="https://derSuessmann.github.io/en/categories/cat_administration.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 30 Jan 2017 19:10:34 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Setting up a git server</title><link>https://derSuessmann.github.io/en/posts/eigenen-git-server-einrichten/</link><dc:creator>derSuessmann</dc:creator><description>&lt;p&gt;
 I would like my students working on projects in teams. They will need a version control system for this.&lt;sup&gt;&lt;a id="fnr.1" name="fnr.1" class="footref" href="https://derSuessmann.github.io/en/posts/eigenen-git-server-einrichten/#fn.1"&gt;1&lt;/a&gt;&lt;/sup&gt;
 &lt;/p&gt;
 
@@ -28,7 +28,6 @@ It is possible to install Gitea on a Ubuntu server. I prepared the basic Ubuntu 
 Most of the time I run my servers as &lt;a href="http://www.linux-kvm.org/"&gt;KVM - Kernel based Virtual Machines&lt;/a&gt;. Creating the virtual machine is just a breeze with the following command.
 &lt;/p&gt;
 
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;virt-install --connect qemu:///system &lt;span class="se"&gt;\&lt;/span&gt;
   --name gitserver &lt;span class="se"&gt;\&lt;/span&gt;
   --ram &lt;span class="m"&gt;1024&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
@@ -53,14 +52,12 @@ You may use also Xen, VirtualBox, VMware or any other virtualisation environment
 &lt;p&gt;
 We will need &lt;code&gt;git&lt;/code&gt; on our server for sure. This has to be installed. It would be possible running version control with the server now, but it sure lacks the comfort anyone expects in the times of Github.
 &lt;/p&gt;
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install git
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;
 The Gitea server should run as a normal user with no special privileges. The following command will create the user &lt;code&gt;git&lt;/code&gt; for this.
 &lt;/p&gt;
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo adduser git
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -72,14 +69,12 @@ The Gitea server should run as a normal user with no special privileges. The fol
 &lt;p&gt;
 Gitea as well as Gogs needs a database. The options are MySQL (MariaDB), PostgreSQL, SQLite3, MSSQL und TiDB. There is no recommendation to be found in the documentation of both projects. Finally, I decided to use MySQL (MariaDB) just because I have some experience with MySQL. The following command will install it on the Ubuntu server.
 &lt;/p&gt;
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install mariadb-server
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;
 The database setup just needs two SQL statements for creating the database and granting the user git full access.
 &lt;/p&gt;
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;DATABASE&lt;/span&gt; &lt;span class="k"&gt;IF&lt;/span&gt; &lt;span class="k"&gt;NOT&lt;/span&gt; &lt;span class="k"&gt;EXISTS&lt;/span&gt; &lt;span class="n"&gt;gitea&lt;/span&gt; &lt;span class="nb"&gt;CHARACTER&lt;/span&gt; &lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="n"&gt;utf8&lt;/span&gt; &lt;span class="k"&gt;COLLATE&lt;/span&gt; &lt;span class="n"&gt;utf8_general_ci&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;ALL&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;gitea&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="s1"&gt;'git'&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="s1"&gt;'localhost'&lt;/span&gt; &lt;span class="n"&gt;identified&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="s1"&gt;'&amp;lt;password&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -87,7 +82,6 @@ The database setup just needs two SQL statements for creating the database and g
 &lt;p&gt;
 Writing these statement into the file &lt;code&gt;create_gitea.sql&lt;/code&gt; allows us setting up the database with the following command.
 &lt;/p&gt;
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo mysql -uroot &amp;lt; create_gitea.sql
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -99,7 +93,6 @@ Writing these statement into the file &lt;code&gt;create_gitea.sql&lt;/code&gt; 
 &lt;p&gt;
 You may start the Gitea installation and configuration after these preparations. The installation from a binary file seems the easiest to me. You only have to download the file as the user &lt;code&gt;git&lt;/code&gt; into a suitable directory and run it:
 &lt;/p&gt;
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;su git
 &lt;span class="nb"&gt;cd&lt;/span&gt; ~
 mkdir gitea
@@ -212,7 +205,6 @@ WantedBy=multi-user.target
 &lt;p&gt;
 … and enabling and starting the service with Systemd.
 &lt;/p&gt;
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo systemctl &lt;span class="nb"&gt;enable&lt;/span&gt; gitea.service
 sudo systemctl start gitea.service
 &lt;/pre&gt;&lt;/div&gt;
@@ -245,7 +237,6 @@ My favorite Let's Encrypt clients is &lt;a href="https://github.com/diafygi/acme
 Create the following directories in the home directory of &lt;code&gt;lets&lt;/code&gt;.
 &lt;/p&gt;
 
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir bin
 mkdir src
 mkdir reqs
@@ -261,7 +252,6 @@ mkdir certs
 There may be updates of the script in the future. To facilitate this we are cloning the Github repository into the &lt;code&gt;src&lt;/code&gt; directory.
 &lt;/p&gt;
 
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; src
 git clone https://github.com/diafygi/acme-tiny.git
 &lt;span class="nb"&gt;cd&lt;/span&gt;
@@ -271,7 +261,6 @@ git clone https://github.com/diafygi/acme-tiny.git
 Now you should always review the source code of the script. If the code review is showing no issue, we are copying the script into the &lt;code&gt;bin&lt;/code&gt; directory. 
 &lt;/p&gt;
 
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cp src/acme-tiny/acme_tiny.py bin
 chmod +x bin/acme_tiny.py
 &lt;/pre&gt;&lt;/div&gt;
@@ -285,7 +274,6 @@ chmod +x bin/acme_tiny.py
 You will need a key pair for the account. The following command will generate a private and a public key for your account. The private key should only be readable by the user &lt;code&gt;lets&lt;/code&gt;.
 &lt;/p&gt;
 
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;openssl genrsa &lt;span class="m"&gt;4096&lt;/span&gt; &amp;gt; account.key
 chmod &lt;span class="m"&gt;400&lt;/span&gt; account.key
 &lt;/pre&gt;&lt;/div&gt;
@@ -299,7 +287,6 @@ chmod &lt;span class="m"&gt;400&lt;/span&gt; account.key
 You must create a a domain key pair and certificate signing request for each domain. The certificate signing request contains the public key for the domain. It will be send to Let's Encrypt for signing.
 &lt;/p&gt;
 
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;openssl genrsa &lt;span class="m"&gt;4096&lt;/span&gt; &amp;gt; example.key
 openssl req -new -sha256 -key example.key -subj &lt;span class="s2"&gt;"/CN=example.com"&lt;/span&gt; &amp;gt; ./requests/example.csr
 &lt;/pre&gt;&lt;/div&gt;
@@ -352,7 +339,6 @@ Now we have completed the preparations for the certificate requests.
 The following command request the certificate for the example domain.
 &lt;/p&gt;
 
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;python acme_tiny.py --account-key ./account.key --csr ~/requests/example.csr --acme-dir /var/www/challenges/ &amp;gt; ~/certs/example.crt
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -360,7 +346,6 @@ The following command request the certificate for the example domain.
 Normally a server requires a certificate chain. The certificate chain is a file with the concatenation of the domain and the intermediate and root certificate of the certification authority. The following steps create this file.
 &lt;/p&gt;
 
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl -fsS https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem -o ~/certs/intermediate.pem
 cat ~/certs/example.crt intermediate.pem &amp;gt; /etc/ssl/lets/example-chained.pem
 &lt;/pre&gt;&lt;/div&gt;
@@ -379,7 +364,6 @@ Since the certificate is only valid for 90 days, you must request a new one befo
 The following script works with OpenBSD for other unix like operating systems you have to adapt the script. Let's call it &lt;code&gt;renew_cert.sh&lt;/code&gt;.
 &lt;/p&gt;
 
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
 &lt;span class="c1"&gt;# Renew certificates with Let's Encrypt&lt;/span&gt;
 

@@ -145,7 +145,6 @@ Den Gitea-Server kann man natürlich auf einem Ubuntu-Server installieren. Dazu 
 Meistens betreibe ich meine Server als <a href="http://www.linux-kvm.org/">KVM - Kernel based Virtual Machines</a>. Die virtuelle Maschine ist dann schnell mit der folgenden Anweisung aufgesetzt.
 </p>
 
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 <div class="highlight"><pre><span></span>virt-install --connect qemu:///system <span class="se">\</span>
   --name gitserver <span class="se">\</span>
   --ram <span class="m">1024</span> <span class="se">\</span>
@@ -171,14 +170,12 @@ Natürlich kann man auch Xen, VirtualBox, VMware oder sonst eine Virtualisierung
 <p>
 Auf unserem Git-Server benötigen wir natürlich <code>git</code>. Das muss noch installiert werden. Damit könnte man schon seine Versionsverwaltung auf dem Server betreiben. Das bietet aber keinerlei Komfort.
 </p>
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 <div class="highlight"><pre><span></span>sudo apt install git
 </pre></div>
 
 <p>
 Der Gitea-Server soll unter dem (normalen) Benutzer <code>git</code> laufen. Den muss man mit dem folgenden Kommando noch anlegen.
 </p>
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 <div class="highlight"><pre><span></span>sudo adduser git
 </pre></div>
 </div>
@@ -190,14 +187,12 @@ Der Gitea-Server soll unter dem (normalen) Benutzer <code>git</code> laufen. Den
 <p>
 Gogs und Gitea benötigen eine Datenbank. Sie können dabei MySQL (MariaDB), PostgreSQL, SQLite3, MSSQL und TiDB verwenden. Eine Empfehlung habe ich nicht gefunden. Da ich mit MySQL gut vertraut bin, habe ich mich für MySQL (MariaDB) entschieden und mit der folgenden Anweisung auf dem Server installiert.
 </p>
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 <div class="highlight"><pre><span></span>sudo apt install mariadb-server
 </pre></div>
 
 <p>
 Mit den beiden folgenden SQL-Anweisungen wird die Datenbank für Gitea eingerichtet und dem Benutzer <code>git</code> die vollen Rechte auf der Datenbank gegeben.
 </p>
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 <div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="k">IF</span> <span class="k">NOT</span> <span class="k">EXISTS</span> <span class="n">gitea</span> <span class="nb">CHARACTER</span> <span class="k">SET</span> <span class="n">utf8</span> <span class="k">COLLATE</span> <span class="n">utf8_general_ci</span><span class="p">;</span>
 <span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">ON</span> <span class="n">gitea</span><span class="p">.</span><span class="o">*</span> <span class="k">to</span> <span class="s1">'git'</span><span class="o">@</span><span class="s1">'localhost'</span> <span class="n">identified</span> <span class="k">by</span> <span class="s1">'&lt;Passwort&gt;'</span><span class="p">;</span>
 </pre></div>
@@ -205,7 +200,6 @@ Mit den beiden folgenden SQL-Anweisungen wird die Datenbank für Gitea eingerich
 <p>
 Schreibt man die SQL-Anweisungen von oben in die <code>create_gitea.sql</code>, so kann man die Datenbank für Gitea mit dem folgenden Kommando einrichten.
 </p>
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 <div class="highlight"><pre><span></span>sudo mysql -uroot &lt; create_gitea.sql
 </pre></div>
 </div>
@@ -217,7 +211,6 @@ Schreibt man die SQL-Anweisungen von oben in die <code>create_gitea.sql</code>, 
 <p>
 Nach den Vorbereitungen kann man jetzt Gitea installieren und konfigurieren. Mir erschien die Installation als Binärdatei am einfachsten. Dazu braucht man als Benutzer <code>git</code> nur die ausführbare Datei in ein passendes Verzeichnis herunterzuladen und zu starten:
 </p>
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 <div class="highlight"><pre><span></span>su git
 <span class="nb">cd</span> ~
 mkdir gitea
@@ -333,7 +326,6 @@ WantedBy=multi-user.target
 <p>
 Jetzt noch schnell den Service aktivieren und über Systemd starten.
 </p>
-/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_DK.UTF-8)
 <div class="highlight"><pre><span></span>sudo systemctl <span class="nb">enable</span> gitea.service
 sudo systemctl start gitea.service
 </pre></div>
